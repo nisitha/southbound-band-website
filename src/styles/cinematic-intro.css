@@ -1,0 +1,422 @@
+/**
+ * Southbound Band Official Website
+ * Cinematic Opening & Typography Transition System
+ * Inspired by vanmorrison.com editorial scale, high contrast & liquid-wash typography
+ */
+
+/* ==========================================================================
+   1. CINEMATIC INTRO OVERLAY
+   ========================================================================== */
+.cinematic-intro {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100svh;
+  background-color: #070709;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 0.9s cubic-bezier(0.16, 1, 0.3, 1), 
+              visibility 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform, filter;
+}
+
+/* Settled / Completed State */
+.cinematic-intro.is-exiting {
+  opacity: 0;
+  transform: scale(1.04);
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.cinematic-intro.is-dismissed {
+  display: none !important;
+}
+
+/* If already seen in this session or reduced motion requested */
+html.intro-already-seen .cinematic-intro {
+  display: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cinematic-intro {
+    display: none !important;
+  }
+}
+
+/* ==========================================================================
+   2. ATMOSPHERIC BACKDROP & LIGHT RAYS
+   ========================================================================== */
+.intro-backdrop {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* Vintage film grain / noise overlay */
+.intro-noise {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.035;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.25) 1px, transparent 1px);
+  background-size: 3px 3px;
+}
+
+/* Center stage light wash */
+.intro-spotlight {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90vw;
+  height: 70vh;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(229, 169, 71, 0.16) 0%,
+    rgba(198, 125, 38, 0.08) 35%,
+    rgba(12, 12, 14, 0.6) 70%,
+    transparent 100%
+  );
+  filter: blur(40px);
+  animation: introSpotlightPulse 3s ease-in-out infinite alternate;
+}
+
+@keyframes introSpotlightPulse {
+  0% {
+    opacity: 0.7;
+    transform: translate(-50%, -50%) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.05);
+  }
+}
+
+/* Moving mist beam */
+.intro-mist-layer {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    115deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.03) 30%,
+    rgba(229, 169, 71, 0.06) 50%,
+    rgba(255, 255, 255, 0.02) 70%,
+    transparent 100%
+  );
+  background-size: 200% 200%;
+  animation: introMistDrift 4s ease-out forwards;
+}
+
+@keyframes introMistDrift {
+  0% {
+    background-position: -100% 0%;
+  }
+  100% {
+    background-position: 100% 100%;
+  }
+}
+
+/* Hide SVG Defs Element */
+.intro-svg-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   3. INTRO CONTENT CONTAINER
+   ========================================================================== */
+.intro-content {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  width: 92vw;
+  max-width: 1400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+/* Eyebrow Header Line */
+.intro-eyebrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 680px;
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  transform: translateY(-12px);
+  animation: introFadeDown 1s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+}
+
+.intro-rule-left,
+.intro-rule-right {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(229, 169, 71, 0.6));
+}
+
+.intro-rule-right {
+  background: linear-gradient(90deg, rgba(229, 169, 71, 0.6), transparent);
+}
+
+.intro-eyebrow-text {
+  font-family: var(--font-display);
+  font-size: clamp(0.75rem, 1.3vw, 0.9375rem);
+  font-weight: 600;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--color-accent-gold);
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   4. GIANT CINEMATIC WORDMARK & LIQUID-WASH REVEAL
+   ========================================================================== */
+.intro-wordmark-wrap {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0.5rem 0 1.5rem;
+}
+
+.intro-title {
+  position: relative;
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(4.2rem, 15vw, 14.5rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 0.88;
+  letter-spacing: 0.08em;
+  color: #f7f6f2;
+  user-select: none;
+  transform-origin: center center;
+}
+
+/* Filtered Liquid-Wash Layer */
+.intro-title-filtered {
+  display: block;
+  position: relative;
+  z-index: 2;
+  background: linear-gradient(
+    95deg,
+    #4a4955 0%,
+    #e5a947 25%,
+    #ffffff 50%,
+    #f3c473 75%,
+    #ecebe6 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: url(#liquid-wash);
+  opacity: 0;
+  transform: scale(0.96) translateY(20px);
+  animation: introLiquidReveal 2.4s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards,
+             introGradientShimmer 2.8s ease-in-out 0.2s forwards;
+}
+
+/* Subtle Ambient Glow Behind Letters */
+.intro-title-glow {
+  position: absolute;
+  inset: 0;
+  display: block;
+  z-index: 1;
+  color: rgba(229, 169, 71, 0.28);
+  filter: blur(24px);
+  opacity: 0;
+  transform: scale(0.98);
+  animation: introGlowFade 2.2s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+}
+
+@keyframes introLiquidReveal {
+  0% {
+    opacity: 0;
+    transform: scale(0.92) translateY(28px);
+    letter-spacing: 0.16em;
+  }
+  30% {
+    opacity: 0.75;
+    letter-spacing: 0.12em;
+  }
+  70% {
+    opacity: 0.95;
+    letter-spacing: 0.09em;
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    letter-spacing: 0.08em;
+  }
+}
+
+@keyframes introGradientShimmer {
+  0% {
+    background-position: 120% center;
+  }
+  100% {
+    background-position: 0% center;
+  }
+}
+
+@keyframes introGlowFade {
+  0% {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+  60% {
+    opacity: 0.45;
+    transform: scale(1.02);
+  }
+  100% {
+    opacity: 0.25;
+    transform: scale(1);
+  }
+}
+
+/* ==========================================================================
+   5. TAGLINE & PROVENANCE SUBTITLE
+   ========================================================================== */
+.intro-tagline-wrap {
+  opacity: 0;
+  transform: translateY(14px);
+  animation: introFadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.8s forwards;
+}
+
+.intro-tagline {
+  font-family: var(--font-serif);
+  font-size: clamp(0.85rem, 1.8vw, 1.25rem);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  color: var(--color-text-secondary);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
+  margin: 0;
+}
+
+/* ==========================================================================
+   6. SKIP ACTION BUTTON
+   ========================================================================== */
+.intro-skip-btn {
+  margin-top: 2.5rem;
+  background: rgba(20, 20, 26, 0.75);
+  border: 1px solid rgba(229, 169, 71, 0.35);
+  border-radius: var(--radius-pill);
+  padding: 0.65rem 1.75rem;
+  font-family: var(--font-display);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-accent-gold);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(12px);
+  animation: introFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1.2s forwards;
+  transition: background-color var(--transition-fast), 
+              border-color var(--transition-fast), 
+              color var(--transition-fast), 
+              transform var(--transition-fast), 
+              box-shadow var(--transition-fast);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.intro-skip-btn svg {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+  transition: transform var(--transition-fast);
+}
+
+.intro-skip-btn:hover {
+  background: var(--color-accent-gold);
+  border-color: var(--color-accent-gold);
+  color: #0c0c0e;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(229, 169, 71, 0.3);
+}
+
+.intro-skip-btn:hover svg {
+  transform: translateX(3px);
+}
+
+.intro-skip-btn:focus-visible {
+  outline: 2px solid var(--color-accent-gold);
+  outline-offset: 3px;
+}
+
+/* ==========================================================================
+   7. KEYFRAMES FOR TRANSITIONS
+   ========================================================================== */
+@keyframes introFadeDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-14px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes introFadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================================================
+   8. RESPONSIVE ADAPTATIONS
+   ========================================================================== */
+@media (max-width: 768px) {
+  .intro-title {
+    font-size: clamp(3.2rem, 16vw, 6.5rem);
+    letter-spacing: 0.05em;
+  }
+
+  .intro-eyebrow {
+    gap: 0.85rem;
+    margin-bottom: 1rem;
+  }
+
+  .intro-eyebrow-text {
+    font-size: 0.6875rem;
+    letter-spacing: 0.22em;
+  }
+
+  .intro-skip-btn {
+    margin-top: 1.75rem;
+    padding: 0.55rem 1.35rem;
+    font-size: 0.75rem;
+  }
+}

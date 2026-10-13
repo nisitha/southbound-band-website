@@ -120,13 +120,15 @@
 }
 
 .nav-link:hover,
-.nav-link.active {
+.nav-link.active,
+.nav-link.is-active {
   color: var(--color-text-primary);
   text-shadow: 0 0 12px rgba(229, 169, 71, 0.25);
 }
 
 .nav-link:hover::after,
-.nav-link.active::after {
+.nav-link.active::after,
+.nav-link.is-active::after {
   width: 100%;
 }
 

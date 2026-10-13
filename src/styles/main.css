@@ -4,6 +4,7 @@
  */
 
 @import './variables.css';
+@import './cinematic-intro.css';
 @import './base.css';
 @import './header.css';
 @import './hero.css';

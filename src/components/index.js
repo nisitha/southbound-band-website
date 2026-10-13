@@ -3,6 +3,7 @@
  * Exports all section components for the Southbound Band Website
  */
 
+import { CinematicIntroComponent } from './Intro/CinematicIntro.js';
 import { HeaderComponent } from './Header/Header.js';
 import { HeroComponent } from './Hero/Hero.js';
 import { AboutComponent } from './About/About.js';
@@ -17,6 +18,7 @@ import { BookingComponent } from './Booking/Booking.js';
 import { FooterComponent } from './Footer/Footer.js';
 
 export const SECTION_COMPONENTS = [
+  CinematicIntroComponent,
   HeaderComponent,
   HeroComponent,
   AboutComponent,

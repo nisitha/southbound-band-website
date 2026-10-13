@@ -50,6 +50,54 @@
   <a href="#main-content" class="skip-link">Skip to main content</a>
 
   <!-- ==========================================================================
+       CINEMATIC OPENING OVERLAY — SOUTHBOUND (Van Morrison inspired liquid-wash)
+       ========================================================================== -->
+  <div class="cinematic-intro" id="cinematic-intro" aria-label="Southbound Band Cinematic Intro">
+    <!-- Atmospheric backdrop layers -->
+    <div class="intro-backdrop" aria-hidden="true">
+      <div class="intro-noise"></div>
+      <div class="intro-spotlight"></div>
+      <div class="intro-mist-layer"></div>
+    </div>
+
+    <!-- SVG Distortion & Liquid Filter Definition -->
+    <svg class="intro-svg-defs" aria-hidden="true" width="0" height="0">
+      <defs>
+        <filter id="liquid-wash" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">
+          <feTurbulence id="intro-turbulence" type="fractalNoise" baseFrequency="0.015 0.04" numOctaves="3" result="turb" seed="4" />
+          <feDisplacementMap id="intro-disp" in="SourceGraphic" in2="turb" scale="48" xChannelSelector="R" yChannelSelector="G" result="displaced" />
+        </filter>
+      </defs>
+    </svg>
+
+    <div class="intro-content">
+      <div class="intro-eyebrow">
+        <span class="intro-rule-left" aria-hidden="true"></span>
+        <span class="intro-eyebrow-text">A Southern Rock Revue</span>
+        <span class="intro-rule-right" aria-hidden="true"></span>
+      </div>
+
+      <!-- Giant Hero Display Wordmark with Ink-Wash Effect -->
+      <div class="intro-wordmark-wrap">
+        <div class="intro-title" id="intro-title" role="heading" aria-level="1">
+          <span class="intro-title-filtered">SOUTHBOUND</span>
+          <span class="intro-title-glow" aria-hidden="true">SOUTHBOUND</span>
+        </div>
+      </div>
+
+      <div class="intro-tagline-wrap">
+        <p class="intro-tagline">Northern California · Sacramento · Est. 2018</p>
+      </div>
+
+      <!-- Skip Action Button -->
+      <button type="button" class="intro-skip-btn" id="intro-skip-btn" aria-label="Enter site and skip intro">
+        <span>Enter Site</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
        1. STICKY NAVIGATION HEADER
        ========================================================================== -->
   <header class="site-header" id="site-header">
@@ -202,13 +250,13 @@
        ========================================================================== -->
   <section id="about" class="about-section section-light" aria-labelledby="about-title">
     <div class="container">
-      <div class="section-header reveal">
+      <div class="section-header reveal reveal-editorial">
         <p class="section-eyebrow">Our Story</p>
         <h2 class="section-title" id="about-title">The Sound &amp; The Spirit</h2>
       </div>
       <div class="about-grid">
         <!-- Left: Live Stage Visual -->
-        <div class="about-visual reveal">
+        <div class="about-visual reveal reveal-mask">
           <img
             src="/assets/gallery/about-live-stage.jpg"
             alt="Southbound performing live on stage at Downtown Roseville under blue stage lights"
@@ -284,7 +332,7 @@
        ========================================================================== -->
   <section id="band" class="band-section section-dark" aria-labelledby="band-title">
     <div class="container">
-      <div class="section-header reveal">
+      <div class="section-header reveal reveal-editorial">
         <p class="section-eyebrow">The Lineup</p>
         <h2 class="section-title" id="band-title">Meet the Band</h2>
         <p class="section-subtitle">Six seasoned musicians. One unstoppable sound.</p>
@@ -294,7 +342,7 @@
       <img
         src="/assets/branding/hero-promo.jpg"
         alt="Southbound 2025 Band Lineup — all six members together"
-        class="band-promo-strip reveal"
+        class="band-promo-strip reveal reveal-mask reveal-mask-up"
         width="3300"
         height="1031"
         loading="lazy"
@@ -457,14 +505,14 @@
        ========================================================================== -->
   <section id="video" class="video-section section-dark" aria-labelledby="video-title">
     <div class="container">
-      <div class="section-header reveal">
+      <div class="section-header reveal reveal-editorial">
         <p class="section-eyebrow">Watch &amp; Listen</p>
         <h2 class="section-title" id="video-title">Live Concert &amp; Promo Gallery</h2>
         <p class="section-subtitle">Experience Northern California's premier Southern Rock revue through official promo reels and authentic concert performances.</p>
       </div>
 
       <!-- Featured Video Theatre -->
-      <div class="video-theatre reveal" id="video-theatre">
+      <div class="video-theatre reveal reveal-scale" id="video-theatre">
         <div class="video-theatre-frame">
           <div class="video-player-wrap">
             <!-- Facade Player -->
@@ -609,7 +657,7 @@
        ========================================================================== -->
   <section id="music" class="music-section section-light" aria-labelledby="music-title">
     <div class="container">
-      <div class="section-header reveal">
+      <div class="section-header reveal reveal-editorial">
         <p class="section-eyebrow">Featured Tracks &amp; The Records</p>
         <h2 class="section-title" id="music-title">Latest Tracks</h2>
         <p class="section-subtitle">Stream verified cover anthems recorded live on tour, or download official audio files authorized directly by the band.</p>
@@ -831,7 +879,7 @@
        ========================================================================== -->
   <section id="photos" class="gallery-section section-dark" aria-labelledby="photos-title">
     <div class="container">
-      <div class="section-header reveal">
+      <div class="section-header reveal reveal-editorial">
         <p class="section-eyebrow">Live Photography</p>
         <h2 class="section-title" id="photos-title">On Stage</h2>
         <p class="section-subtitle">Authentic concert photography from stages across Northern California.</p>
@@ -940,7 +988,7 @@
        ========================================================================== -->
   <section id="shows" class="shows-section section-light" aria-labelledby="shows-title">
     <div class="container">
-      <div class="section-header reveal">
+      <div class="section-header reveal reveal-editorial">
         <p class="section-eyebrow">Tour Schedule</p>
         <h2 class="section-title" id="shows-title">Upcoming Shows</h2>
         <p class="section-subtitle">Find Southbound near you across Northern California.</p>
@@ -1037,7 +1085,7 @@
     <div class="container">
       
       <!-- Section Header -->
-      <div class="section-header reveal">
+      <div class="section-header reveal reveal-editorial">
         <p class="section-eyebrow">Media &amp; Industry Resources</p>
         <h2 class="section-title" id="press-title">Press Kit &amp; Downloads</h2>
         <p class="section-subtitle">
@@ -1361,7 +1409,7 @@
        ========================================================================== -->
   <section id="merch" class="merch-section section-light" aria-labelledby="merch-title">
     <div class="container">
-      <div class="section-header reveal">
+      <div class="section-header reveal reveal-editorial">
         <p class="section-eyebrow">Official Merchandise</p>
         <h2 class="section-title" id="merch-title">Wear the Music</h2>
       </div>
@@ -1410,7 +1458,7 @@
        ========================================================================== -->
   <section id="booking" class="booking-section section-dark" aria-labelledby="booking-title">
     <div class="container">
-      <div class="section-header reveal">
+      <div class="section-header reveal reveal-editorial">
         <p class="section-eyebrow">Hire the Band</p>
         <h2 class="section-title" id="booking-title">Book Southbound</h2>
         <p class="section-subtitle">
