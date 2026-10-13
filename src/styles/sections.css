@@ -1851,10 +1851,16 @@
 }
 
 .footer-logo {
-  height: 40px;
-  width: auto;
+  height: 64px;
+  width: 64px;
   object-fit: contain;
   object-position: left center;
+  border-radius: 50%;
+  transition: transform var(--transition-base);
+}
+
+.footer-logo:hover {
+  transform: scale(1.05);
 }
 
 .footer-tagline {

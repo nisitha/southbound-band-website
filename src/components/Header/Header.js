@@ -8,8 +8,7 @@ export const HeaderComponent = {
   id: 'header',
   name: 'Sticky Navigation Header',
   mappedAssets: [
-    '/assets/branding/logo-fade.png',
-    '/assets/branding/logo-round.png'
+    '/assets/branding/Southbound_Logo_Round.png'
   ],
   navItems: [
     { label: 'About', href: '#about' },

@@ -61,18 +61,20 @@
 }
 
 .brand-logo-img {
-  height: 44px;
-  width: auto;
+  height: 52px;
+  width: 52px;
   object-fit: contain;
-  transition: transform var(--transition-base);
+  border-radius: 50%;
+  transition: transform var(--transition-base), height var(--transition-base), width var(--transition-base);
 }
 
 .site-header.scrolled .brand-logo-img {
-  height: 38px;
+  height: 44px;
+  width: 44px;
 }
 
 .header-brand:hover .brand-logo-img {
-  transform: scale(1.02);
+  transform: scale(1.06);
 }
 
 /* ==========================================================================
@@ -355,7 +357,8 @@
   }
 
   .brand-logo-img {
-    height: 36px;
+    height: 40px;
+    width: 40px;
   }
 }
 

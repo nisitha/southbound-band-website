@@ -9,7 +9,7 @@ export const HeroComponent = {
   name: 'Full-Impact Hero Section',
   mappedAssets: [
     '/assets/branding/hero-promo.jpg',
-    '/assets/branding/logo-fade.png'
+    '/assets/branding/Southbound_Logo_Round.png'
   ],
   headline: 'SOUTHBOUND',
   tagline: "Northern California's Premier Southern Rock Revue",
