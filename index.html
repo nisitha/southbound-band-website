@@ -35,8 +35,8 @@
   <meta name="twitter:image" content="https://sb916.com/assets/branding/hero-promo.jpg">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="/assets/branding/logo-round.png">
-  <link rel="apple-touch-icon" href="/assets/branding/logo-round.png">
+  <link rel="icon" type="image/png" href="./assets/branding/logo-round.png">
+  <link rel="apple-touch-icon" href="./assets/branding/logo-round.png">
 
   <!-- Application Entry Point -->
   <script type="module" src="/src/main.js"></script>
@@ -104,7 +104,7 @@
     <div class="container header-inner">
       <!-- Brand Logo Link -->
       <a href="#hero" class="header-brand" id="brand-link" aria-label="Southbound Official Home">
-        <img src="/assets/branding/logo-fade.png" alt="Southbound - A Southern Rock Revue" class="brand-logo-img" id="header-logo" width="1080" height="566">
+        <img src="./assets/branding/logo-fade.png" alt="Southbound - A Southern Rock Revue" class="brand-logo-img" id="header-logo" width="1080" height="566">
       </a>
 
       <!-- Desktop Navigation Links -->
@@ -152,7 +152,7 @@
   <aside class="mobile-drawer" id="mobile-drawer" aria-label="Mobile Navigation" aria-modal="true" role="dialog">
     <div class="mobile-drawer-top">
       <a href="#hero" aria-label="Southbound Home">
-        <img src="/assets/branding/logo-round.png" alt="Southbound Emblem" class="mobile-brand-emblem" width="612" height="612">
+        <img src="./assets/branding/logo-round.png" alt="Southbound Emblem" class="mobile-brand-emblem" width="612" height="612">
       </a>
       <ul class="mobile-nav-list">
         <li><a href="#about" class="mobile-nav-link">About</a></li>
@@ -190,7 +190,7 @@
     <section class="hero-section" id="hero" aria-label="Southbound Official Hero">
       <div class="hero-backdrop">
         <!-- Authentic 2025 promotional photograph featuring all 6 band members -->
-        <img src="/assets/branding/hero-promo.jpg" alt="Southbound Band 2025 Lineup: Larry Audino, Rusty Chain, Scott Baxter, Dean Fisher, Tony Vivilacqua, Mike Cochran" class="hero-bg-img" id="hero-img" width="3300" height="1878" fetchpriority="high" loading="eager" decoding="async">
+        <img src="./assets/branding/hero-promo.jpg" alt="Southbound Band 2025 Lineup: Larry Audino, Rusty Chain, Scott Baxter, Dean Fisher, Tony Vivilacqua, Mike Cochran" class="hero-bg-img" id="hero-img" width="3300" height="1878" fetchpriority="high" loading="eager" decoding="async">
         <div class="hero-vignette" aria-hidden="true"></div>
       </div>
 
@@ -256,18 +256,20 @@
       </div>
       <div class="about-grid">
         <!-- Left: Live Stage Visual -->
-        <div class="about-visual reveal reveal-mask">
-          <img
-            src="/assets/gallery/about-live-stage.jpg"
-            alt="Southbound performing live on stage at Downtown Roseville under blue stage lights"
-            class="about-stage-img"
-            width="1080"
-            height="706"
-            loading="lazy"
-            decoding="async"
-          >
+        <div class="about-visual reveal">
+          <div class="about-img-frame">
+            <img
+              src="./assets/gallery/about-live-stage.jpg"
+              alt="Southbound performing live on stage at Downtown Roseville under blue stage lights"
+              class="about-stage-img"
+              width="1080"
+              height="706"
+              loading="lazy"
+              decoding="async"
+            >
+          </div>
           <div class="about-logo-badge" aria-hidden="true">
-            <img src="/assets/branding/logo-round.png" alt="" width="612" height="612">
+            <img src="./assets/branding/logo-round.png" alt="" width="612" height="612">
           </div>
         </div>
         <!-- Right: Bio & Repertoire -->
@@ -289,18 +291,18 @@
             up to 4 complete sets without repeating a song, covering the essential canon of 
             Southern Rock from the 1970s through today.
           </p>
-          <!-- Stats Bar -->
-          <div class="about-stats reveal reveal-delay-3">
+          <!-- Stats Bar with Counter Animation -->
+          <div class="about-stats reveal reveal-delay-3" id="about-stats">
             <div class="about-stat">
-              <span class="about-stat-value">6</span>
+              <span class="about-stat-value" data-counter="6" data-start="0">6</span>
               <span class="about-stat-label">Piece Band</span>
             </div>
             <div class="about-stat">
-              <span class="about-stat-value">4</span>
+              <span class="about-stat-value" data-counter="4" data-start="0">4</span>
               <span class="about-stat-label">Sets Available</span>
             </div>
             <div class="about-stat">
-              <span class="about-stat-value">2018</span>
+              <span class="about-stat-value" data-counter="2018" data-start="1990">2018</span>
               <span class="about-stat-label">Founded</span>
             </div>
             <div class="about-stat">
@@ -340,9 +342,9 @@
 
       <!-- Promo Band Panoramic Photo -->
       <img
-        src="/assets/branding/hero-promo.jpg"
+        src="./assets/branding/hero-promo.jpg"
         alt="Southbound 2025 Band Lineup — all six members together"
-        class="band-promo-strip reveal reveal-mask reveal-mask-up"
+        class="band-promo-strip reveal"
         width="3300"
         height="1031"
         loading="lazy"
@@ -356,7 +358,7 @@
         <article class="band-member-card reveal reveal-delay-1">
           <div class="band-member-img-wrap">
             <img
-              src="/assets/members/scott-baxter.jpg"
+              src="./assets/members/scott-baxter.jpg"
               alt="Scott Baxter — Lead Vocals"
               class="band-member-img"
               width="600"
@@ -380,7 +382,7 @@
         <article class="band-member-card reveal reveal-delay-2">
           <div class="band-member-img-wrap">
             <img
-              src="/assets/members/dean-fisher.jpg"
+              src="./assets/members/dean-fisher.jpg"
               alt="Dean Fisher — Guitars &amp; Vocals"
               class="band-member-img"
               width="600"
@@ -404,7 +406,7 @@
         <article class="band-member-card reveal reveal-delay-3">
           <div class="band-member-img-wrap">
             <img
-              src="/assets/members/mike-cochran.jpg"
+              src="./assets/members/mike-cochran.jpg"
               alt="Mike Cochran — Bass Guitar &amp; Vocals"
               class="band-member-img"
               width="600"
@@ -428,7 +430,7 @@
         <article class="band-member-card reveal reveal-delay-1">
           <div class="band-member-img-wrap">
             <img
-              src="/assets/members/rusty-chain.jpg"
+              src="./assets/members/rusty-chain.jpg"
               alt="Rusty Chain — Guitar &amp; Vocals"
               class="band-member-img"
               width="600"
@@ -452,7 +454,7 @@
         <article class="band-member-card reveal reveal-delay-2">
           <div class="band-member-img-wrap">
             <img
-              src="/assets/members/tony-vivilacqua.jpg"
+              src="./assets/members/tony-vivilacqua.jpg"
               alt="Tony Vivilacqua — Drums &amp; Vocals"
               class="band-member-img"
               width="600"
@@ -476,7 +478,7 @@
         <article class="band-member-card reveal reveal-delay-3">
           <div class="band-member-img-wrap">
             <img
-              src="/assets/members/larry-audino.jpg"
+              src="./assets/members/larry-audino.jpg"
               alt="Larry Audino — Keyboards, Guitar &amp; Vocals"
               class="band-member-img"
               width="600"
@@ -518,7 +520,7 @@
             <!-- Facade Player -->
             <div class="video-facade" id="video-facade" role="button" tabindex="0" aria-label="Play Southbound Promo Video '25">
               <img
-                src="/assets/video/thumb-promo25.jpg"
+                src="./assets/video/thumb-promo25.jpg"
                 alt="Southbound Promo Video '25 — Official band promo reel"
                 class="video-facade-img"
                 id="video-poster"
@@ -566,7 +568,7 @@
         <!-- Video 1 -->
         <article class="video-card is-active" data-video-id="nSN0ZIoctMo" tabindex="0" role="button" aria-label="Watch Southbound Promo Video '25" aria-selected="true">
           <div class="video-card-thumb-wrap">
-            <img src="/assets/video/thumb-promo25.jpg" alt="Southbound Promo Video '25" class="video-card-thumb" width="480" height="360" loading="lazy">
+            <img src="./assets/video/thumb-promo25.jpg" alt="Southbound Promo Video '25" class="video-card-thumb" width="480" height="360" loading="lazy">
             <div class="video-card-play-overlay" aria-hidden="true">
               <div class="video-card-play-icon">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
@@ -585,7 +587,7 @@
         <!-- Video 2 -->
         <article class="video-card" data-video-id="M95QmHVGUWo" tabindex="0" role="button" aria-label="Watch Keep on Smilin' (Wet Willie Cover)" aria-selected="false">
           <div class="video-card-thumb-wrap">
-            <img src="/assets/video/thumb-keep-on-smilin.jpg" alt="Keep on Smilin' — Wet Willie Cover" class="video-card-thumb" width="480" height="360" loading="lazy">
+            <img src="./assets/video/thumb-keep-on-smilin.jpg" alt="Keep on Smilin' — Wet Willie Cover" class="video-card-thumb" width="480" height="360" loading="lazy">
             <div class="video-card-play-overlay" aria-hidden="true">
               <div class="video-card-play-icon">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
@@ -604,7 +606,7 @@
         <!-- Video 3 -->
         <article class="video-card" data-video-id="OpySJ7OwICg" tabindex="0" role="button" aria-label="Watch What If I'd Been The One (.38 Special Cover)" aria-selected="false">
           <div class="video-card-thumb-wrap">
-            <img src="/assets/video/thumb-what-if-id-been-the-one.jpg" alt="What If I'd Been The One — .38 Special Cover" class="video-card-thumb" width="480" height="360" loading="lazy">
+            <img src="./assets/video/thumb-what-if-id-been-the-one.jpg" alt="What If I'd Been The One — .38 Special Cover" class="video-card-thumb" width="480" height="360" loading="lazy">
             <div class="video-card-play-overlay" aria-hidden="true">
               <div class="video-card-play-icon">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
@@ -623,7 +625,7 @@
         <!-- Video 4 -->
         <article class="video-card" data-video-id="UlN5942NNu8" tabindex="0" role="button" aria-label="Watch Southbound Live Concert Showcase" aria-selected="false">
           <div class="video-card-thumb-wrap">
-            <img src="/assets/video/thumb-live-showcase.jpg" alt="Southbound Live Concert Showcase" class="video-card-thumb" width="480" height="360" loading="lazy">
+            <img src="./assets/video/thumb-live-showcase.jpg" alt="Southbound Live Concert Showcase" class="video-card-thumb" width="480" height="360" loading="lazy">
             <div class="video-card-play-overlay" aria-hidden="true">
               <div class="video-card-play-icon">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
@@ -674,7 +676,7 @@
                 <span>·</span>
                 <span>Stereo LP</span>
               </div>
-              <img src="/assets/branding/hero-promo.jpg" alt="Southbound Band 2025" class="vinyl-sleeve-art" width="800" height="800" loading="lazy">
+              <img src="./assets/branding/hero-promo.jpg" alt="Southbound Band 2025" class="vinyl-sleeve-art" width="800" height="800" loading="lazy">
               <div class="vinyl-sleeve-footer">33⅓ RPM · Recorded Live</div>
             </div>
 
@@ -682,7 +684,7 @@
             <div class="vinyl-record" aria-hidden="true">
               <div class="vinyl-label-ring"></div>
               <div class="vinyl-label">
-                <img src="/assets/branding/logo-round.png" alt="Southbound emblem" class="vinyl-label-emblem" width="200" height="200">
+                <img src="./assets/branding/logo-round.png" alt="Southbound emblem" class="vinyl-label-emblem" width="200" height="200">
               </div>
               <div class="vinyl-spindle-hole"></div>
             </div>
@@ -711,7 +713,7 @@
           <!-- Master Playback Console -->
           <div class="master-playback-bar">
             <div class="master-playback-info">
-              <img src="/assets/branding/hero-promo.jpg" alt="Southbound Album Cover" class="master-track-artwork">
+              <img src="./assets/branding/hero-promo.jpg" alt="Southbound Album Cover" class="master-track-artwork">
               <div class="master-track-meta">
                 <div class="master-track-label">Selected Track</div>
                 <div class="master-track-title" id="master-track-title">Can't You See</div>
@@ -898,67 +900,67 @@
       <div class="gallery-grid" id="gallery-grid" role="list" aria-label="Concert photo gallery">
 
         <div class="gallery-item gallery-wide reveal reveal-scale" data-category="festival" data-full="./assets/gallery/gallery-festival-01.jpg" data-caption="Southbound performing at a Northern California festival" role="listitem">
-          <img src="/assets/gallery/gallery-festival-01.jpg" alt="Southbound performing live at a Northern California outdoor festival" class="gallery-img" loading="lazy" decoding="async">
+          <img src="./assets/gallery/gallery-festival-01.jpg" alt="Southbound performing live at a Northern California outdoor festival" class="gallery-img" loading="lazy" decoding="async">
           <div class="gallery-item-overlay"><div class="gallery-zoom-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg></div></div>
         </div>
 
         <div class="gallery-item reveal reveal-scale reveal-delay-1" data-category="festival" data-full="./assets/gallery/gallery-festival-02.jpg" data-caption="Guitar solo at a California summer festival" role="listitem">
-          <img src="/assets/gallery/gallery-festival-02.jpg" alt="Guitar solo moment at a California summer festival" class="gallery-img" loading="lazy" decoding="async">
+          <img src="./assets/gallery/gallery-festival-02.jpg" alt="Guitar solo moment at a California summer festival" class="gallery-img" loading="lazy" decoding="async">
           <div class="gallery-item-overlay"><div class="gallery-zoom-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg></div></div>
         </div>
 
         <div class="gallery-item reveal reveal-scale reveal-delay-2" data-category="theatre" data-full="./assets/gallery/gallery-theatre-01.jpg" data-caption="Historic Opera House, Roseville" role="listitem">
-          <img src="/assets/gallery/gallery-theatre-01.jpg" alt="Southbound performing at the Historic Opera House in Roseville" class="gallery-img" loading="lazy" decoding="async">
+          <img src="./assets/gallery/gallery-theatre-01.jpg" alt="Southbound performing at the Historic Opera House in Roseville" class="gallery-img" loading="lazy" decoding="async">
           <div class="gallery-item-overlay"><div class="gallery-zoom-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg></div></div>
         </div>
 
         <div class="gallery-item gallery-wide reveal reveal-scale reveal-delay-1" data-category="festival" data-full="./assets/gallery/gallery-festival-03.jpg" data-caption="Full stage at a summer festival" role="listitem">
-          <img src="/assets/gallery/gallery-festival-03.jpg" alt="Southbound full band on stage at an outdoor festival" class="gallery-img" loading="lazy" decoding="async">
+          <img src="./assets/gallery/gallery-festival-03.jpg" alt="Southbound full band on stage at an outdoor festival" class="gallery-img" loading="lazy" decoding="async">
           <div class="gallery-item-overlay"><div class="gallery-zoom-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg></div></div>
         </div>
 
         <div class="gallery-item reveal reveal-scale reveal-delay-2" data-category="festival" data-full="./assets/gallery/gallery-festival-04.jpg" data-caption="Festival performance — stage panorama" role="listitem">
-          <img src="/assets/gallery/gallery-festival-04.jpg" alt="Southbound festival performance stage panorama" class="gallery-img" loading="lazy" decoding="async">
+          <img src="./assets/gallery/gallery-festival-04.jpg" alt="Southbound festival performance stage panorama" class="gallery-img" loading="lazy" decoding="async">
           <div class="gallery-item-overlay"><div class="gallery-zoom-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg></div></div>
         </div>
 
         <div class="gallery-item reveal reveal-scale reveal-delay-3" data-category="swabbies" data-full="./assets/gallery/gallery-swabbies-01.jpg" data-caption="Swabbies on the River, Sacramento" role="listitem">
-          <img src="/assets/gallery/gallery-swabbies-01.jpg" alt="Southbound performing at Swabbies on the River in Sacramento" class="gallery-img" loading="lazy" decoding="async">
+          <img src="./assets/gallery/gallery-swabbies-01.jpg" alt="Southbound performing at Swabbies on the River in Sacramento" class="gallery-img" loading="lazy" decoding="async">
           <div class="gallery-item-overlay"><div class="gallery-zoom-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg></div></div>
         </div>
 
         <div class="gallery-item reveal reveal-scale reveal-delay-1" data-category="swabbies" data-full="./assets/gallery/gallery-swabbies-02.jpg" data-caption="Swabbies on the River — summer 2025" role="listitem">
-          <img src="/assets/gallery/gallery-swabbies-02.jpg" alt="Southbound summer performance at Swabbies on the River 2025" class="gallery-img" loading="lazy" decoding="async">
+          <img src="./assets/gallery/gallery-swabbies-02.jpg" alt="Southbound summer performance at Swabbies on the River 2025" class="gallery-img" loading="lazy" decoding="async">
           <div class="gallery-item-overlay"><div class="gallery-zoom-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg></div></div>
         </div>
 
         <div class="gallery-item gallery-wide reveal reveal-scale reveal-delay-2" data-category="theatre" data-full="./assets/gallery/gallery-theatre-02.jpg" data-caption="Historic Opera House — wide stage view" role="listitem">
-          <img src="/assets/gallery/gallery-theatre-02.jpg" alt="Wide stage view at the Historic Opera House" class="gallery-img" loading="lazy" decoding="async">
+          <img src="./assets/gallery/gallery-theatre-02.jpg" alt="Wide stage view at the Historic Opera House" class="gallery-img" loading="lazy" decoding="async">
           <div class="gallery-item-overlay"><div class="gallery-zoom-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg></div></div>
         </div>
 
         <div class="gallery-item reveal reveal-scale reveal-delay-3" data-category="theatre" data-full="./assets/gallery/gallery-theatre-03.jpg" data-caption="Stage moment at the Opera House" role="listitem">
-          <img src="/assets/gallery/gallery-theatre-03.jpg" alt="Stage moment under spotlights at the Historic Opera House" class="gallery-img" loading="lazy" decoding="async">
+          <img src="./assets/gallery/gallery-theatre-03.jpg" alt="Stage moment under spotlights at the Historic Opera House" class="gallery-img" loading="lazy" decoding="async">
           <div class="gallery-item-overlay"><div class="gallery-zoom-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg></div></div>
         </div>
 
         <div class="gallery-item reveal reveal-scale reveal-delay-1" data-category="festival" data-full="./assets/gallery/gallery-resort-01.jpg" data-caption="Robb's Resort — Pollock Pines, Sierra Foothills" role="listitem">
-          <img src="/assets/gallery/gallery-resort-01.jpg" alt="Southbound performing at Robb's Resort in Pollock Pines" class="gallery-img" loading="lazy" decoding="async">
+          <img src="./assets/gallery/gallery-resort-01.jpg" alt="Southbound performing at Robb's Resort in Pollock Pines" class="gallery-img" loading="lazy" decoding="async">
           <div class="gallery-item-overlay"><div class="gallery-zoom-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg></div></div>
         </div>
 
         <div class="gallery-item reveal reveal-scale reveal-delay-2" data-category="club" data-full="./assets/gallery/gallery-club-01.jpg" data-caption="Corner Pocket Sports Bar, Orangevale" role="listitem">
-          <img src="/assets/gallery/gallery-club-01.jpg" alt="Southbound at Corner Pocket Sports Bar in Orangevale" class="gallery-img" loading="lazy" decoding="async">
+          <img src="./assets/gallery/gallery-club-01.jpg" alt="Southbound at Corner Pocket Sports Bar in Orangevale" class="gallery-img" loading="lazy" decoding="async">
           <div class="gallery-item-overlay"><div class="gallery-zoom-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg></div></div>
         </div>
 
         <div class="gallery-item reveal reveal-scale reveal-delay-3" data-category="festival" data-full="./assets/gallery/gallery-community-01.jpg" data-caption="Community outdoor concert" role="listitem">
-          <img src="/assets/gallery/gallery-community-01.jpg" alt="Southbound performing at a community outdoor concert" class="gallery-img" loading="lazy" decoding="async">
+          <img src="./assets/gallery/gallery-community-01.jpg" alt="Southbound performing at a community outdoor concert" class="gallery-img" loading="lazy" decoding="async">
           <div class="gallery-item-overlay"><div class="gallery-zoom-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg></div></div>
         </div>
 
         <div class="gallery-item reveal reveal-scale reveal-delay-1" data-category="festival" data-full="./assets/gallery/gallery-candid-01.jpg" data-caption="Backstage moment at Swabbies" role="listitem">
-          <img src="/assets/gallery/gallery-candid-01.jpg" alt="Southbound band members candid backstage moment at Swabbies" class="gallery-img" loading="lazy" decoding="async">
+          <img src="./assets/gallery/gallery-candid-01.jpg" alt="Southbound band members candid backstage moment at Swabbies" class="gallery-img" loading="lazy" decoding="async">
           <div class="gallery-item-overlay"><div class="gallery-zoom-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg></div></div>
         </div>
 
@@ -1239,7 +1241,7 @@
           <!-- Photo 1: Color Promo -->
           <article class="press-media-card">
             <div class="press-media-preview-wrap">
-              <img src="/assets/branding/hero-promo.jpg" alt="Southbound Official 2025 Promo Photo (Color)" class="press-media-preview-img" width="800" height="455" loading="lazy">
+              <img src="./assets/branding/hero-promo.jpg" alt="Southbound Official 2025 Promo Photo (Color)" class="press-media-preview-img" width="800" height="455" loading="lazy">
               <span class="press-media-res-badge">3300 × 1878 px</span>
             </div>
             <div class="press-media-card-body">
@@ -1255,7 +1257,7 @@
           <!-- Photo 2: B&W Promo -->
           <article class="press-media-card">
             <div class="press-media-preview-wrap">
-              <img src="/assets/downloads/Southbound_Promo_2025_BW.jpg" alt="Southbound Official 2025 Promo Photo (Monochrome)" class="press-media-preview-img" width="800" height="455" loading="lazy">
+              <img src="./assets/downloads/Southbound_Promo_2025_BW.jpg" alt="Southbound Official 2025 Promo Photo (Monochrome)" class="press-media-preview-img" width="800" height="455" loading="lazy">
               <span class="press-media-res-badge">3300 × 1878 px</span>
             </div>
             <div class="press-media-card-body">
@@ -1271,7 +1273,7 @@
           <!-- Logo 1: Round Crest -->
           <article class="press-media-card">
             <div class="press-media-preview-wrap is-logo">
-              <img src="/assets/branding/logo-round.png" alt="Southbound Round Crest Logo" class="press-media-preview-img" width="400" height="400" loading="lazy">
+              <img src="./assets/branding/logo-round.png" alt="Southbound Round Crest Logo" class="press-media-preview-img" width="400" height="400" loading="lazy">
               <span class="press-media-res-badge">612 × 612 px</span>
             </div>
             <div class="press-media-card-body">
@@ -1287,7 +1289,7 @@
           <!-- Logo 2: Solid Black -->
           <article class="press-media-card">
             <div class="press-media-preview-wrap is-logo" style="background: #fff;">
-              <img src="/assets/branding/logo-black.jpg" alt="Southbound Solid Black Logo" class="press-media-preview-img" width="800" height="392" loading="lazy">
+              <img src="./assets/branding/logo-black.jpg" alt="Southbound Solid Black Logo" class="press-media-preview-img" width="800" height="392" loading="lazy">
               <span class="press-media-res-badge">2700 × 1322 px</span>
             </div>
             <div class="press-media-card-body">
@@ -1303,7 +1305,7 @@
           <!-- Logo 3: Gradient Guitars Fade -->
           <article class="press-media-card">
             <div class="press-media-preview-wrap is-logo">
-              <img src="/assets/branding/logo-fade.png" alt="Southbound Gradient Guitars Logo" class="press-media-preview-img" width="800" height="419" loading="lazy">
+              <img src="./assets/branding/logo-fade.png" alt="Southbound Gradient Guitars Logo" class="press-media-preview-img" width="800" height="419" loading="lazy">
               <span class="press-media-res-badge">1080 × 566 px</span>
             </div>
             <div class="press-media-card-body">
@@ -1417,7 +1419,7 @@
         <!-- T-Shirt Visual -->
         <div class="merch-visual reveal">
           <img
-            src="/assets/merch-tshirt.png"
+            src="./assets/merch-tshirt.png"
             alt="Official Southbound Southern Rock Revue tour t-shirt — vintage psychedelic artwork with twin guitars, locomotive, and cotton blossoms"
             class="merch-tshirt-img"
             width="1643"
@@ -1656,7 +1658,7 @@
       <div class="footer-inner-grid">
         <!-- Brand Column -->
         <div class="footer-brand-col">
-          <img src="/assets/branding/logo-fade.png" alt="Southbound" class="footer-logo" width="1080" height="566" loading="lazy">
+          <img src="./assets/branding/logo-fade.png" alt="Southbound" class="footer-logo" width="1080" height="566" loading="lazy">
           <p class="footer-tagline">
             Northern California's Premier Southern Rock Revue. Performing the music of 
             Lynyrd Skynyrd, The Allman Brothers Band, .38 Special, and more since 2018.

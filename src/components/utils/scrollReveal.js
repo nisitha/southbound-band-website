@@ -36,13 +36,23 @@ export function initScrollReveal() {
       });
     },
     {
-      rootMargin: '0px 0px -50px 0px',
-      threshold: [0.08, 0.2]
+      rootMargin: '0px 0px -40px 0px',
+      threshold: 0.05
     }
   );
 
   document.querySelectorAll('.reveal, .reveal-mask, .reveal-editorial').forEach(el => {
     _revealObserver.observe(el);
+  });
+
+  // Reveal any elements already visible when the intro sequence completes
+  document.addEventListener('southbound:intro-complete', () => {
+    document.querySelectorAll('.reveal, .reveal-mask, .reveal-editorial').forEach(el => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight - 30 && rect.bottom > 0) {
+        el.classList.add('is-visible');
+      }
+    });
   });
 
   // 2. Active Navigation Scroll Spy

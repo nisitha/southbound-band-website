@@ -19,7 +19,7 @@ export function initParallax() {
   const heroSection = document.getElementById('hero');
   const heroContent = document.querySelector('.hero-content');
   const bandPromo = document.querySelector('.band-promo-strip');
-  const aboutImg = document.querySelector('.about-img-frame img');
+  const aboutImg = document.querySelector('.about-stage-img') || document.querySelector('.about-img-frame img');
   const vinylShowcase = document.querySelector('.vinyl-showcase');
 
   let ticking = false;
@@ -46,11 +46,11 @@ export function initParallax() {
       }
     }
 
-    // 2. Band Promo Strip Parallax
-    if (bandPromo) {
+    // 2. Band Promo Strip Parallax (applies after reveal to avoid overriding initial animation)
+    if (bandPromo && bandPromo.classList.contains('is-visible')) {
       const rect = bandPromo.getBoundingClientRect();
       if (rect.top < windowHeight && rect.bottom > 0) {
-        const relativeY = ((windowHeight - rect.top) * 0.06).toFixed(1);
+        const relativeY = ((windowHeight - rect.top) * 0.035).toFixed(1);
         bandPromo.style.transform = `translate3d(0, ${relativeY}px, 0)`;
       }
     }
@@ -59,8 +59,8 @@ export function initParallax() {
     if (aboutImg) {
       const rect = aboutImg.getBoundingClientRect();
       if (rect.top < windowHeight && rect.bottom > 0) {
-        const delta = ((rect.top - (windowHeight / 2)) * 0.05).toFixed(1);
-        aboutImg.style.transform = `translate3d(0, ${delta}px, 0) scale(1.04)`;
+        const delta = ((rect.top - (windowHeight / 2)) * 0.035).toFixed(1);
+        aboutImg.style.transform = `translate3d(0, ${delta}px, 0)`;
       }
     }
 
