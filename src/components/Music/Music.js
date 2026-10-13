@@ -9,6 +9,8 @@
  * 3. There Goes Another Love Song (Outlaws Cover) — 2:59 — WAV (30.1 MB)
  */
 
+import { resolveAssetUrl } from '../../utils/paths.js';
+
 export const VERIFIED_TRACKS = [
   {
     id: 'cant-you-see',
@@ -156,7 +158,7 @@ export const MusicComponent = {
       if (totalDurationEl) totalDurationEl.textContent = track.duration;
 
       // Update Audio source
-      this.audio.src = track.file;
+      this.audio.src = resolveAssetUrl(track.file);
       scrubSlider.value = 0;
       if (currentTimeEl) currentTimeEl.textContent = '0:00';
 

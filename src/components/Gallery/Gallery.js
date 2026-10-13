@@ -4,6 +4,8 @@
  * Features: Category filter + accessible keyboard lightbox
  */
 
+import { resolveAssetUrl } from '../../utils/paths.js';
+
 export const GalleryComponent = {
   id: 'gallery',
   name: 'Concert Photo Gallery',
@@ -123,7 +125,7 @@ export const GalleryComponent = {
     const imgEl = item.querySelector('.gallery-img');
     const alt = imgEl ? imgEl.alt : caption;
 
-    this._lightboxImg.src = src;
+    this._lightboxImg.src = resolveAssetUrl(src);
     this._lightboxImg.alt = alt;
     this._updateCounter();
 

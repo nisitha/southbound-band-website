@@ -9,6 +9,8 @@
  * 4. UlN5942NNu8 — Southbound Live Concert Showcase (Live Reel)
  */
 
+import { resolveAssetUrl } from '../../utils/paths.js';
+
 export const VERIFIED_VIDEOS = [
   {
     id: 'nSN0ZIoctMo',
@@ -79,7 +81,7 @@ export const VideoComponent = {
       if (titleEl) titleEl.textContent = videoData.title;
       if (badgeEl) badgeEl.textContent = videoData.badge;
       if (descEl) descEl.textContent = videoData.desc;
-      if (posterImg) posterImg.src = videoData.thumb;
+      if (posterImg) posterImg.src = resolveAssetUrl(videoData.thumb);
 
       // Update gallery cards active state
       galleryCards.forEach(card => {
