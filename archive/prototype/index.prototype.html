@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Southbound — Northern California's Premier Southern Rock Revue | Official Website</title>
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Official website for Southbound, Northern California's premier Southern Rock Revue. High-energy concerts featuring classics by Lynyrd Skynyrd, The Allman Brothers, .38 Special, and more.">
+  <meta name="keywords" content="Southbound, Southern Rock, Classic Rock Tribute, Sacramento band, Allman Brothers tribute, Lynyrd Skynyrd cover, live music Northern California">
+  <meta name="author" content="Southbound">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://sb916.com/">
+  <meta property="og:title" content="Southbound — Northern California's Premier Southern Rock Revue">
+  <meta property="og:description" content="A live jukebox of Southern Rock hits played with true arena-rock energy. Experience the premier 6-piece Southern Rock revue.">
+  <meta property="og:image" content="assets/branding/hero-promo.jpg">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/branding/logo-round.png">
+  <link rel="apple-touch-icon" href="assets/branding/logo-round.png">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- ==========================================================================
+       1. STICKY NAVIGATION HEADER
+       ========================================================================== -->
+  <header class="site-header" id="site-header">
+    <div class="container header-inner">
+      <a href="#hero" class="header-brand" id="brand-link" aria-label="Southbound Official Home">
+        <img src="assets/branding/logo-fade.png" alt="Southbound - A Southern Rock Revue" class="brand-logo-img" id="header-logo">
+      </a>
+
+      <nav class="header-nav" id="desktop-nav" aria-label="Main Navigation">
+        <a href="#about" class="nav-link" id="nav-about">About</a>
+        <a href="#band" class="nav-link" id="nav-band">The Band</a>
+        <a href="#video" class="nav-link" id="nav-video">Video</a>
+        <a href="#music" class="nav-link" id="nav-music">Music</a>
+        <a href="#photos" class="nav-link" id="nav-photos">Photos</a>
+        <a href="#shows" class="nav-link" id="nav-shows">Shows</a>
+        <a href="#press" class="nav-link" id="nav-press">Press</a>
+        <a href="#merch" class="nav-link" id="nav-merch">Merch</a>
+        <a href="#booking" class="nav-link" id="nav-booking">Booking</a>
+      </nav>
+
+      <div class="header-actions">
+        <!-- Facebook -->
+        <a href="https://www.facebook.com/Southbound6" target="_blank" rel="noopener noreferrer" class="social-icon-btn" id="header-fb-btn" aria-label="Southbound on Facebook" title="Facebook">
+          <svg viewBox="0 0 24 24"><path d="M22.675 0h-21.35C.597 0 0 .597 0 1.326v21.348C0 23.403.597 24 1.326 24H12.82v-9.294H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116c.73 0 1.323-.597 1.323-1.326V1.326C24 .597 23.405 0 22.675 0z"/></svg>
+        </a>
+
+        <!-- YouTube -->
+        <a href="https://www.youtube.com/@southbound2102" target="_blank" rel="noopener noreferrer" class="social-icon-btn" id="header-yt-btn" aria-label="Southbound on YouTube" title="YouTube">
+          <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+        </a>
+
+        <!-- Booking CTA -->
+        <a href="#booking" class="btn btn-primary btn-sm" id="header-book-btn">Book Now</a>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button class="menu-toggle-btn" id="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-drawer">
+          <span class="menu-toggle-bar"></span>
+          <span class="menu-toggle-bar"></span>
+          <span class="menu-toggle-bar"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Overlay -->
+  <div class="mobile-drawer-overlay" id="drawer-overlay"></div>
+
+  <!-- Mobile Navigation Drawer -->
+  <aside class="mobile-drawer" id="mobile-drawer" aria-label="Mobile Navigation">
+    <div class="mobile-nav-top">
+      <img src="assets/branding/logo-fade.png" alt="Southbound Logo" style="height: 40px; margin-bottom: 24px;">
+      <ul class="mobile-nav-list">
+        <li><a href="#about" class="mobile-nav-link">About</a></li>
+        <li><a href="#band" class="mobile-nav-link">The Band</a></li>
+        <li><a href="#video" class="mobile-nav-link">Video</a></li>
+        <li><a href="#music" class="mobile-nav-link">Music</a></li>
+        <li><a href="#photos" class="mobile-nav-link">Photos</a></li>
+        <li><a href="#shows" class="mobile-nav-link">Shows</a></li>
+        <li><a href="#press" class="mobile-nav-link">Press</a></li>
+        <li><a href="#merch" class="mobile-nav-link">Merch</a></li>
+        <li><a href="#booking" class="mobile-nav-link">Booking</a></li>
+      </ul>
+    </div>
+    <div class="mobile-nav-bottom" style="margin-top: 32px;">
+      <a href="#booking" class="btn btn-primary" style="width: 100%; margin-bottom: 16px;">Book the Band</a>
+      <div style="display: flex; gap: 12px; justify-content: center;">
+        <a href="https://www.facebook.com/Southbound6" target="_blank" rel="noopener noreferrer" class="social-icon-btn"><svg viewBox="0 0 24 24"><path d="M22.675 0h-21.35C.597 0 0 .597 0 1.326v21.348C0 23.403.597 24 1.326 24H12.82v-9.294H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116c.73 0 1.323-.597 1.323-1.326V1.326C24 .597 23.405 0 22.675 0z"/></svg></a>
+        <a href="https://www.youtube.com/@southbound2102" target="_blank" rel="noopener noreferrer" class="social-icon-btn"><svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ==========================================================================
+       2. HERO SECTION
+       ========================================================================== -->
+  <section class="hero-section" id="hero" aria-label="Hero Section">
+    <div class="hero-backdrop">
+      <img src="assets/branding/hero-promo.jpg" alt="Southbound Band 2025 Lineup" class="hero-bg-img" id="hero-img">
+      <div class="hero-vignette"></div>
+    </div>
+
+    <div class="container hero-content">
+      <div class="hero-eyebrow-badge" id="hero-badge">
+        <span>★</span> A Southern Rock Revue & Concert Experience <span>★</span>
+      </div>
+
+      <h1 class="hero-headline" id="main-title">SOUTHBOUND</h1>
+
+      <p class="hero-tagline" id="hero-tagline">
+        Northern California's Premier Southern Rock Revue
+      </p>
+
+      <div class="hero-cta-group">
+        <a href="#video" class="btn btn-primary btn-lg" id="hero-cta-watch">
+          <svg style="width: 18px; height: 18px; fill: currentColor;" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          Watch Live Promo
+        </a>
+        <a href="#shows" class="btn btn-outline btn-lg" id="hero-cta-shows">Tour Dates</a>
+        <a href="#booking" class="btn btn-outline btn-lg" id="hero-cta-book">Book Event</a>
+      </div>
+
+      <div class="hero-features-bar">
+        <div class="hero-feature-item">
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <span>6-Piece Full Band Experience</span>
+        </div>
+        <div class="hero-feature-item">
+          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          <span>Greater Sacramento / Sierra / NorCal</span>
+        </div>
+        <div class="hero-feature-item">
+          <svg viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+          <span>All-Ages Danceable Arena Sound</span>
+        </div>
+      </div>
+    </div>
+
+    <a href="#about" class="hero-scroll-indicator" id="hero-scroll-down" aria-label="Scroll down to About section">
+      <span>Scroll</span>
+      <span class="hero-scroll-arrow">▼</span>
+    </a>
+  </section>
+
+  <!-- ==========================================================================
+       3. ABOUT THE BAND & SOUND REPERTOIRE
+       ========================================================================== -->
+  <section class="section" id="about" aria-labelledby="about-title">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-eyebrow">Pure Arena Energy</div>
+        <h2 class="section-title" id="about-title">The <span class="section-title-highlight">Southbound</span> Sound</h2>
+        <p class="section-desc">Performing regularly throughout Northern California and the Greater Sacramento/Sierra area since 2018.</p>
+      </div>
+
+      <div class="about-grid">
+        <!-- Left: Stage Photo -->
+        <div class="about-visual">
+          <div class="about-img-frame">
+            <img src="assets/gallery/about-live-stage.jpg" alt="Southbound performing live in Downtown Roseville under blue stage lights" loading="lazy">
+          </div>
+          <div class="about-floating-seal">
+            <img src="assets/branding/logo-round.png" alt="Southbound Seal Emblem">
+          </div>
+        </div>
+
+        <!-- Right: Story & Specs -->
+        <div class="about-content">
+          <p class="about-lead">
+            <span>Southbound</span> is Northern California's premier Southern Rock Revue. We deliver the authentic grit, twin-lead guitar harmonies, and soulful vocals of Southern Rock classics with an upbeat sound that keeps dance floors packed.
+          </p>
+          <p class="about-text">
+            Our music is suitable for all ages and appeals to a wide audience—young and old alike. Accustomed to playing to large crowds, Southbound is a regular headline participant in regional music festivals, concerts in the park, car/motorcycle rallies, corporate affairs, and premier live music venues.
+          </p>
+
+          <!-- Repertoire Box -->
+          <div class="repertoire-box">
+            <div class="repertoire-label">Artists & Covers We Feature</div>
+            <div class="repertoire-pills">
+              <span class="repertoire-pill">🎸 The Allman Brothers Band</span>
+              <span class="repertoire-pill">🎸 Lynyrd Skynyrd</span>
+              <span class="repertoire-pill">🎸 .38 Special</span>
+              <span class="repertoire-pill">🎸 The Marshall Tucker Band</span>
+              <span class="repertoire-pill">🎸 Molly Hatchet</span>
+              <span class="repertoire-pill">🎸 ZZ Top</span>
+              <span class="repertoire-pill">🎸 The Outlaws</span>
+              <span class="repertoire-pill">🎸 Wet Willie</span>
+            </div>
+          </div>
+
+          <!-- Format Specifications -->
+          <div class="format-specs-grid">
+            <div class="format-spec-card">
+              <div class="format-spec-val">6</div>
+              <div class="format-spec-name">Piece Full Band</div>
+            </div>
+            <div class="format-spec-card">
+              <div class="format-spec-val">Up to 4</div>
+              <div class="format-spec-name">Sets (45-60 min)</div>
+            </div>
+            <div class="format-spec-card">
+              <div class="format-spec-val">2018</div>
+              <div class="format-spec-name">Established Live</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       4. THE BAND (6-MEMBER ROSTER)
+       ========================================================================== -->
+  <section class="section section-alt" id="band" aria-labelledby="band-title">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-eyebrow">The Lineup</div>
+        <h2 class="section-title" id="band-title">Meet <span class="section-title-highlight">The Musicians</span></h2>
+        <p class="section-desc">Seasoned veterans with decades of brotherhood and stage chemistry, bringing true Southern Rock authority to every show.</p>
+      </div>
+
+      <div class="band-grid">
+        <!-- 1. Scott Baxter -->
+        <article class="member-card" id="member-scott">
+          <div class="member-photo-wrap">
+            <img src="assets/members/scott-baxter.jpg" alt="Scott Baxter - Lead Vocals" class="member-photo" loading="lazy">
+            <div class="member-photo-gradient"></div>
+            <div class="member-role-badge">Lead Vocals</div>
+          </div>
+          <div class="member-info">
+            <h3 class="member-name">Scott Baxter</h3>
+            <p class="member-bio">
+              A multi-instrumentalist and veteran of hundreds of shows along the Texas Gulf coast, including gigs with rock and roll pioneer Bo Diddley and South Texas blues legend Rocky Benton. Scott has been the powerhouse front-man and voice of Southbound since 2023.
+            </p>
+          </div>
+        </article>
+
+        <!-- 2. Dean Fisher -->
+        <article class="member-card" id="member-dean">
+          <div class="member-photo-wrap">
+            <img src="assets/members/dean-fisher.jpg" alt="Dean Fisher - Guitars & Vocals" class="member-photo" loading="lazy">
+            <div class="member-photo-gradient"></div>
+            <div class="member-role-badge">Guitars & Vocals</div>
+          </div>
+          <div class="member-info">
+            <h3 class="member-name">Dean Fisher</h3>
+            <p class="member-bio">
+              The release of Freebird nearly 50 years ago triggered Dean's desire to pick up guitar. Longtime partner with Mike Cochran; they formed Savannah Blue 28 years ago and brought that brotherhood into Southbound. To play music and ride with your brothers is Dean's idea of living the dream!
+            </p>
+          </div>
+        </article>
+
+        <!-- 3. Mike Cochran -->
+        <article class="member-card" id="member-mike">
+          <div class="member-photo-wrap">
+            <img src="assets/members/mike-cochran.jpg" alt="Mike Cochran - Bass Guitar & Vocals" class="member-photo" loading="lazy">
+            <div class="member-photo-gradient"></div>
+            <div class="member-role-badge">Bass & Vocals</div>
+          </div>
+          <div class="member-info">
+            <h3 class="member-name">Mike Cochran</h3>
+            <p class="member-bio">
+              Decided at age 15 he was going to play bass. Ten years later, he and Dean Fisher began jamming at backyard BBQs, forming Savannah Blue. 28 years later, Mike and Dean morphed those Southern Rock influences into Southbound: "I've been very fortunate to play with incredible musicians and learn from every one."
+            </p>
+          </div>
+        </article>
+
+        <!-- 4. Rusty Chain -->
+        <article class="member-card" id="member-rusty">
+          <div class="member-photo-wrap">
+            <img src="assets/members/rusty-chain.jpg" alt="Rusty Chain - Guitar & Vocals" class="member-photo" loading="lazy">
+            <div class="member-photo-gradient"></div>
+            <div class="member-role-badge">Guitar & Vocals</div>
+          </div>
+          <div class="member-info">
+            <h3 class="member-name">Rusty Chain</h3>
+            <p class="member-bio">
+              Growing up outside Washington DC in a vibrant Blues/Rock scene (Danny Gatton, Jimmy Thackery & the Nighthawks), Rusty gigged throughout MD, DC, and Virginia. After relocating to Sacramento in the late 90s, he formed the Chain-Lightning Band and Bad Catz. Today his gritty, blues-soaked riffs fill out the Southbound sound.
+            </p>
+          </div>
+        </article>
+
+        <!-- 5. Tony Vivilacqua -->
+        <article class="member-card" id="member-tony">
+          <div class="member-photo-wrap">
+            <img src="assets/members/tony-vivilacqua.jpg" alt="Tony Vivilacqua - Drums & Vocals" class="member-photo" loading="lazy">
+            <div class="member-photo-gradient"></div>
+            <div class="member-role-badge">Drums & Vocals</div>
+          </div>
+          <div class="member-info">
+            <h3 class="member-name">Tony Vivilacqua</h3>
+            <p class="member-bio">
+              At age 11 Tony received his first wood sticks, Folgers coffee cans, and a radio before buying his first $25 drum set from Auburn Journal classifieds. Playing along with classic rock KZAP, Tony turned pro at 16. Cutting teeth on Skynyrd, Allman Brothers, and Molly Hatchet gave him the chops needed for Southbound!
+            </p>
+          </div>
+        </article>
+
+        <!-- 6. Larry Audino -->
+        <article class="member-card" id="member-larry">
+          <div class="member-photo-wrap">
+            <img src="assets/members/larry-audino.jpg" alt="Larry Audino - Keyboards, Guitar & Vocals" class="member-photo" loading="lazy">
+            <div class="member-photo-gradient"></div>
+            <div class="member-role-badge">Keys, Guitar & Vocals</div>
+          </div>
+          <div class="member-info">
+            <h3 class="member-name">Larry Audino</h3>
+            <p class="member-bio">
+              Began playing piano at 10 and picked up guitar for easy hauling before keyboard technology advanced at age 19. Southern Rock has always been his favorite genre; Larry was an integral founding keyboardist with Savannah Blue and now provides the rich Hammond organ and piano backbone of Southbound.
+            </p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       5. FEATURED VIDEO SHOWCASE
+       ========================================================================== -->
+  <section class="section" id="video" aria-labelledby="video-title">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-eyebrow">Watch The Band</div>
+        <h2 class="section-title" id="video-title">Live In <span class="section-title-highlight">Action</span></h2>
+        <p class="section-desc">Experience the energy, musicianship, and audience connection of a Southbound live performance.</p>
+      </div>
+
+      <!-- Responsive Video Player with Facade -->
+      <div class="video-wrapper" id="video-wrapper">
+        <div class="video-facade" id="video-facade" data-youtube-id="UlN5942NNu8" role="button" aria-label="Play Southbound Promotional Video">
+          <img src="assets/gallery/about-live-stage.jpg" alt="Southbound Promotional Video Poster" class="video-poster-img">
+          <div class="video-play-btn" id="play-button-icon">
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+        </div>
+        <div class="video-iframe-container" id="video-container"></div>
+      </div>
+
+      <!-- Extra Video Channel Links -->
+      <div class="video-extras-bar">
+        <div class="video-extras-text">
+          <strong>Southbound Live Video Archive:</strong> Featuring covers of <em>Keep on Smilin'</em>, <em>What If I'd Been The One</em>, and promo clips.
+        </div>
+        <a href="https://www.youtube.com/@southbound2102" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm" id="yt-channel-btn">
+          <svg style="width: 16px; height: 16px; fill: currentColor;" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          Subscribe on YouTube
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       6. MUSIC & AUDIO STREAMER
+       ========================================================================== -->
+  <section class="section section-alt" id="music" aria-labelledby="music-title">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-eyebrow">Sound & Repertoire</div>
+        <h2 class="section-title" id="music-title">Signature <span class="section-title-highlight">Recordings</span></h2>
+        <p class="section-desc">Sample Southbound's signature studio & live recordings from our electronic press kit catalog.</p>
+      </div>
+
+      <div class="music-box">
+        <div class="music-player-top">
+          <div class="now-playing-info">
+            <div class="music-eq-animation" id="music-eq">
+              <span class="music-eq-bar"></span>
+              <span class="music-eq-bar"></span>
+              <span class="music-eq-bar"></span>
+              <span class="music-eq-bar"></span>
+            </div>
+            <div>
+              <div class="now-playing-title" id="current-song-title">Can't You See</div>
+              <div class="now-playing-artist" id="current-song-artist">The Marshall Tucker Band Cover</div>
+            </div>
+          </div>
+          <a href="https://epk.sb916.com/" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">Full Audio on EPK ↗</a>
+        </div>
+
+        <!-- Player Controls Strip -->
+        <div class="player-controls-strip">
+          <button class="audio-play-pause-btn" id="audio-play-btn" aria-label="Play or Pause Track">
+            <svg id="audio-play-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            <svg id="audio-pause-icon" viewBox="0 0 24 24" style="display: none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+          </button>
+
+          <div class="audio-timeline-wrap">
+            <div class="audio-time-row">
+              <span id="audio-current-time">0:00</span>
+              <span id="audio-total-duration">6:50</span>
+            </div>
+            <div class="audio-progress-bar" id="audio-progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+              <div class="audio-progress-fill" id="audio-progress-fill"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tracklist Selection -->
+        <div class="tracklist-container">
+          <div class="track-item active" data-track="0">
+            <div class="track-meta">
+              <span class="track-number">01</span>
+              <div>
+                <div class="track-name">Can't You See</div>
+                <div class="track-orig-artist">The Marshall Tucker Band Cover</div>
+              </div>
+            </div>
+            <span class="track-duration">6:50</span>
+          </div>
+
+          <div class="track-item" data-track="1">
+            <div class="track-meta">
+              <span class="track-number">02</span>
+              <div>
+                <div class="track-name">Midnight Rider</div>
+                <div class="track-orig-artist">The Allman Brothers Band Cover</div>
+              </div>
+            </div>
+            <span class="track-duration">3:05</span>
+          </div>
+
+          <div class="track-item" data-track="2">
+            <div class="track-meta">
+              <span class="track-number">03</span>
+              <div>
+                <div class="track-name">There Goes Another Love Song</div>
+                <div class="track-orig-artist">The Outlaws Cover</div>
+              </div>
+            </div>
+            <span class="track-duration">2:59</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       7. LIVE CONCERT PHOTO GALLERY
+       ========================================================================== -->
+  <section class="section" id="photos" aria-labelledby="photos-title">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-eyebrow">Concert Photography</div>
+        <h2 class="section-title" id="photos-title">Stage & <span class="section-title-highlight">Festival Moments</span></h2>
+        <p class="section-desc">Selected shots from our headline performances across historic theatres, outdoor park concerts, and river stages.</p>
+      </div>
+
+      <!-- Filter Controls -->
+      <div class="gallery-filter-bar">
+        <button class="filter-btn active" data-filter="all">All Photos</button>
+        <button class="filter-btn" data-filter="festivals">Festivals & Parks</button>
+        <button class="filter-btn" data-filter="theatre">Opera House</button>
+        <button class="filter-btn" data-filter="river">River Stages</button>
+        <button class="filter-btn" data-filter="clubs">Club Nights</button>
+      </div>
+
+      <!-- Gallery Grid -->
+      <div class="gallery-grid" id="gallery-grid">
+        <div class="gallery-item" data-category="festivals">
+          <img src="assets/gallery/gallery-festival-01.jpg" alt="Concert in the Park Festival Stage" class="gallery-item-img" loading="lazy">
+          <div class="gallery-item-overlay">
+            <div class="gallery-item-caption">Concert in the Park Festival</div>
+            <div class="gallery-item-tag">Roseville Festival Series</div>
+          </div>
+        </div>
+
+        <div class="gallery-item" data-category="festivals">
+          <img src="assets/gallery/gallery-festival-02.jpg" alt="Outdoor Stage Sunset Performance" class="gallery-item-img" loading="lazy">
+          <div class="gallery-item-overlay">
+            <div class="gallery-item-caption">Sunset Stage Performance</div>
+            <div class="gallery-item-tag">Northern California Parks</div>
+          </div>
+        </div>
+
+        <div class="gallery-item" data-category="theatre">
+          <img src="assets/gallery/gallery-theatre-01.jpg" alt="Historic Opera House Panoramic Stage" class="gallery-item-img" loading="lazy">
+          <div class="gallery-item-overlay">
+            <div class="gallery-item-caption">Historic Opera House</div>
+            <div class="gallery-item-tag">Theatre Stage Series</div>
+          </div>
+        </div>
+
+        <div class="gallery-item" data-category="festivals">
+          <img src="assets/gallery/gallery-festival-03.jpg" alt="Full Band Arena Sound Experience" class="gallery-item-img" loading="lazy">
+          <div class="gallery-item-overlay">
+            <div class="gallery-item-caption">Full Band Arena Experience</div>
+            <div class="gallery-item-tag">Live Festival Crowd</div>
+          </div>
+        </div>
+
+        <div class="gallery-item" data-category="river">
+          <img src="assets/gallery/gallery-swabbies-01.jpg" alt="Swabbies on the River Summer Show" class="gallery-item-img" loading="lazy">
+          <div class="gallery-item-overlay">
+            <div class="gallery-item-caption">Swabbies on the River</div>
+            <div class="gallery-item-tag">Summer Riverfront Stage</div>
+          </div>
+        </div>
+
+        <div class="gallery-item" data-category="theatre">
+          <img src="assets/gallery/gallery-theatre-02.jpg" alt="Opera House Encore Performance" class="gallery-item-img" loading="lazy">
+          <div class="gallery-item-overlay">
+            <div class="gallery-item-caption">Opera House Stage Encore</div>
+            <div class="gallery-item-tag">Indoor Concert Series</div>
+          </div>
+        </div>
+
+        <div class="gallery-item" data-category="festivals">
+          <img src="assets/gallery/gallery-resort-01.jpg" alt="Robb's Resort Sierra Foothills Finale" class="gallery-item-img" loading="lazy">
+          <div class="gallery-item-overlay">
+            <div class="gallery-item-caption">Sierra Foothills Finale</div>
+            <div class="gallery-item-tag">Robb's Resort Concert</div>
+          </div>
+        </div>
+
+        <div class="gallery-item" data-category="clubs">
+          <img src="assets/gallery/gallery-club-01.jpg" alt="Corner Pocket Live Rock Night" class="gallery-item-img" loading="lazy">
+          <div class="gallery-item-overlay">
+            <div class="gallery-item-caption">Corner Pocket Rock Night</div>
+            <div class="gallery-item-tag">Live Club Performance</div>
+          </div>
+        </div>
+
+        <div class="gallery-item" data-category="river">
+          <img src="assets/gallery/gallery-swabbies-02.jpg" alt="Riverfront Stage Crowd Excitement" class="gallery-item-img" loading="lazy">
+          <div class="gallery-item-overlay">
+            <div class="gallery-item-caption">Riverfront Crowd Energy</div>
+            <div class="gallery-item-tag">Swabbies Live Concert</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lightbox Modal -->
+  <div class="lightbox-modal" id="lightbox-modal" role="dialog" aria-modal="true" aria-label="Photo Lightbox">
+    <button class="lightbox-close-btn" id="lightbox-close" aria-label="Close Lightbox">✕</button>
+    <button class="lightbox-prev-btn" id="lightbox-prev" aria-label="Previous Photo">❮</button>
+    <button class="lightbox-next-btn" id="lightbox-next" aria-label="Next Photo">❯</button>
+    <div class="lightbox-content-box">
+      <img src="" alt="" class="lightbox-main-img" id="lightbox-img">
+      <div class="lightbox-caption-text" id="lightbox-caption"></div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       8. TOUR DATES & LIVE SHOWS
+       ========================================================================== -->
+  <section class="section section-alt" id="shows" aria-labelledby="shows-title">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-eyebrow">Live Dates</div>
+        <h2 class="section-title" id="shows-title">Upcoming <span class="section-title-highlight">Shows</span></h2>
+        <p class="section-desc">Catch Southbound live on stage. More seasonal festival dates announced regularly.</p>
+      </div>
+
+      <div class="shows-list">
+        <!-- Show 1 -->
+        <div class="show-item-card">
+          <div class="show-date-badge">
+            <span class="show-date-month">OCT</span>
+            <span class="show-date-day">12</span>
+          </div>
+          <div class="show-details-info">
+            <div class="show-venue-name">High Hand Brewery & Garden</div>
+            <div class="show-location-city">
+              <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+              Loomis, California
+            </div>
+          </div>
+          <div class="show-action-box">
+            <a href="#booking" class="btn btn-outline btn-sm">Event Details</a>
+          </div>
+        </div>
+
+        <!-- Show 2 -->
+        <div class="show-item-card">
+          <div class="show-date-badge">
+            <span class="show-date-month">DEC</span>
+            <span class="show-date-day">19</span>
+          </div>
+          <div class="show-details-info">
+            <div class="show-venue-name">Powerhouse Pub</div>
+            <div class="show-location-city">
+              <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+              Folsom, California
+            </div>
+          </div>
+          <div class="show-action-box">
+            <a href="#booking" class="btn btn-outline btn-sm">Event Details</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Credited Festival Box -->
+      <div class="festivals-credited-box">
+        <div class="festivals-credited-title">Signature Festivals & Venues Played</div>
+        <div class="festivals-tags-wrap">
+          <span class="festival-tag">Roseville Concert in the Park</span>
+          <span class="festival-tag">Carmichael Park Concert Series</span>
+          <span class="festival-tag">Vacaville Tomato & Vine Festival</span>
+          <span class="festival-tag">Swabbies on the River</span>
+          <span class="festival-tag">Historic Opera House</span>
+          <span class="festival-tag">Robb's Resort Sierra Finale</span>
+          <span class="festival-tag">Winnemucca Convention Center</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       9. PRESS QUOTES & TESTIMONIALS
+       ========================================================================== -->
+  <section class="section" id="press" aria-labelledby="press-title">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-eyebrow">Industry Recognition</div>
+        <h2 class="section-title" id="press-title">What They're <span class="section-title-highlight">Saying</span></h2>
+        <p class="section-desc">Praise from radio personalities and festival directors throughout the region.</p>
+      </div>
+
+      <div class="press-grid">
+        <!-- Quote 1: Doug Thomas -->
+        <article class="press-card">
+          <div>
+            <div class="quote-mark-icon">“</div>
+            <blockquote class="quote-body-text">
+              Southbound is Southern Rock done right! A live jukebox of classic rock hits, played with true arena-rock energy! Great vocals, great guitars, tight rhythm section, and killer keyboards! You will love the Southern Rock experience!
+            </blockquote>
+          </div>
+          <div>
+            <div class="quote-author-divider"></div>
+            <div class="quote-author-name">Doug Thomas</div>
+            <div class="quote-author-title">Radio Personality, 96.9 The Eagle (Sacramento, CA)</div>
+          </div>
+        </article>
+
+        <!-- Quote 2: Darrel Field -->
+        <article class="press-card">
+          <div>
+            <div class="quote-mark-icon">“</div>
+            <blockquote class="quote-body-text">
+              This band is great! Their catalog of Southern Rock and Classic Rock hits are always well produced and presented with talent and heart.
+            </blockquote>
+          </div>
+          <div>
+            <div class="quote-author-divider"></div>
+            <div class="quote-author-name">Darrel Field</div>
+            <div class="quote-author-title">Marketing & Events Coordinator, Winnemucca Convention & Visitors Authority</div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       10. OFFICIAL MERCHANDISE SPOTLIGHT
+       ========================================================================== -->
+  <section class="section section-alt" id="merch" aria-labelledby="merch-title">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-eyebrow">Band Gear</div>
+        <h2 class="section-title" id="merch-title">Official <span class="section-title-highlight">Merchandise</span></h2>
+        <p class="section-desc">Authentic concert artwork and memorabilia created exclusively for Southbound fans.</p>
+      </div>
+
+      <div class="merch-showcase-box">
+        <div class="merch-artwork-wrap">
+          <img src="assets/merch-tshirt.png" alt="Southbound 'What Song Is It You Wanna Hear?' Official Tour Artwork" class="merch-artwork-img" loading="lazy">
+        </div>
+        <div class="merch-details-pane">
+          <div class="merch-badge">Official Tour Artwork</div>
+          <h3 class="merch-title">"What Song Is It You Wanna Hear?" Tour T-Shirt</h3>
+          <p class="merch-desc">
+            Vibrant vintage Southern Rock artwork featuring crossed guitars, motorcycle, steam locomotive, and cotton blossoms. Screen-printed on premium heavy-cotton apparel.
+          </p>
+          <div class="merch-callout-notice">
+            Official Southbound T-shirts, badges, and merchandise are available exclusively at our live concerts and festival performances. Be sure to visit the merch table at our next show!
+          </div>
+          <div>
+            <a href="#shows" class="btn btn-outline btn-sm">Find Next Live Show</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       11. EVENT BOOKING & CONTACT FORM
+       ========================================================================== -->
+  <section class="section" id="booking" aria-labelledby="booking-title">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-eyebrow">Bring The Revue To Your Event</div>
+        <h2 class="section-title" id="booking-title">Book <span class="section-title-highlight">Southbound</span></h2>
+        <p class="section-desc">Inquire about festival dates, park concerts, corporate events, clubs, or private parties.</p>
+      </div>
+
+      <div class="booking-grid">
+        <!-- Left: Direct Booking Channels -->
+        <div class="booking-info-col">
+          <div class="booking-intro-card">
+            <h3 class="booking-intro-title">Talent Booking & Management</h3>
+            <p class="booking-intro-text">
+              We are accustomed to performing before large crowds with complete stage reliability and professional production. Reach out directly or complete the inquiry form for dates and technical rider info.
+            </p>
+          </div>
+
+          <!-- Contact 1: Michael Shreiber -->
+          <div class="contact-card-item">
+            <div class="contact-role-label">Booking & Management</div>
+            <div class="contact-person-name">Michael Shreiber (Rusty)</div>
+            <div class="contact-link-row">
+              <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+              <a href="tel:9168040723">(916) 804-0723</a>
+            </div>
+            <div class="contact-link-row">
+              <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+              <a href="mailto:Rusty@SB916.com">Rusty@SB916.com</a>
+            </div>
+          </div>
+
+          <!-- Contact 2: Tony Vivilacqua -->
+          <div class="contact-card-item">
+            <div class="contact-role-label">Band Contact</div>
+            <div class="contact-person-name">Tony Vivilacqua</div>
+            <div class="contact-link-row">
+              <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+              <a href="tel:9169971176">(916) 997-1176</a>
+            </div>
+            <div class="contact-link-row">
+              <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+              <a href="mailto:SouthboundEmail@Gmail.com">SouthboundEmail@Gmail.com</a>
+            </div>
+          </div>
+
+          <!-- Direct EPK Download Link -->
+          <div>
+            <a href="https://epk.sb916.com/" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="width: 100%;">
+              Access Electronic Press Kit (EPK) ↗
+            </a>
+          </div>
+        </div>
+
+        <!-- Right: Interactive Booking Form -->
+        <div class="booking-form-col">
+          <form class="booking-form" id="booking-form">
+            <div class="form-group-row">
+              <div class="form-field">
+                <label for="booking-name" class="form-label">Full Name *</label>
+                <input type="text" id="booking-name" class="form-input" placeholder="Your name or organization" required>
+              </div>
+              <div class="form-field">
+                <label for="booking-email" class="form-label">Email Address *</label>
+                <input type="email" id="booking-email" class="form-input" placeholder="name@example.com" required>
+              </div>
+            </div>
+
+            <div class="form-group-row">
+              <div class="form-field">
+                <label for="booking-phone" class="form-label">Phone Number</label>
+                <input type="tel" id="booking-phone" class="form-input" placeholder="(916) 000-0000">
+              </div>
+              <div class="form-field">
+                <label for="booking-type" class="form-label">Event Type</label>
+                <select id="booking-type" class="form-select">
+                  <option value="Festival / Concert in the Park">Festival / Concert in the Park</option>
+                  <option value="Live Music Venue / Club">Live Music Venue / Club</option>
+                  <option value="Private Event / Party">Private Event / Party</option>
+                  <option value="Corporate Event">Corporate Event</option>
+                  <option value="Motorcycle / Car Rally">Motorcycle / Car Rally</option>
+                  <option value="Other">Other Event</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group-row">
+              <div class="form-field">
+                <label for="booking-date" class="form-label">Proposed Event Date</label>
+                <input type="date" id="booking-date" class="form-input">
+              </div>
+              <div class="form-field">
+                <label for="booking-location" class="form-label">City / Venue Location</label>
+                <input type="text" id="booking-location" class="form-input" placeholder="e.g. Sacramento, Roseville, Folsom">
+              </div>
+            </div>
+
+            <div class="form-field">
+              <label for="booking-message" class="form-label">Event Details / Message *</label>
+              <textarea id="booking-message" class="form-textarea" placeholder="Tell us about your event, schedule, stage requirements, and audience..." required></textarea>
+            </div>
+
+            <p class="form-privacy-note">
+              🔒 Inquiries are securely routed directly to Southbound booking management at <strong>Booking@SB916.com</strong>.
+            </p>
+
+            <div id="form-status" class="form-status-msg"></div>
+
+            <button type="submit" class="btn btn-primary btn-lg" id="form-submit-btn">
+              Send Booking Inquiry
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       12. FOOTER & SOCIAL HUB
+       ========================================================================== -->
+  <footer class="site-footer" id="footer" aria-label="Footer">
+    <div class="container footer-inner">
+      <a href="#hero" aria-label="Back to Top">
+        <img src="assets/branding/logo-round.png" alt="Southbound Badge" class="footer-emblem-img">
+      </a>
+
+      <nav class="footer-nav-links" aria-label="Footer Navigation">
+        <a href="#about" class="footer-link">About</a>
+        <a href="#band" class="footer-link">The Band</a>
+        <a href="#video" class="footer-link">Video</a>
+        <a href="#music" class="footer-link">Music</a>
+        <a href="#photos" class="footer-link">Photos</a>
+        <a href="#shows" class="footer-link">Shows</a>
+        <a href="#press" class="footer-link">Press</a>
+        <a href="#merch" class="footer-link">Merch</a>
+        <a href="#booking" class="footer-link">Booking</a>
+      </nav>
+
+      <div class="footer-social-strip">
+        <a href="https://www.facebook.com/Southbound6" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="Facebook">
+          <svg viewBox="0 0 24 24"><path d="M22.675 0h-21.35C.597 0 0 .597 0 1.326v21.348C0 23.403.597 24 1.326 24H12.82v-9.294H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116c.73 0 1.323-.597 1.323-1.326V1.326C24 .597 23.405 0 22.675 0z"/></svg>
+        </a>
+        <a href="https://www.youtube.com/@southbound2102" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="YouTube">
+          <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+        </a>
+      </div>
+
+      <p class="footer-copy-text">
+        © 2026 Southbound. All rights reserved. Northern California's Premier Southern Rock Revue.
+      </p>
+
+      <a href="#hero" class="back-to-top-btn" id="back-to-top">
+        <span>↑</span> Back to Top
+      </a>
+    </div>
+  </footer>
+
+  <!-- Main JavaScript File -->
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+/**
+ * Southbound Band Official Website
+ * Design Tokens & CSS Custom Properties
+ * Inspired by vanmorrison.com editorial typography & high-contrast rock aesthetics
+ */
+
+:root {
+  /* ==========================================================================
+     1. COLOR PALETTE & ALTERNATING CONTRAST TOKENS
+     ========================================================================== */
+  /* Dark Section Foundations */
+  --color-bg-base:          #0c0c0e;   /* Deep charcoal-black base */
+  --color-bg-surface:       #141418;   /* Elevated surface cards & containers */
+  --color-bg-surface-elev:  #1b1b22;   /* Hover cards, modals, dropdowns */
+  --color-bg-overlay:       rgba(12, 12, 14, 0.88); /* Glassmorphism background */
+
+  /* Alternating Light Section Tokens (vanmorrison.com-inspired) */
+  --color-light-bg:         #ffffff;   /* Crisp white background */
+  --color-light-bg-alt:     #f8f7f4;   /* Warm off-white / parchment background */
+  --color-light-surface:    #f0eee9;   /* Light elevated cards & containers */
+  --color-light-surface-elev:#ffffff;  /* Light hover cards / floating elements */
+  --color-light-text:       #0f0f0f;   /* High-contrast ink black for titles */
+  --color-light-text-body:  #242426;   /* Legible dark charcoal body copy */
+  --color-light-text-muted: #666570;   /* Muted captions and metadata on light bg */
+  --color-light-border:     #e2e0d8;   /* Subtle light separation lines */
+  --color-light-border-strong:#c8c6bc; /* Defined borders on light surfaces */
+
+  /* Borders & Separation (Dark) */
+  --color-border-subtle:    #262630;   /* Clean separation lines */
+  --color-border-strong:    #3d3d4d;   /* Active borders and inputs */
+  --color-border-accent:    rgba(229, 169, 71, 0.35); /* Subtle gold border */
+
+  /* Brand Accents (Sunburst Amber & Southern Grit) */
+  --color-accent-gold:      #e5a947;   /* Warm sunburst amber / California golden hour */
+  --color-accent-gold-hover:#f0bc68;   /* Bright hover state */
+  --color-accent-amber:     #c67d26;   /* Rich bourbon / stage spotlight warmth */
+  --color-accent-blue:      #1c4da1;   /* Logo brand blue (from official logo header) */
+  --color-accent-glow:      rgba(229, 169, 71, 0.22); /* Subtle glow for buttons & highlights */
+
+  /* Semantic Feedback */
+  --color-success:          #2ecc71;
+  --color-warning:          #f39c12;
+  --color-error:            #e74c3c;
+
+  /* Typography Contrast (Dark Default) */
+  --color-text-primary:     #f5f4f0;   /* High-contrast parchment off-white */
+  --color-text-secondary:   #a8a7b0;   /* Legible silver-gray for paragraphs & metadata */
+  --color-text-muted:       #8e8d9c;   /* WCAG AA compliant muted captions */
+
+  /* ==========================================================================
+     2. TYPOGRAPHY SYSTEM (Verified from vanmorrison.com)
+     ========================================================================== */
+  --font-display:           'Oswald', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-serif:             'Inria Serif', Georgia, 'Times New Roman', serif;
+  --font-body:              'Inria Serif', Georgia, 'Times New Roman', serif;
+  --font-nav:               'Oswald', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Font Sizes */
+  --text-xs:                0.75rem;   /* 12px */
+  --text-sm:                0.875rem;  /* 14px */
+  --text-base:              1.0625rem; /* 17px */
+  --text-lg:                1.1875rem; /* 19px */
+  --text-xl:                1.375rem;  /* 22px */
+  --text-2xl:               1.625rem;  /* 26px */
+  --text-3xl:               2rem;      /* 32px */
+  --text-4xl:               2.5rem;    /* 40px */
+  --text-5xl:               3.25rem;   /* 52px */
+  --text-hero:              clamp(3.5rem, 9.5vw, 7.5rem);
+
+  /* Font Weights */
+  --font-weight-light:      300;
+  --font-weight-regular:    400;
+  --font-weight-medium:     500;
+  --font-weight-semibold:   600;
+  --font-weight-bold:       700;
+
+  /* Letter Spacing */
+  --tracking-tight:        -0.02em;
+  --tracking-normal:        0;
+  --tracking-wide:          0.05em;
+  --tracking-wider:         0.12em;
+  --tracking-widest:        0.25em;
+
+  /* ==========================================================================
+     3. SPATIAL CADENCE & LAYOUT
+     ========================================================================== */
+  --container-max:          1240px;
+  --container-padding:      24px;
+  --section-padding-desktop:110px 0;
+  --section-padding-mobile: 65px 0;
+  --header-height:          80px;
+
+  /* Radius Tokens */
+  --radius-sm:              3px;
+  --radius-md:              6px;
+  --radius-lg:              12px;
+  --radius-pill:            9999px;
+
+  /* Shadows & Elevations */
+  --shadow-sm:              0 2px 8px rgba(0, 0, 0, 0.4);
+  --shadow-md:              0 8px 24px rgba(0, 0, 0, 0.6);
+  --shadow-lg:              0 16px 40px rgba(0, 0, 0, 0.8);
+  --shadow-gold:            0 8px 30px rgba(229, 169, 71, 0.28);
+  --shadow-light-sm:        0 2px 8px rgba(0, 0, 0, 0.06);
+  --shadow-light-md:        0 10px 30px rgba(0, 0, 0, 0.08);
+
+  /* ==========================================================================
+     4. ANIMATIONS & TRANSITIONS
+     ========================================================================== */
+  --transition-fast:        0.15s ease-out;
+  --transition-base:        0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-slow:        0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}

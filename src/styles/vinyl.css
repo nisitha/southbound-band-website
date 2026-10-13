@@ -1,0 +1,276 @@
+/**
+ * Southbound Band Official Website
+ * Signature Rotating Vinyl Record Styles
+ * Inspired by the Orangefield Records rotating LP on vanmorrison.com
+ */
+
+/* ==========================================================================
+   1. VINYL SHOWCASE CONTAINER
+   ========================================================================== */
+.vinyl-showcase {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 1.5rem;
+}
+
+.vinyl-player-cradle {
+  position: relative;
+  width: clamp(280px, 32vw, 420px);
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1000px;
+}
+
+/* Vinyl Sleeve / Album Jacket Peeking in Background */
+.vinyl-sleeve-backdrop {
+  position: absolute;
+  width: 94%;
+  height: 94%;
+  top: 3%;
+  left: -8%;
+  background: linear-gradient(135deg, #18181c 0%, #0d0d10 100%);
+  border-radius: var(--radius-md);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  z-index: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.25rem;
+  transition: transform var(--transition-base);
+}
+
+.vinyl-showcase:hover .vinyl-sleeve-backdrop {
+  transform: translateX(-12px) rotate(-2deg);
+}
+
+.vinyl-sleeve-spine {
+  font-family: var(--font-display);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--color-accent-gold);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.vinyl-sleeve-art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.22;
+  filter: contrast(1.2) grayscale(0.5);
+  pointer-events: none;
+}
+
+.vinyl-sleeve-footer {
+  font-family: var(--font-serif);
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 0.05em;
+  z-index: 2;
+}
+
+/* ==========================================================================
+   2. REALISTIC BLACK VINYL LP
+   ========================================================================== */
+.vinyl-record {
+  position: relative;
+  width: 96%;
+  height: 96%;
+  border-radius: 50%;
+  z-index: 2;
+  cursor: pointer;
+  box-shadow:
+    0 16px 45px rgba(0, 0, 0, 0.45),
+    0 4px 12px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.08),
+    inset 0 0 0 2px rgba(0, 0, 0, 0.9),
+    inset 0 0 20px rgba(0, 0, 0, 0.95);
+  /* Concentric sound grooves and realistic light-reflecting specular cones */
+  background:
+    /* Specular light sheen reflection 1 */
+    linear-gradient(45deg, transparent 38%, rgba(255, 255, 255, 0.08) 47%, rgba(255, 255, 255, 0.16) 50%, rgba(255, 255, 255, 0.08) 53%, transparent 62%),
+    /* Specular light sheen reflection 2 (cross reflection) */
+    linear-gradient(-45deg, transparent 38%, rgba(255, 255, 255, 0.05) 47%, rgba(255, 255, 255, 0.13) 50%, rgba(255, 255, 255, 0.05) 53%, transparent 62%),
+    /* Concentric micro-grooves */
+    repeating-radial-gradient(circle at 50% 50%,
+      #0a0a0c 0px,
+      #131317 1px,
+      #0b0b0e 2px,
+      #17171c 3px,
+      #09090b 4px
+    );
+  animation: spinVinyl 18s linear infinite;
+  will-change: transform;
+  transform-origin: center center;
+  transition: box-shadow var(--transition-base);
+}
+
+.vinyl-record:hover {
+  box-shadow:
+    0 22px 55px rgba(0, 0, 0, 0.55),
+    0 6px 18px rgba(0, 0, 0, 0.35),
+    0 0 0 2px rgba(229, 169, 71, 0.4),
+    inset 0 0 0 2px rgba(0, 0, 0, 0.9);
+}
+
+/* ==========================================================================
+   3. CENTRAL RECORD LABEL & SPINDLE
+   ========================================================================== */
+.vinyl-label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 38%;
+  height: 38%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: #141418;
+  border: 3px solid rgba(229, 169, 71, 0.6);
+  box-shadow:
+    0 0 12px rgba(0, 0, 0, 0.9),
+    inset 0 0 8px rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.vinyl-label-emblem {
+  width: 78%;
+  height: 78%;
+  object-fit: contain;
+  display: block;
+}
+
+/* Spindle Center Hole */
+.vinyl-spindle-hole {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8%;
+  height: 8%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: #09090b;
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.9);
+  z-index: 5;
+}
+
+/* Center Label Rim Grooves */
+.vinyl-label-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 44%;
+  height: 44%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 1px dashed rgba(255, 255, 255, 0.1);
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   4. VINYL CAPTION & TURNTABLE SPEED BADGE
+   ========================================================================== */
+.vinyl-meta {
+  margin-top: 1.75rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.vinyl-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.3rem 0.9rem;
+  border-radius: var(--radius-pill);
+  background: rgba(15, 15, 15, 0.06);
+  border: 1px solid rgba(15, 15, 15, 0.15);
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--color-light-text);
+}
+
+.section-dark .vinyl-badge {
+  background: rgba(229, 169, 71, 0.1);
+  border-color: rgba(229, 169, 71, 0.3);
+  color: var(--color-accent-gold);
+}
+
+.vinyl-meta-title {
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  font-weight: 700;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-light-text);
+}
+
+.section-dark .vinyl-meta-title {
+  color: var(--color-text-primary);
+}
+
+.vinyl-meta-desc {
+  font-family: var(--font-serif);
+  font-size: 0.875rem;
+  color: var(--color-light-text-muted);
+  font-style: italic;
+  max-width: 320px;
+}
+
+.section-dark .vinyl-meta-desc {
+  color: var(--color-text-muted);
+}
+
+/* ==========================================================================
+   5. ROTATION KEYFRAME & REDUCED MOTION OVERRIDE
+   ========================================================================== */
+@keyframes spinVinyl {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vinyl-record {
+    animation: none !important;
+  }
+  .vinyl-sleeve-backdrop {
+    transition: none !important;
+    transform: none !important;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  .vinyl-player-cradle {
+    width: clamp(240px, 60vw, 340px);
+  }
+
+  .vinyl-sleeve-backdrop {
+    left: -4%;
+  }
+}

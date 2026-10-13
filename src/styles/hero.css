@@ -1,0 +1,348 @@
+/**
+ * Southbound Band Official Website
+ * Hero Section Styles & Cinematic Entrance Animations
+ */
+
+/* ==========================================================================
+   1. HERO ENTRANCE KEYFRAME ANIMATIONS
+   ========================================================================== */
+@keyframes heroBgReveal {
+  0% {
+    opacity: 0.35;
+    transform: scale(1.08);
+    filter: brightness(0.35) contrast(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1.02);
+    filter: brightness(0.58) contrast(1.15) saturate(1.1);
+  }
+}
+
+@keyframes heroEyebrowDrop {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes heroTitleRise {
+  0% {
+    opacity: 0;
+    transform: translateY(35px) scale(0.96);
+    letter-spacing: 0.10em;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    letter-spacing: 0.05em;
+  }
+}
+
+@keyframes heroSubtitleFade {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heroCtaRise {
+  0% {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heroFeaturesRise {
+  0% {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================================================
+   2. HERO CONTAINER & BACKDROP
+   ========================================================================== */
+.hero-section {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: calc(var(--header-height) + 2rem);
+  padding-bottom: 5rem;
+  overflow: hidden;
+  background-color: var(--color-bg-base);
+}
+
+.hero-backdrop {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.hero-bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 22%;
+  filter: brightness(0.58) contrast(1.15) saturate(1.1);
+  transform: scale(1.02);
+  will-change: transform, opacity;
+  animation: heroBgReveal 2.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  transition: filter var(--transition-base);
+}
+
+/* Multi-layered Vignette & Atmospheric Gradients */
+.hero-vignette {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    /* Radial center glow & edge darkening */
+    radial-gradient(ellipse at 50% 38%, rgba(12, 12, 14, 0.22) 0%, rgba(12, 12, 14, 0.72) 65%, rgba(12, 12, 14, 0.96) 100%),
+    /* Top linear gradient for header contrast */
+    linear-gradient(to bottom, rgba(12, 12, 14, 0.9) 0%, rgba(12, 12, 14, 0.3) 25%, transparent 45%),
+    /* Bottom linear gradient seamlessly blending into following sections */
+    linear-gradient(to top, var(--color-bg-base) 0%, rgba(12, 12, 14, 0.85) 15%, transparent 40%),
+    /* Sunburst stage spotlight wash */
+    radial-gradient(circle at 50% 20%, rgba(229, 169, 71, 0.12) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   3. HERO CONTENT & TYPOGRAPHY
+   ========================================================================== */
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+/* Eyebrow Badge */
+.hero-eyebrow-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.45rem 1.35rem;
+  background: rgba(18, 18, 24, 0.82);
+  border: 1px solid var(--color-border-accent);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-display);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-accent-gold);
+  margin-bottom: 1.5rem;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
+  animation: heroEyebrowDrop 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.15s backwards;
+}
+
+.hero-eyebrow-star {
+  font-size: 0.75rem;
+  color: var(--color-accent-gold);
+}
+
+/* Main Display Title */
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(3.5rem, 9.5vw, 7.5rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  line-height: 0.95;
+  color: var(--color-text-primary);
+  text-shadow: 
+    0 4px 24px rgba(0, 0, 0, 0.95),
+    0 0 50px rgba(229, 169, 71, 0.2);
+  margin-bottom: 1rem;
+  animation: heroTitleRise 1.1s cubic-bezier(0.16, 1, 0.3, 1) 0.3s backwards;
+}
+
+/* Heritage Serif Subtitle */
+.hero-tagline {
+  font-family: var(--font-serif);
+  font-size: clamp(1.15rem, 2.6vw, 1.85rem);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--color-accent-gold);
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.9);
+  margin-bottom: 1.25rem;
+  animation: heroSubtitleFade 1s cubic-bezier(0.16, 1, 0.3, 1) 0.45s backwards;
+}
+
+/* Verified Intro Description */
+.hero-description {
+  font-size: clamp(0.95rem, 1.7vw, 1.125rem);
+  color: var(--color-text-secondary);
+  max-width: 720px;
+  margin: 0 auto 2.5rem;
+  line-height: 1.65;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
+  animation: heroSubtitleFade 1s cubic-bezier(0.16, 1, 0.3, 1) 0.6s backwards;
+}
+
+/* ==========================================================================
+   4. HERO CTA ACTIONS
+   ========================================================================== */
+.hero-cta-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.15rem;
+  flex-wrap: wrap;
+  margin-bottom: 3rem;
+  animation: heroCtaRise 1s cubic-bezier(0.16, 1, 0.3, 1) 0.75s backwards;
+}
+
+.btn-lg {
+  padding: 0.95rem 2.25rem;
+  font-size: 1.0625rem;
+}
+
+.btn-play-icon {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+  margin-right: 0.25rem;
+}
+
+/* ==========================================================================
+   5. HERO FEATURES & STATUS BAR
+   ========================================================================== */
+.hero-features-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  padding-top: 1.75rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  animation: heroFeaturesRise 1s cubic-bezier(0.16, 1, 0.3, 1) 0.9s backwards;
+}
+
+.hero-feature-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-display);
+  font-size: 0.875rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+  transition: color var(--transition-fast);
+}
+
+.hero-feature-item:hover {
+  color: var(--color-text-primary);
+}
+
+.hero-feature-icon {
+  width: 16px;
+  height: 16px;
+  fill: var(--color-accent-gold);
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   6. RESPONSIVE OPTIMIZATIONS
+   ========================================================================== */
+@media (max-width: 768px) {
+  .hero-section {
+    padding-top: calc(var(--header-height) + 1.5rem);
+    padding-bottom: 3.5rem;
+  }
+
+  .hero-bg-img {
+    object-position: center 20%;
+  }
+
+  .hero-eyebrow-badge {
+    padding: 0.35rem 1rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    margin-bottom: 1.25rem;
+  }
+
+  .hero-cta-group {
+    flex-direction: column;
+    width: 100%;
+    max-width: 320px;
+    margin-left: auto;
+    margin-right: auto;
+    gap: 0.75rem;
+    margin-bottom: 2.25rem;
+  }
+
+  .hero-cta-group .btn {
+    width: 100%;
+  }
+
+  .hero-features-bar {
+    gap: 1rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    text-align: left;
+  }
+
+  .hero-feature-item {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-features-bar {
+    grid-template-columns: 1fr;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .hero-feature-item {
+    justify-content: center;
+  }
+}
+
+/* ==========================================================================
+   7. ACCESSIBILITY: REDUCED MOTION OVERRIDE
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .hero-bg-img,
+  .hero-eyebrow-badge,
+  .hero-title,
+  .hero-tagline,
+  .hero-description,
+  .hero-cta-group,
+  .hero-features-bar {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    filter: brightness(0.58) contrast(1.15) saturate(1.1) !important;
+  }
+}

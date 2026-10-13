@@ -1,0 +1,619 @@
+/**
+ * Southbound Band Official Website
+ * Section 6: Latest Tracks — Play & Download
+ * Integrated with Signature Rotating Vinyl LP (vanmorrison.com Orangefield Records style)
+ */
+
+/* ==========================================================================
+   1. SECTION & LIGHT ALTERNATING FOUNDATION
+   ========================================================================== */
+.music-section {
+  padding: var(--section-padding-desktop);
+  background: var(--color-light-bg);
+  color: var(--color-light-text-body);
+  position: relative;
+  overflow: hidden;
+}
+
+.music-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(ellipse 60% 60% at 20% 40%, rgba(229, 169, 71, 0.05) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.music-section .section-title {
+  color: var(--color-light-text);
+}
+
+.music-section .section-subtitle {
+  color: var(--color-light-text-muted);
+}
+
+/* ==========================================================================
+   2. MUSIC LAYOUT GRID
+   ========================================================================== */
+.music-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.25fr;
+  gap: 4.5rem;
+  align-items: start;
+  margin-bottom: 4rem;
+}
+
+/* Vinyl Playback Reactivity */
+.vinyl-showcase.is-playing .vinyl-record {
+  animation-play-state: running;
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.65),
+    0 0 0 2px rgba(229, 169, 71, 0.6),
+    0 0 35px rgba(229, 169, 71, 0.25);
+}
+
+.vinyl-showcase.is-paused .vinyl-record {
+  animation-play-state: paused;
+}
+
+.vinyl-now-playing-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--radius-pill);
+  background: rgba(229, 169, 71, 0.15);
+  border: 1px solid rgba(229, 169, 71, 0.4);
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--color-accent-amber);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  transition: all var(--transition-base);
+}
+
+.vinyl-now-playing-badge.is-active {
+  background: var(--color-accent-gold);
+  color: #0c0c0e;
+  box-shadow: 0 4px 15px rgba(229, 169, 71, 0.35);
+}
+
+/* Equalizer Bars */
+.vinyl-eq-bars {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 12px;
+}
+
+.vinyl-eq-bar {
+  width: 3px;
+  background: currentColor;
+  border-radius: 1px;
+  height: 3px;
+  transition: height 0.2s ease;
+}
+
+.is-active .vinyl-eq-bar:nth-child(1) { animation: eqBarAnim 0.7s infinite alternate; }
+.is-active .vinyl-eq-bar:nth-child(2) { animation: eqBarAnim 0.9s infinite alternate 0.2s; }
+.is-active .vinyl-eq-bar:nth-child(3) { animation: eqBarAnim 0.6s infinite alternate 0.4s; }
+.is-active .vinyl-eq-bar:nth-child(4) { animation: eqBarAnim 0.8s infinite alternate 0.1s; }
+
+@keyframes eqBarAnim {
+  0% { height: 3px; }
+  100% { height: 12px; }
+}
+
+/* ==========================================================================
+   3. MASTER AUDIO PLAYER CONSOLE
+   ========================================================================== */
+.music-player-panel {
+  background: var(--color-light-surface-elev);
+  border: 1px solid var(--color-light-border-strong);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.08);
+}
+
+.music-player-header {
+  padding: 1.25rem 1.75rem;
+  background: var(--color-light-bg-alt);
+  border-bottom: 1px solid var(--color-light-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.music-player-status-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.music-player-title {
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--color-light-text);
+}
+
+.music-audio-badge {
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-pill);
+  background: rgba(198, 125, 38, 0.12);
+  color: var(--color-accent-amber);
+  font-weight: 600;
+}
+
+/* Master Playback Console Bar */
+.master-playback-bar {
+  padding: 1.5rem 1.75rem;
+  background: #111115;
+  color: #fff;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.master-playback-info {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.master-track-artwork {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-md);
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 1px solid rgba(229, 169, 71, 0.4);
+}
+
+.master-track-meta {
+  flex: 1;
+  min-width: 0;
+}
+
+.master-track-label {
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--color-accent-gold);
+  margin-bottom: 0.15rem;
+}
+
+.master-track-title {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.master-track-artist {
+  font-size: var(--text-xs);
+  color: #a8a7b0;
+}
+
+/* Master Controls Row */
+.master-controls-row {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.master-play-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--color-accent-gold);
+  border: none;
+  color: #0c0c0e;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform var(--transition-fast), background var(--transition-fast);
+  box-shadow: 0 4px 16px rgba(229, 169, 71, 0.4);
+}
+
+.master-play-btn:hover {
+  transform: scale(1.08);
+  background: var(--color-accent-gold-hover);
+}
+
+.master-play-btn svg {
+  width: 22px;
+  height: 22px;
+  fill: currentColor;
+}
+
+/* Progress & Scrub Bar */
+.master-progress-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.master-scrub-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.15);
+  outline: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.master-scrub-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--color-accent-gold);
+  cursor: pointer;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.6);
+  transition: transform 0.15s;
+}
+
+.master-scrub-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.3);
+}
+
+.master-scrub-slider::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--color-accent-gold);
+  border: none;
+  cursor: pointer;
+}
+
+.master-time-row {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  color: #8e8d9c;
+  letter-spacing: 0.05em;
+}
+
+/* Volume Control */
+.master-volume-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.master-vol-btn {
+  background: none;
+  border: none;
+  color: #a8a7b0;
+  cursor: pointer;
+  padding: 0.25rem;
+  display: flex;
+  align-items: center;
+  transition: color 0.2s;
+}
+
+.master-vol-btn:hover {
+  color: var(--color-accent-gold);
+}
+
+.master-vol-btn svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+.master-vol-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 60px;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.2);
+  outline: none;
+  cursor: pointer;
+}
+
+.master-vol-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--color-accent-gold);
+  cursor: pointer;
+}
+
+/* ==========================================================================
+   4. FEATURED TRACKS LIST (VERIFIED AUDIO + DOWNLOADS)
+   ========================================================================== */
+.tracks-list-header {
+  padding: 1rem 1.75rem;
+  background: var(--color-light-bg-alt);
+  border-bottom: 1px solid var(--color-light-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tracks-list-heading {
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--color-accent-amber);
+  font-weight: 700;
+}
+
+.tracks-list-count {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  color: var(--color-light-text-muted);
+}
+
+.featured-tracks-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.featured-track-item {
+  padding: 1.25rem 1.75rem;
+  border-bottom: 1px solid var(--color-light-border);
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  transition: background var(--transition-fast);
+}
+
+.featured-track-item:hover {
+  background: var(--color-light-bg-alt);
+}
+
+.featured-track-item.is-active {
+  background: rgba(229, 169, 71, 0.08);
+  border-left: 4px solid var(--color-accent-gold);
+  padding-left: calc(1.75rem - 4px);
+}
+
+.track-play-action-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #0c0c0e;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all var(--transition-fast);
+}
+
+.featured-track-item:hover .track-play-action-btn {
+  background: var(--color-accent-gold);
+  color: #0c0c0e;
+  transform: scale(1.05);
+}
+
+.featured-track-item.is-active .track-play-action-btn {
+  background: var(--color-accent-gold);
+  color: #0c0c0e;
+}
+
+.track-play-action-btn svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+.track-num-badge {
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--color-light-text-muted);
+  width: 24px;
+}
+
+.track-details-col {
+  flex: 1;
+  min-width: 0;
+}
+
+.track-title-text {
+  font-family: var(--font-display);
+  font-size: var(--text-base);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  color: var(--color-light-text);
+  line-height: 1.2;
+}
+
+.track-artist-text {
+  font-size: var(--text-xs);
+  color: var(--color-light-text-muted);
+  font-style: italic;
+  margin-top: 0.15rem;
+}
+
+.track-meta-pills {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.35rem;
+}
+
+.track-format-pill {
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  padding: 0.1rem 0.4rem;
+  background: rgba(0, 0, 0, 0.06);
+  border-radius: var(--radius-sm);
+  color: var(--color-light-text-body);
+}
+
+.track-duration-text {
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-light-text-muted);
+  letter-spacing: 0.05em;
+}
+
+/* Track Download Button */
+.track-download-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.5rem 0.9rem;
+  border-radius: var(--radius-pill);
+  background: #0c0c0e;
+  color: #fff;
+  border: none;
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all var(--transition-fast);
+}
+
+.track-download-link:hover {
+  background: var(--color-accent-gold);
+  color: #0c0c0e;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(229, 169, 71, 0.4);
+}
+
+.track-download-link svg {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+}
+
+/* ==========================================================================
+   5. REPERTOIRE PREVIEW / LIVE SETLIST SECTION
+   ========================================================================== */
+.repertoire-preview-box {
+  padding: 1.5rem 1.75rem;
+  background: var(--color-light-bg-alt);
+}
+
+.repertoire-preview-title {
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-light-text-muted);
+  margin-bottom: 1rem;
+}
+
+.repertoire-chips-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.repertoire-chip {
+  padding: 0.35rem 0.75rem;
+  background: #fff;
+  border: 1px solid var(--color-light-border);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: var(--color-light-text-body);
+}
+
+.music-epk-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  width: 100%;
+  padding: 0.85rem 1.5rem;
+  background: #0c0c0e;
+  color: #fff;
+  border-radius: var(--radius-md);
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all var(--transition-base);
+}
+
+.music-epk-cta-btn:hover {
+  background: var(--color-accent-gold);
+  color: #0c0c0e;
+  box-shadow: 0 6px 20px rgba(229, 169, 71, 0.35);
+}
+
+.music-epk-cta-btn svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+/* Responsive */
+@media (max-width: 960px) {
+  .music-layout {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .featured-track-item {
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    padding: 1rem;
+  }
+  .track-download-link {
+    width: 100%;
+    justify-content: center;
+  }
+  .master-controls-row {
+    flex-wrap: wrap;
+  }
+  .master-volume-wrap {
+    display: none;
+  }
+}
