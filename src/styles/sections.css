@@ -341,9 +341,9 @@
 
 .band-promo-strip {
   width: 100%;
-  aspect-ratio: 16/5;
+  aspect-ratio: 16/7;
   object-fit: cover;
-  object-position: center 30%;
+  object-position: center 8%;
   border-radius: var(--radius-lg);
   margin-bottom: 4rem;
   box-shadow: var(--shadow-lg);
@@ -374,7 +374,7 @@
 .band-member-img-wrap {
   position: relative;
   overflow: hidden;
-  aspect-ratio: 4/3;
+  aspect-ratio: 4/5;
   background: var(--color-bg-surface-elev);
 }
 
@@ -432,7 +432,8 @@
   }
 
   .band-promo-strip {
-    aspect-ratio: 16/6;
+    aspect-ratio: 16/7;
+    object-position: center 8%;
     margin-bottom: 3rem;
   }
 }
@@ -446,7 +447,8 @@
   }
 
   .band-promo-strip {
-    aspect-ratio: 16/9;
+    aspect-ratio: 16/8;
+    object-position: center 8%;
     margin-bottom: 2rem;
   }
 }
@@ -1257,9 +1259,10 @@
 }
 
 /* ==========================================================================
-   PRESS SECTION
+   REVIEWS & PRESS SECTIONS
    ========================================================================== */
 
+.reviews-section,
 .press-section {
   padding: var(--section-padding-desktop);
   background: var(--color-bg-surface);
@@ -1267,6 +1270,7 @@
   overflow: hidden;
 }
 
+.reviews-section::before,
 .press-section::before {
   content: '';
   position: absolute;
@@ -1380,6 +1384,7 @@
 }
 
 @media (max-width: 600px) {
+  .reviews-section,
   .press-section { padding: var(--section-padding-mobile); }
 
   .press-grid {

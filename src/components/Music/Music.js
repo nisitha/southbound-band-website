@@ -20,9 +20,7 @@ export const VERIFIED_TRACKS = [
     duration: "6:51",
     durationSec: 411,
     file: "/assets/audio/cant-you-see-marshall-tucker-band-cover.mp3",
-    format: "MP3",
-    size: "15.7 MB",
-    downloadName: "Southbound-Cant-You-See-Cover.mp3"
+    format: "Audio Stream"
   },
   {
     id: 'midnight-rider',
@@ -32,9 +30,7 @@ export const VERIFIED_TRACKS = [
     duration: "3:05",
     durationSec: 185,
     file: "/assets/audio/midnight-rider-allman-brothers-cover.wav",
-    format: "WAV",
-    size: "31.0 MB",
-    downloadName: "Southbound-Midnight-Rider-Cover.wav"
+    format: "Audio Stream"
   },
   {
     id: 'there-goes-another-love-song',
@@ -44,9 +40,7 @@ export const VERIFIED_TRACKS = [
     duration: "2:59",
     durationSec: 179,
     file: "/assets/audio/there-goes-another-love-song-outlaws-cover.wav",
-    format: "WAV",
-    size: "30.1 MB",
-    downloadName: "Southbound-There-Goes-Another-Love-Song-Cover.wav"
+    format: "Audio Stream"
   }
 ];
 

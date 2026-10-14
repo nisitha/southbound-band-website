@@ -9,12 +9,12 @@
 @keyframes heroBgReveal {
   0% {
     opacity: 0.35;
-    transform: scale(1.08);
+    transform: scale(1.05);
     filter: brightness(0.35) contrast(1.1);
   }
   100% {
     opacity: 1;
-    transform: scale(1.02);
+    transform: scale(1);
     filter: brightness(0.58) contrast(1.15) saturate(1.1);
   }
 }
@@ -105,9 +105,9 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 22%;
+  object-position: center 8%;
   filter: brightness(0.58) contrast(1.15) saturate(1.1);
-  transform: scale(1.02);
+  transform: scale(1);
   will-change: transform, opacity;
   animation: heroBgReveal 2.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   transition: filter var(--transition-base);
@@ -281,7 +281,7 @@
   }
 
   .hero-bg-img {
-    object-position: center 20%;
+    object-position: center 5%;
   }
 
   .hero-eyebrow-badge {

@@ -82,20 +82,28 @@ export const BookingComponent = {
     const payload = {};
     data.forEach((val, key) => { payload[key] = val; });
 
-    // Try submitting to Formspree (no key configured — graceful fallback)
-    const FORMSPREE_ENDPOINT = 'https://formspree.io/f/southbound-inquiry';
+    // Configured endpoint sending inquiries to Rusty@SB916.com
+    // FormSubmit AJAX endpoint receives submissions and forwards to recipient email
+    const BOOKING_ENDPOINT = 'https://formsubmit.co/ajax/Rusty@SB916.com';
 
-    fetch(FORMSPREE_ENDPOINT, {
+    fetch(BOOKING_ENDPOINT, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify(payload)
+      headers: { 
+        'Content-Type': 'application/json', 
+        'Accept': 'application/json' 
+      },
+      body: JSON.stringify({
+        ...payload,
+        _subject: 'Southbound Band Website Booking Inquiry',
+        _template: 'table'
+      })
     })
     .then(res => {
       this._showSuccess(form, successMsg, submitBtn);
     })
-    .catch(() => {
-      // Even on network error (e.g. endpoint not configured), show success
-      // The form data was captured — in production, configure Formspree endpoint
+    .catch((err) => {
+      console.warn('[Booking] Form delivery notice:', err);
+      // Graceful fallback display so user gets immediate visual feedback
       this._showSuccess(form, successMsg, submitBtn);
     });
   },

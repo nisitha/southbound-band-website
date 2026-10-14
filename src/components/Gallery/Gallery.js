@@ -6,12 +6,105 @@
 
 import { resolveAssetUrl } from '../../utils/paths.js';
 
+export const GALLERY_PHOTOS = [
+  {
+    id: 'festival-01',
+    src: './assets/gallery/gallery-festival-01.jpg',
+    caption: 'Southbound performing at a Northern California festival',
+    alt: 'Southbound performing live at a Northern California outdoor festival',
+    wide: true
+  },
+  {
+    id: 'festival-02',
+    src: './assets/gallery/gallery-festival-02.jpg',
+    caption: 'Guitar solo at a California summer festival',
+    alt: 'Guitar solo moment at a California summer festival',
+    wide: false
+  },
+  {
+    id: 'theatre-01',
+    src: './assets/gallery/gallery-theatre-01.jpg',
+    caption: 'Historic Opera House, Roseville',
+    alt: 'Southbound performing at the Historic Opera House in Roseville',
+    wide: false
+  },
+  {
+    id: 'festival-03',
+    src: './assets/gallery/gallery-festival-03.jpg',
+    caption: 'Full stage at a summer festival',
+    alt: 'Southbound full band on stage at an outdoor festival',
+    wide: true
+  },
+  {
+    id: 'festival-04',
+    src: './assets/gallery/gallery-festival-04.jpg',
+    caption: 'Festival performance — stage panorama',
+    alt: 'Southbound festival performance stage panorama',
+    wide: false
+  },
+  {
+    id: 'swabbies-01',
+    src: './assets/gallery/gallery-swabbies-01.jpg',
+    caption: 'Swabbies on the River, Sacramento',
+    alt: 'Southbound performing at Swabbies on the River in Sacramento',
+    wide: false
+  },
+  {
+    id: 'swabbies-02',
+    src: './assets/gallery/gallery-swabbies-02.jpg',
+    caption: 'Swabbies on the River — summer 2025',
+    alt: 'Southbound summer performance at Swabbies on the River 2025',
+    wide: false
+  },
+  {
+    id: 'theatre-02',
+    src: './assets/gallery/gallery-theatre-02.jpg',
+    caption: 'Historic Opera House — wide stage view',
+    alt: 'Wide stage view at the Historic Opera House',
+    wide: true
+  },
+  {
+    id: 'theatre-03',
+    src: './assets/gallery/gallery-theatre-03.jpg',
+    caption: 'Stage moment at the Opera House',
+    alt: 'Stage moment under spotlights at the Historic Opera House',
+    wide: false
+  },
+  {
+    id: 'resort-01',
+    src: './assets/gallery/gallery-resort-01.jpg',
+    caption: "Robb's Resort — Pollock Pines, Sierra Foothills",
+    alt: 'Southbound performing at Robb\'s Resort in Pollock Pines',
+    wide: false
+  },
+  {
+    id: 'club-01',
+    src: './assets/gallery/gallery-club-01.jpg',
+    caption: 'Corner Pocket Sports Bar, Orangevale',
+    alt: 'Southbound at Corner Pocket Sports Bar in Orangevale',
+    wide: false
+  },
+  {
+    id: 'community-01',
+    src: './assets/gallery/gallery-community-01.jpg',
+    caption: 'Community outdoor concert',
+    alt: 'Southbound performing at a community outdoor concert',
+    wide: false
+  },
+  {
+    id: 'candid-01',
+    src: './assets/gallery/gallery-candid-01.jpg',
+    caption: 'Backstage moment at Swabbies',
+    alt: 'Southbound band members candid backstage moment at Swabbies',
+    wide: false
+  }
+];
+
 export const GalleryComponent = {
   id: 'gallery',
   name: 'Concert Photo Gallery',
 
   _items: [],
-  _filtered: [],
   _currentIndex: 0,
   _lightbox: null,
   _lightboxImg: null,
@@ -29,7 +122,6 @@ export const GalleryComponent = {
     }
 
     this._buildItemList();
-    this._bindFilterButtons();
     this._bindGalleryClicks();
     this._bindLightboxControls();
     this._bindKeyboard();
@@ -39,30 +131,6 @@ export const GalleryComponent = {
 
   _buildItemList() {
     this._items = Array.from(document.querySelectorAll('.gallery-item[data-full]'));
-    this._filtered = [...this._items];
-  },
-
-  _bindFilterButtons() {
-    const buttons = document.querySelectorAll('.gallery-filter-btn');
-    buttons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const filter = btn.dataset.filter;
-        // Update active state
-        buttons.forEach(b => b.classList.remove('is-active'));
-        btn.classList.add('is-active');
-        // Filter items
-        this._applyFilter(filter);
-      });
-    });
-  },
-
-  _applyFilter(filter) {
-    this._items.forEach(item => {
-      const cat = item.dataset.category || '';
-      const show = filter === 'all' || cat === filter;
-      item.classList.toggle('gallery-hidden', !show);
-    });
-    this._filtered = this._items.filter(item => !item.classList.contains('gallery-hidden'));
   },
 
   _bindGalleryClicks() {
@@ -72,7 +140,7 @@ export const GalleryComponent = {
     grid.addEventListener('click', (e) => {
       const item = e.target.closest('.gallery-item[data-full]');
       if (!item) return;
-      const idx = this._filtered.indexOf(item);
+      const idx = this._items.indexOf(item);
       if (idx === -1) return;
       this._openLightbox(idx);
     });
@@ -83,7 +151,7 @@ export const GalleryComponent = {
       const item = e.target.closest('.gallery-item[data-full]');
       if (!item) return;
       e.preventDefault();
-      const idx = this._filtered.indexOf(item);
+      const idx = this._items.indexOf(item);
       if (idx === -1) return;
       this._openLightbox(idx);
     });
@@ -117,7 +185,7 @@ export const GalleryComponent = {
 
   _openLightbox(index) {
     this._currentIndex = index;
-    const item = this._filtered[index];
+    const item = this._items[index];
     if (!item) return;
 
     const src = item.dataset.full || '';
@@ -149,13 +217,13 @@ export const GalleryComponent = {
   },
 
   _navigate(direction) {
-    const next = (this._currentIndex + direction + this._filtered.length) % this._filtered.length;
+    const next = (this._currentIndex + direction + this._items.length) % this._items.length;
     this._openLightbox(next);
   },
 
   _updateCounter() {
     if (this._lightboxCounter) {
-      this._lightboxCounter.textContent = `${this._currentIndex + 1} / ${this._filtered.length}`;
+      this._lightboxCounter.textContent = `${this._currentIndex + 1} / ${this._items.length}`;
     }
   }
 };

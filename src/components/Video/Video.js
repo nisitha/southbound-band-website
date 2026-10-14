@@ -40,13 +40,13 @@ export const VERIFIED_VIDEOS = [
     desc: "Driving arena-rock rhythm section, razor-sharp duel leads, and crowd-rousing rock vocals in a high-octane performance."
   },
   {
-    id: 'UlN5942NNu8',
-    title: "Southbound Live Concert Showcase",
-    subtitle: "Full Ensemble Concert Reel",
-    badge: "Concert Reel",
-    duration: "4:30",
-    thumb: "/assets/video/thumb-live-showcase.jpg",
-    desc: "Live concert footage capturing the full 6-piece revue sound, powerhouse rhythm section, and authentic Southern Rock anthems."
+    id: 'RbEp3GUou94',
+    title: "Marshall Tucker Cover",
+    subtitle: "The Marshall Tucker Band Cover (Live on Stage)",
+    badge: "Marshall Tucker Cover",
+    duration: "6:51",
+    thumb: "/assets/video/thumb-marshall-tucker.jpg",
+    desc: "Authentic live performance honoring The Marshall Tucker Band with twin-guitar harmonies, soulful vocals, and Southern Rock energy."
   }
 ];
 
