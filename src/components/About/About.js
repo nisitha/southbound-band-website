@@ -50,7 +50,9 @@ export const AboutComponent = {
 
           // Animate each stat with a subtle stagger
           statValueElements.forEach((el, index) => {
-            const target = parseInt(el.getAttribute('data-counter'), 10);
+            const counterAttr = el.getAttribute('data-counter');
+            const target = parseInt(counterAttr, 10);
+            if (isNaN(target)) return;
             const start = parseInt(el.getAttribute('data-start') || '0', 10);
             const delay = index * 140; // 140ms stagger between stats
             const duration = 1400;     // 1.4s smooth animation duration

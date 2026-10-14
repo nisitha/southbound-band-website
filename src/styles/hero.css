@@ -201,7 +201,7 @@
 /* Verified Intro Description */
 .hero-description {
   font-size: clamp(0.95rem, 1.7vw, 1.125rem);
-  color: var(--color-text-secondary);
+  color: #ffffff;
   max-width: 720px;
   margin: 0 auto 2.5rem;
   line-height: 1.65;

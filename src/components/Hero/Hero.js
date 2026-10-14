@@ -13,7 +13,7 @@ export const HeroComponent = {
   ],
   headline: 'SOUTHBOUND',
   tagline: "Northern California's Premier Southern Rock Revue",
-  verifiedDescription: "Delivering the danceable, arena-rock energy of Lynyrd Skynyrd, The Allman Brothers Band, .38 Special, and The Marshall Tucker Band throughout Northern California and the Greater Sacramento area since 2018.",
+  verifiedDescription: "Delivering the danceable, arena-rock energy of Lynyrd Skynyrd, The Allman Brothers Band, .38 Special, The Marshall Tucker Band and others, throughout Northern California, Tahoe and Nevada since 2018.",
   
   init() {
     const heroImg = document.getElementById('hero-img');
