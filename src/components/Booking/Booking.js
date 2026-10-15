@@ -2,6 +2,7 @@
  * Booking Component Module
  * Section 11: Event Booking & Contact Inquiry
  * Implements client-side form validation with accessible error messaging
+ * Configured strictly for https://formsubmit.co/ajax/Rusty@SB916.com
  */
 
 export const BookingComponent = {
@@ -10,6 +11,9 @@ export const BookingComponent = {
 
   init() {
     const form = document.getElementById('booking-form');
+    const resetBtn = document.getElementById('booking-reset-btn');
+    const successMsg = document.getElementById('booking-success');
+
     if (!form) {
       console.debug('[Booking] Form not found — skipping init');
       return;
@@ -21,6 +25,16 @@ export const BookingComponent = {
         this._submit(form);
       }
     });
+
+    if (resetBtn) {
+      resetBtn.addEventListener('click', () => {
+        form.reset();
+        form.style.display = '';
+        if (successMsg) successMsg.classList.remove('is-visible');
+        const firstInput = form.querySelector('input');
+        if (firstInput) firstInput.focus();
+      });
+    }
 
     // Live validation: clear errors on input
     form.querySelectorAll('.form-input, .form-select, .form-textarea').forEach(field => {
@@ -34,7 +48,7 @@ export const BookingComponent = {
       });
     });
 
-    console.debug('[Booking] Form validation initialized');
+    console.debug('[Booking] Form validation initialized for Rusty@SB916.com');
   },
 
   _validate(form) {
@@ -71,10 +85,10 @@ export const BookingComponent = {
     const submitBtn = document.getElementById('booking-submit-btn');
     const successMsg = document.getElementById('booking-success');
 
-    // Disable button
+    // Disable button during submission
     if (submitBtn) {
       submitBtn.disabled = true;
-      submitBtn.textContent = 'Sending...';
+      submitBtn.textContent = 'Sending Inquiry...';
     }
 
     // Collect form data
@@ -82,8 +96,7 @@ export const BookingComponent = {
     const payload = {};
     data.forEach((val, key) => { payload[key] = val; });
 
-    // Configured endpoint sending inquiries to Rusty@SB916.com
-    // FormSubmit AJAX endpoint receives submissions and forwards to recipient email
+    // Configured endpoint sending inquiries to Rusty@SB916.com via FormSubmit AJAX
     const BOOKING_ENDPOINT = 'https://formsubmit.co/ajax/Rusty@SB916.com';
 
     fetch(BOOKING_ENDPOINT, {
@@ -95,7 +108,8 @@ export const BookingComponent = {
       body: JSON.stringify({
         ...payload,
         _subject: 'Southbound Band Website Booking Inquiry',
-        _template: 'table'
+        _template: 'table',
+        _captcha: 'false'
       })
     })
     .then(res => {
@@ -103,7 +117,7 @@ export const BookingComponent = {
     })
     .catch((err) => {
       console.warn('[Booking] Form delivery notice:', err);
-      // Graceful fallback display so user gets immediate visual feedback
+      // Fallback display so user gets immediate visual feedback
       this._showSuccess(form, successMsg, submitBtn);
     });
   },

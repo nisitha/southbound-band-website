@@ -9,13 +9,13 @@
 @keyframes heroBgReveal {
   0% {
     opacity: 0.35;
-    transform: scale(1.05);
-    filter: brightness(0.35) contrast(1.1);
+    transform: scale(0.98);
+    filter: brightness(0.55) contrast(1.1);
   }
   100% {
     opacity: 1;
-    transform: scale(1);
-    filter: brightness(0.58) contrast(1.15) saturate(1.1);
+    transform: scale(0.94);
+    filter: brightness(0.85) contrast(1.1) saturate(1.12);
   }
 }
 
@@ -84,9 +84,9 @@
   min-height: 100vh;
   min-height: 100svh;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  padding-top: calc(var(--header-height) + 2rem);
+  padding-top: calc(var(--header-height) + 16.5rem);
   padding-bottom: 5rem;
   overflow: hidden;
   background-color: var(--color-bg-base);
@@ -99,35 +99,40 @@
   height: 100%;
   z-index: 1;
   overflow: hidden;
+  padding-top: calc(var(--header-height) + 12px);
 }
 
 .hero-bg-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 8%;
-  filter: brightness(0.58) contrast(1.15) saturate(1.1);
-  transform: scale(1);
+  object-position: center top;
+  filter: brightness(0.85) contrast(1.1) saturate(1.12);
+  transform: scale(0.94);
+  transform-origin: center top;
   will-change: transform, opacity;
   animation: heroBgReveal 2.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   transition: filter var(--transition-base);
 }
 
-/* Multi-layered Vignette & Atmospheric Gradients */
+/* Multi-layered Vignette & Atmospheric Gradients: Lightened over band faces, dark at text base */
 .hero-vignette {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   background: 
-    /* Radial center glow & edge darkening */
-    radial-gradient(ellipse at 50% 38%, rgba(12, 12, 14, 0.22) 0%, rgba(12, 12, 14, 0.72) 65%, rgba(12, 12, 14, 0.96) 100%),
-    /* Top linear gradient for header contrast */
-    linear-gradient(to bottom, rgba(12, 12, 14, 0.9) 0%, rgba(12, 12, 14, 0.3) 25%, transparent 45%),
-    /* Bottom linear gradient seamlessly blending into following sections */
-    linear-gradient(to top, var(--color-bg-base) 0%, rgba(12, 12, 14, 0.85) 15%, transparent 40%),
-    /* Sunburst stage spotlight wash */
-    radial-gradient(circle at 50% 20%, rgba(229, 169, 71, 0.12) 0%, transparent 60%);
+    /* 1. Subtle top shadow for header contrast (only top 90px) */
+    linear-gradient(to bottom, rgba(12, 12, 14, 0.75) 0%, rgba(12, 12, 14, 0.2) 65px, transparent 110px),
+    
+    /* 2. Spotlight clarity over band members' faces (golden hour warmth, no heavy black) */
+    radial-gradient(ellipse at 50% 26%, rgba(229, 169, 71, 0.12) 0%, transparent 60%),
+    
+    /* 3. Deep readable contrast gradient over bottom half where text and CTAs sit */
+    linear-gradient(to top, var(--color-bg-base) 0%, rgba(12, 12, 14, 0.94) 32%, rgba(12, 12, 14, 0.65) 50%, rgba(12, 12, 14, 0.15) 65%, transparent 78%),
+    
+    /* 4. Subtle lateral vignette at outer screen edges */
+    radial-gradient(ellipse at 50% 45%, transparent 55%, rgba(12, 12, 14, 0.55) 100%);
   pointer-events: none;
 }
 
@@ -272,16 +277,22 @@
 }
 
 /* ==========================================================================
+/* ==========================================================================
    6. RESPONSIVE OPTIMIZATIONS
    ========================================================================== */
 @media (max-width: 768px) {
   .hero-section {
-    padding-top: calc(var(--header-height) + 1.5rem);
+    padding-top: calc(var(--header-height) + 9rem);
     padding-bottom: 3.5rem;
   }
 
+  .hero-backdrop {
+    padding-top: calc(var(--header-height) + 8px);
+  }
+
   .hero-bg-img {
-    object-position: center 5%;
+    object-position: center top;
+    transform: scale(0.95);
   }
 
   .hero-eyebrow-badge {
@@ -318,6 +329,10 @@
 }
 
 @media (max-width: 480px) {
+  .hero-section {
+    padding-top: calc(var(--header-height) + 7.5rem);
+  }
+
   .hero-features-bar {
     grid-template-columns: 1fr;
     text-align: center;
@@ -343,6 +358,12 @@
     animation: none !important;
     opacity: 1 !important;
     transform: none !important;
-    filter: brightness(0.58) contrast(1.15) saturate(1.1) !important;
+  }
+
+  .hero-bg-img {
+    transform: scale(0.94) !important;
+    transform-origin: center top !important;
+    filter: brightness(0.85) contrast(1.1) saturate(1.12) !important;
   }
 }
+

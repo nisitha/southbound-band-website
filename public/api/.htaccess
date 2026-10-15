@@ -1,0 +1,13 @@
+# Protect configuration and backup files from direct web access
+<FilesMatch "^(admin-config\.php|.*\.bak|.*\.log)$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order deny,allow
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+# Allow API script execution
+Options -Indexes

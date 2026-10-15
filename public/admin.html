@@ -1,0 +1,2824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Southbound — Content Management System &amp; Admin Dashboard</title>
+  <link rel="icon" type="image/png" href="./assets/branding/Southbound_Logo_Round.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-base: #0c0c0e;
+      --bg-surface: #141418;
+      --bg-elev: #1c1c24;
+      --bg-card: #22222d;
+      --bg-input: #121217;
+      --border-subtle: #2d2d3a;
+      --border-strong: #3f3f52;
+      --gold: #e5a947;
+      --gold-hover: #f0bc68;
+      --gold-dim: #b8822d;
+      --gold-glow: rgba(229, 169, 71, 0.25);
+      --gold-tint: rgba(229, 169, 71, 0.12);
+      --text-main: #f5f4f0;
+      --text-muted: #9e9da8;
+      --text-dim: #6c6b78;
+      --success: #2ecc71;
+      --success-glow: rgba(46, 204, 113, 0.2);
+      --danger: #e74c3c;
+      --danger-hover: #c0392b;
+      --warning: #f39c12;
+      --info: #3498db;
+      --font-display: 'Oswald', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 14px;
+      --radius-pill: 9999px;
+      --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.35);
+      --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.65);
+      --header-h: 68px;
+      --sidebar-w: 260px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg-base);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      font-size: 15px;
+      line-height: 1.5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* Common Utilities */
+    .hidden { display: none !important; }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.2rem 0.65rem;
+      border-radius: var(--radius-pill);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-family: var(--font-display);
+    }
+    .badge-gold { background: var(--gold-tint); color: var(--gold); border: 1px solid rgba(229, 169, 71, 0.35); }
+    .badge-success { background: rgba(46, 204, 113, 0.15); color: var(--success); border: 1px solid rgba(46, 204, 113, 0.3); }
+    .badge-warning { background: rgba(243, 156, 18, 0.15); color: var(--warning); border: 1px solid rgba(243, 156, 18, 0.3); }
+    .badge-dim { background: var(--bg-card); color: var(--text-muted); border: 1px solid var(--border-subtle); }
+
+    /* Button Styles */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.65rem 1.25rem;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .btn svg { width: 18px; height: 18px; fill: currentColor; }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dim) 100%);
+      color: #0c0c0e;
+      box-shadow: 0 4px 15px var(--gold-glow);
+    }
+    .btn-primary:hover {
+      background: linear-gradient(135deg, var(--gold-hover) 0%, var(--gold) 100%);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px var(--gold-glow);
+    }
+    .btn-outline {
+      background: transparent;
+      color: var(--text-main);
+      border-color: var(--border-strong);
+    }
+    .btn-outline:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: var(--gold-tint);
+    }
+    .btn-danger {
+      background: rgba(231, 76, 60, 0.15);
+      color: var(--danger);
+      border-color: rgba(231, 76, 60, 0.3);
+    }
+    .btn-danger:hover {
+      background: var(--danger);
+      color: #fff;
+    }
+    .btn-sm { padding: 0.35rem 0.75rem; font-size: 0.8rem; }
+    .btn-icon { padding: 0.45rem; border-radius: var(--radius-sm); }
+
+    /* ==============================================================================
+       1. LOGIN SCREEN
+       ============================================================================== */
+    #login-view {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+      background: radial-gradient(circle at 50% 30%, #1c1c24 0%, #0c0c0e 80%);
+      position: relative;
+    }
+    .login-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 2.75rem 2.25rem;
+      width: 100%;
+      max-width: 440px;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      text-align: center;
+    }
+    .login-brand-logo {
+      width: 84px;
+      height: 84px;
+      border-radius: 50%;
+      border: 2px solid var(--gold);
+      box-shadow: 0 0 20px var(--gold-glow);
+      margin: 0 auto 1.25rem;
+      display: block;
+    }
+    .login-title {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-main);
+      margin-bottom: 0.35rem;
+    }
+    .login-title span { color: var(--gold); }
+    .login-desc {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 2rem;
+    }
+    .form-group {
+      text-align: left;
+      margin-bottom: 1.25rem;
+    }
+    .form-label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 0.45rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: var(--font-display);
+    }
+    .input-wrap {
+      position: relative;
+    }
+    .form-input {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      background: var(--bg-input);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
+    }
+    .form-input::placeholder {
+      color: var(--text-dim);
+    }
+    .form-input:focus {
+      outline: none;
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px var(--gold-tint);
+    }
+    .input-toggle-btn {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 4px;
+    }
+    .input-toggle-btn:hover { color: var(--gold); }
+    .login-remember {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      cursor: pointer;
+    }
+    .login-remember input {
+      accent-color: var(--gold);
+      width: 16px;
+      height: 16px;
+    }
+    .login-alert {
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius-sm);
+      margin-bottom: 1.25rem;
+      font-size: 0.85rem;
+      text-align: left;
+    }
+    .login-alert-danger {
+      background: rgba(231, 76, 60, 0.15);
+      border: 1px solid rgba(231, 76, 60, 0.35);
+      color: #ff8b80;
+    }
+
+    /* ==============================================================================
+       2. DASHBOARD LAYOUT & NAVIGATION
+       ============================================================================== */
+    #dashboard-view {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Top Navigation Bar */
+    .dashboard-topbar {
+      height: var(--header-h);
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1.5rem;
+      position: sticky;
+      top: 0;
+      z-index: 90;
+      backdrop-filter: blur(10px);
+    }
+    .topbar-left {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+    .topbar-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: inherit;
+    }
+    .topbar-brand img {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 1.5px solid var(--gold);
+    }
+    .topbar-title {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: var(--text-main);
+    }
+    .topbar-title span { color: var(--gold); }
+    .server-status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: 0.75rem;
+      padding: 0.25rem 0.75rem;
+      border-radius: var(--radius-pill);
+      background: var(--bg-elev);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+    }
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--success);
+      box-shadow: 0 0 6px var(--success-glow);
+    }
+    .status-dot-preview {
+      background: var(--warning);
+      box-shadow: 0 0 6px rgba(243, 156, 18, 0.4);
+    }
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .save-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.8rem;
+      color: var(--warning);
+      font-weight: 500;
+    }
+    .user-pill {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.75rem;
+      background: var(--bg-elev);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-pill);
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    .user-avatar {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--gold);
+      color: #0c0c0e;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.75rem;
+    }
+
+    /* Main Container with Sidebar */
+    .dashboard-body {
+      display: flex;
+      flex: 1;
+      min-height: calc(100vh - var(--header-h));
+    }
+
+    /* Sidebar Navigation */
+    .dashboard-sidebar {
+      width: var(--sidebar-w);
+      background: var(--bg-surface);
+      border-right: 1px solid var(--border-subtle);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+    .sidebar-menu {
+      list-style: none;
+      padding: 1rem 0.75rem;
+    }
+    .sidebar-item {
+      margin-bottom: 0.35rem;
+    }
+    .sidebar-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius-sm);
+      color: var(--text-muted);
+      text-decoration: none;
+      font-family: var(--font-display);
+      font-size: 1rem;
+      letter-spacing: 0.04em;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+    .sidebar-link-content {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .sidebar-link svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+      opacity: 0.75;
+    }
+    .sidebar-link:hover {
+      background: var(--bg-elev);
+      color: var(--text-main);
+    }
+    .sidebar-link.active {
+      background: var(--gold-tint);
+      color: var(--gold);
+      border-left: 3px solid var(--gold);
+      font-weight: 600;
+    }
+    .sidebar-link.active svg {
+      opacity: 1;
+      fill: var(--gold);
+    }
+    .sidebar-badge {
+      background: var(--bg-card);
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: var(--radius-pill);
+      font-family: var(--font-body);
+    }
+    .sidebar-link.active .sidebar-badge {
+      background: var(--gold);
+      color: #0c0c0e;
+      font-weight: 700;
+    }
+    .sidebar-footer {
+      padding: 1.25rem;
+      border-top: 1px solid var(--border-subtle);
+      font-size: 0.8rem;
+      color: var(--text-dim);
+    }
+
+    /* Content Area */
+    .dashboard-content {
+      flex: 1;
+      padding: 2rem 2.5rem;
+      max-width: 1400px;
+      background: var(--bg-base);
+      overflow-y: auto;
+    }
+
+    /* Tab Panels */
+    .tab-pane {
+      display: none;
+      animation: fadeIn 0.25s ease-out;
+    }
+    .tab-pane.active {
+      display: block;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Section Headers */
+    .tab-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.75rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border-subtle);
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .tab-header-text h2 {
+      font-family: var(--font-display);
+      font-size: 1.85rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--text-main);
+    }
+    .tab-header-text p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-top: 0.2rem;
+    }
+
+    /* Stats Cards Grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 2rem;
+    }
+    .stat-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .stat-card:hover {
+      border-color: var(--gold);
+      transform: translateY(-2px);
+    }
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--gold);
+    }
+    .stat-info h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      font-family: var(--font-display);
+      margin-bottom: 0.35rem;
+    }
+    .stat-num {
+      font-family: var(--font-display);
+      font-size: 2.25rem;
+      font-weight: 700;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .stat-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--gold-tint);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
+    }
+    .stat-icon svg { width: 24px; height: 24px; fill: currentColor; }
+
+    /* Quick Actions */
+    .quick-actions-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 2.5rem;
+    }
+    .quick-action-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+    .quick-action-card:hover {
+      border-color: var(--gold);
+      background: var(--bg-elev);
+    }
+    .action-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: var(--radius-sm);
+      background: var(--bg-elev);
+      border: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
+      flex-shrink: 0;
+    }
+    .quick-action-card:hover .action-icon {
+      background: var(--gold);
+      color: #0c0c0e;
+    }
+    .action-icon svg { width: 22px; height: 22px; fill: currentColor; }
+    .action-text h4 {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.25rem;
+    }
+    .action-text p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* System & Environment Info Box */
+    .info-box {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .info-box h3 {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.75rem;
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* Dropzone Uploader */
+    .upload-zone {
+      border: 2px dashed var(--border-strong);
+      border-radius: var(--radius-md);
+      background: var(--bg-surface);
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      position: relative;
+      margin-bottom: 2rem;
+    }
+    .upload-zone:hover, .upload-zone.dragover {
+      border-color: var(--gold);
+      background: var(--gold-tint);
+    }
+    .upload-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--bg-elev);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+      color: var(--gold);
+    }
+    .upload-icon svg { width: 28px; height: 28px; fill: currentColor; }
+    .upload-zone h4 {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      margin-bottom: 0.35rem;
+    }
+    .upload-zone p {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+    .upload-zone input[type="file"] {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Cards & Grids for Content Lists */
+    .content-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .item-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.2s ease;
+    }
+    .item-card:hover {
+      border-color: var(--border-strong);
+      transform: translateY(-2px);
+    }
+    .item-card-media {
+      position: relative;
+      background: #000;
+      aspect-ratio: 16/9;
+      overflow: hidden;
+    }
+    .item-card-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .item-card-badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+    }
+    .item-card-duration {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      background: rgba(0,0,0,0.8);
+      color: #fff;
+      font-size: 0.75rem;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+    .item-card-body {
+      padding: 1.25rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .item-card-title {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.25rem;
+    }
+    .item-card-subtitle {
+      font-size: 0.85rem;
+      color: var(--gold);
+      margin-bottom: 0.75rem;
+    }
+    .item-card-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+      line-height: 1.4;
+    }
+    .item-card-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 0.85rem;
+      margin-top: auto;
+    }
+
+    /* Audio Track List Rows */
+    .tracks-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+    }
+    .track-row {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 1rem 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      transition: all 0.2s ease;
+    }
+    .track-row:hover {
+      border-color: var(--border-strong);
+      background: var(--bg-elev);
+    }
+    .track-meta {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex: 1;
+      min-width: 240px;
+    }
+    .track-number {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--gold);
+      width: 32px;
+      text-align: center;
+    }
+    .track-info h4 {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      letter-spacing: 0.03em;
+    }
+    .track-info p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    .track-player-wrap {
+      flex: 1;
+      min-width: 220px;
+      max-width: 360px;
+    }
+    .track-player-wrap audio {
+      width: 100%;
+      height: 36px;
+    }
+    .track-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* Photo Gallery Grid */
+    .gallery-admin-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 2rem;
+    }
+    .gallery-admin-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .gallery-thumb-wrap {
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      background: #000;
+      position: relative;
+    }
+    .gallery-thumb-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .gallery-card-body {
+      padding: 0.85rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      justify-content: space-between;
+    }
+    .gallery-caption {
+      font-size: 0.85rem;
+      color: var(--text-main);
+      margin-bottom: 0.75rem;
+      word-break: break-word;
+    }
+    .gallery-card-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 0.65rem;
+    }
+
+    /* Shows & Tour Table/Cards */
+    .shows-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      margin-bottom: 2rem;
+    }
+    .show-row {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 1.15rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+    }
+    .show-date-badge {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: var(--gold-tint);
+      border: 1px solid rgba(229, 169, 71, 0.35);
+      border-radius: var(--radius-sm);
+      width: 60px;
+      height: 60px;
+      flex-shrink: 0;
+    }
+    .show-month {
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.05em;
+    }
+    .show-day {
+      font-family: var(--font-display);
+      font-size: 1.45rem;
+      font-weight: 700;
+      line-height: 1;
+      color: #fff;
+    }
+    .show-details {
+      flex: 1;
+      min-width: 200px;
+    }
+    .show-venue {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.2rem;
+    }
+    .show-meta-text {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+    .show-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    /* Modals */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(6px);
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+    .modal-backdrop.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .modal-box {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-md);
+      width: 100%;
+      max-width: 580px;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: var(--shadow-lg);
+      transform: translateY(12px);
+      transition: transform 0.2s ease;
+    }
+    .modal-backdrop.open .modal-box {
+      transform: translateY(0);
+    }
+    .modal-header {
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .modal-header h3 {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      letter-spacing: 0.05em;
+      color: var(--gold);
+      text-transform: uppercase;
+    }
+    .modal-close-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 4px;
+    }
+    .modal-close-btn:hover { color: #fff; }
+    .modal-body {
+      padding: 1.5rem;
+    }
+    .modal-footer {
+      padding: 1rem 1.5rem;
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 0.75rem;
+    }
+
+    /* Staged Upload Preview Grid */
+    .staged-preview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+    .staged-item {
+      aspect-ratio: 1;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      border: 1px solid var(--border-subtle);
+      position: relative;
+    }
+    .staged-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Toast Notification */
+    #toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--bg-elev);
+      border: 1px solid var(--border-strong);
+      color: var(--text-main);
+      padding: 0.85rem 1.25rem;
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.9rem;
+      z-index: 300;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: none;
+    }
+    #toast.show {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+    #toast.toast-success { border-color: var(--success); }
+    #toast.toast-error { border-color: var(--danger); }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .dashboard-body { flex-direction: column; }
+      .dashboard-sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid var(--border-subtle);
+      }
+      .sidebar-menu {
+        display: flex;
+        overflow-x: auto;
+        padding: 0.5rem;
+        gap: 0.25rem;
+      }
+      .sidebar-item { margin-bottom: 0; }
+      .sidebar-link { padding: 0.5rem 0.85rem; font-size: 0.85rem; }
+      .sidebar-footer { display: none; }
+      .dashboard-content { padding: 1.25rem 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================================================
+       1. LOGIN VIEW GATE
+       ========================================================================== -->
+  <main id="login-view">
+    <div class="login-card">
+      <img src="./assets/branding/Southbound_Logo_Round.png" alt="Southbound Band Emblem" class="login-brand-logo">
+      <h1 class="login-title">SOUTHBOUND <span>CMS</span></h1>
+      <p class="login-desc">Sign in with your administrative credentials to manage shows, media, and band content.</p>
+
+      <div id="login-alert-box" class="login-alert login-alert-danger hidden"></div>
+
+      <form id="login-form">
+        <div class="form-group">
+          <label for="login-username" class="form-label">Username</label>
+          <input type="text" id="login-username" class="form-input" placeholder="Enter username" required autocomplete="username">
+        </div>
+
+        <div class="form-group">
+          <label for="login-password" class="form-label">Password</label>
+          <div class="input-wrap">
+            <input type="password" id="login-password" class="form-input" placeholder="Enter password" required autocomplete="current-password">
+            <button type="button" class="input-toggle-btn" id="toggle-password-btn" aria-label="Toggle password visibility">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <label class="login-remember">
+          <input type="checkbox" id="login-remember" checked>
+          <span>Remember me on this browser</span>
+        </label>
+
+        <button type="submit" class="btn btn-primary" id="login-submit-btn" style="width: 100%;">
+          <span>Sign In to Dashboard</span>
+          <svg viewBox="0 0 24 24"><path d="M10 17l5-5-5-5v10z"/></svg>
+        </button>
+      </form>
+    </div>
+  </main>
+
+  <!-- ==========================================================================
+       2. DASHBOARD VIEW (AUTHENTICATED)
+       ========================================================================== -->
+  <div id="dashboard-view" class="hidden">
+    
+    <!-- Top Navigation Header -->
+    <header class="dashboard-topbar">
+      <div class="topbar-left">
+        <a href="#overview" class="topbar-brand">
+          <img src="./assets/branding/Southbound_Logo_Round.png" alt="Southbound Emblem">
+          <div class="topbar-title">SOUTHBOUND <span>CMS</span></div>
+        </a>
+
+        <!-- Live Server vs Preview Environment Status -->
+        <div class="server-status-pill" id="status-pill">
+          <span class="status-dot" id="status-dot"></span>
+          <span id="status-text">Detecting API...</span>
+        </div>
+      </div>
+
+      <div class="topbar-right">
+        <!-- Unsaved Indicator -->
+        <span class="save-indicator hidden" id="unsaved-badge">
+          ● Unsaved Changes
+        </span>
+
+        <!-- Save Button -->
+        <button type="button" class="btn btn-primary btn-sm" id="save-all-btn">
+          <svg viewBox="0 0 24 24"><path d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm2 16H5V5h11.17L19 7.83V19zm-7-7c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3zM6 6h9v4H6z"/></svg>
+          <span>Save Changes</span>
+        </button>
+
+        <!-- View Live Site -->
+        <a href="./index.html" target="_blank" class="btn btn-outline btn-sm">
+          <span>Live Site ↗</span>
+        </a>
+
+        <!-- User Info & Logout -->
+        <div class="user-pill">
+          <div class="user-avatar">A</div>
+          <span id="username-display">admin</span>
+        </div>
+
+        <button type="button" class="btn btn-danger btn-sm" id="logout-btn">
+          <span>Sign Out</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Body Layout with Sidebar -->
+    <div class="dashboard-body">
+      <!-- Sidebar Navigation -->
+      <aside class="dashboard-sidebar">
+        <ul class="sidebar-menu">
+          <li class="sidebar-item">
+            <a class="sidebar-link active" data-tab="overview">
+              <span class="sidebar-link-content">
+                <svg viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
+                <span>Overview</span>
+              </span>
+            </a>
+          </li>
+          <li class="sidebar-item">
+            <a class="sidebar-link" data-tab="videos">
+              <span class="sidebar-link-content">
+                <svg viewBox="0 0 24 24"><path d="M21.58 7.19a2.5 2.5 0 0 0-1.76-1.77C18.25 5 12 5 12 5s-6.25 0-7.82.42a2.5 2.5 0 0 0-1.76 1.77C2 8.75 2 12 2 12s0 3.25.42 4.81a2.5 2.5 0 0 0 1.76 1.77C5.75 19 12 19 12 19s6.25 0 7.82-.42a2.5 2.5 0 0 0 1.76-1.77C22 15.25 22 12 22 12s0-3.25-.42-4.81zM10 15V9l5.2 3-5.2 3z"/></svg>
+                <span>Videos</span>
+              </span>
+              <span class="sidebar-badge" id="badge-count-videos">0</span>
+            </a>
+          </li>
+          <li class="sidebar-item">
+            <a class="sidebar-link" data-tab="music">
+              <span class="sidebar-link-content">
+                <svg viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+                <span>Audio Tracks</span>
+              </span>
+              <span class="sidebar-badge" id="badge-count-tracks">0</span>
+            </a>
+          </li>
+          <li class="sidebar-item">
+            <a class="sidebar-link" data-tab="gallery">
+              <span class="sidebar-link-content">
+                <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                <span>Photo Gallery</span>
+              </span>
+              <span class="sidebar-badge" id="badge-count-gallery">0</span>
+            </a>
+          </li>
+          <li class="sidebar-item">
+            <a class="sidebar-link" data-tab="shows">
+              <span class="sidebar-link-content">
+                <svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10z"/></svg>
+                <span>Shows &amp; Tour</span>
+              </span>
+              <span class="sidebar-badge" id="badge-count-shows">0</span>
+            </a>
+          </li>
+          <li class="sidebar-item">
+            <a class="sidebar-link" data-tab="settings">
+              <span class="sidebar-link-content">
+                <svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.488.488 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.484.484 0 0 0-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+                <span>Settings</span>
+              </span>
+            </a>
+          </li>
+        </ul>
+
+        <div class="sidebar-footer">
+          <div>Southbound CMS v2.0</div>
+          <div style="margin-top: 4px; color: var(--gold);">Protected Client Admin</div>
+        </div>
+      </aside>
+
+      <!-- Main Tab Content Area -->
+      <main class="dashboard-content">
+
+        <!-- ====================================================================
+             TAB 1: OVERVIEW
+             ==================================================================== -->
+        <section class="tab-pane active" id="tab-overview">
+          <div class="tab-header">
+            <div class="tab-header-text">
+              <h2>Dashboard Overview</h2>
+              <p>Live summary of your website media, upcoming shows, and quick actions.</p>
+            </div>
+            <button type="button" class="btn btn-outline btn-sm" id="download-json-btn">
+              <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+              <span>Export content.json</span>
+            </button>
+          </div>
+
+          <!-- Quick Stats Cards -->
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-info">
+                <h3>Live Videos</h3>
+                <div class="stat-num" id="stat-videos">0</div>
+              </div>
+              <div class="stat-icon">
+                <svg viewBox="0 0 24 24"><path d="M21.58 7.19a2.5 2.5 0 0 0-1.76-1.77C18.25 5 12 5 12 5s-6.25 0-7.82.42a2.5 2.5 0 0 0-1.76 1.77C2 8.75 2 12 2 12s0 3.25.42 4.81a2.5 2.5 0 0 0 1.76 1.77C5.75 19 12 19 12 19s6.25 0 7.82-.42a2.5 2.5 0 0 0 1.76-1.77C22 15.25 22 12 22 12s0-3.25-.42-4.81zM10 15V9l5.2 3-5.2 3z"/></svg>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-info">
+                <h3>Audio Tracks</h3>
+                <div class="stat-num" id="stat-tracks">0</div>
+              </div>
+              <div class="stat-icon">
+                <svg viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-info">
+                <h3>Gallery Photos</h3>
+                <div class="stat-num" id="stat-gallery">0</div>
+              </div>
+              <div class="stat-icon">
+                <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-info">
+                <h3>Upcoming Shows</h3>
+                <div class="stat-num" id="stat-shows">0</div>
+              </div>
+              <div class="stat-icon">
+                <svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10z"/></svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Action Shortcuts -->
+          <h3 style="font-family: var(--font-display); font-size: 1.35rem; margin-bottom: 1rem; text-transform: uppercase;">Quick Actions</h3>
+          <div class="quick-actions-grid">
+            <div class="quick-action-card" onclick="switchTab('videos'); openAddVideoModal();">
+              <div class="action-icon">
+                <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+              </div>
+              <div class="action-text">
+                <h4>Add YouTube Video</h4>
+                <p>Paste a link to add new live performance video.</p>
+              </div>
+            </div>
+
+            <div class="quick-action-card" onclick="switchTab('music'); document.getElementById('audio-file-input').click();">
+              <div class="action-icon">
+                <svg viewBox="0 0 24 24"><path d="M9 16h6v-6h4l-7-7-7 7h4v6zm-4 2h14v2H5v-2z"/></svg>
+              </div>
+              <div class="action-text">
+                <h4>Upload MP3 Audio Track</h4>
+                <p>Upload a fresh live audio recording directly.</p>
+              </div>
+            </div>
+
+            <div class="quick-action-card" onclick="switchTab('gallery'); document.getElementById('photo-file-input').click();">
+              <div class="action-icon">
+                <svg viewBox="0 0 24 24"><path d="M4 4h3l2-2h6l2 2h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm8 3a5 5 0 1 0 0 10 5 5 0 0 0 0-10z"/></svg>
+              </div>
+              <div class="action-text">
+                <h4>Upload Stage Photos</h4>
+                <p>Drag and drop multi-photo concert captures.</p>
+              </div>
+            </div>
+
+            <div class="quick-action-card" onclick="switchTab('shows'); openAddShowModal();">
+              <div class="action-icon">
+                <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+              </div>
+              <div class="action-text">
+                <h4>Add Tour Date</h4>
+                <p>Post a new confirmed festival, venue or club date.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Environment Diagnostic Info -->
+          <div class="info-box">
+            <h3>
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+              <span>Deployment &amp; Storage Architecture</span>
+            </h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;" id="storage-diag-text">
+              Checking server configuration...
+            </p>
+          </div>
+        </section>
+
+        <!-- ====================================================================
+             TAB 2: VIDEOS MANAGER
+             ==================================================================== -->
+        <section class="tab-pane" id="tab-videos">
+          <div class="tab-header">
+            <div class="tab-header-text">
+              <h2>Live Concert &amp; Promo Videos</h2>
+              <p>Manage YouTube video reels featured in the "Watch &amp; Listen" section.</p>
+            </div>
+            <button type="button" class="btn btn-primary btn-sm" onclick="openAddVideoModal();">
+              <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+              <span>Add Video</span>
+            </button>
+          </div>
+
+          <!-- Video Cards Grid -->
+          <div class="content-grid" id="videos-container">
+            <!-- Dynamically populated -->
+          </div>
+        </section>
+
+        <!-- ====================================================================
+             TAB 3: MUSIC / AUDIO TRACKS MANAGER
+             ==================================================================== -->
+        <section class="tab-pane" id="tab-music">
+          <div class="tab-header">
+            <div class="tab-header-text">
+              <h2>Latest Audio Tracks</h2>
+              <p>Upload and manage high-fidelity audio streams for the music player.</p>
+            </div>
+            <span class="badge badge-success">Stream-Only Audio Protection Active</span>
+          </div>
+
+          <!-- Direct MP3/WAV Drag & Drop Upload Zone -->
+          <div class="upload-zone" id="audio-drop-zone">
+            <input type="file" id="audio-file-input" accept="audio/*,.mp3,.wav,.m4a">
+            <div class="upload-icon">
+              <svg viewBox="0 0 24 24"><path d="M9 16h6v-6h4l-7-7-7 7h4v6zm-4 2h14v2H5v-2z"/></svg>
+            </div>
+            <h4>Drag &amp; Drop MP3 or WAV Audio Files</h4>
+            <p>Or click to browse your computer. Track duration and title will be automatically detected.</p>
+          </div>
+
+          <!-- Tracks List -->
+          <div class="tracks-list" id="tracks-container">
+            <!-- Dynamically populated -->
+          </div>
+        </section>
+
+        <!-- ====================================================================
+             TAB 4: PHOTO GALLERY MANAGER
+             ==================================================================== -->
+        <section class="tab-pane" id="tab-gallery">
+          <div class="tab-header">
+            <div class="tab-header-text">
+              <h2>On Stage Photo Gallery</h2>
+              <p>Upload and organize live concert photography and festival moments.</p>
+            </div>
+          </div>
+
+          <!-- Multi-photo Drag & Drop Uploader -->
+          <div class="upload-zone" id="photo-drop-zone">
+            <input type="file" id="photo-file-input" accept="image/*,.jpg,.jpeg,.png,.webp" multiple>
+            <div class="upload-icon">
+              <svg viewBox="0 0 24 24"><path d="M4 4h3l2-2h6l2 2h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm8 3a5 5 0 1 0 0 10 5 5 0 0 0 0-10z"/></svg>
+            </div>
+            <h4>Drag &amp; Drop Stage Photos (.jpg, .png, .webp)</h4>
+            <p>Select multiple images at once to upload directly to the gallery grid.</p>
+          </div>
+
+          <!-- Staged Photos Upload Preview Bar (When files selected) -->
+          <div id="staged-photos-panel" class="info-box hidden">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem;">
+              <h4 style="font-family: var(--font-display); font-size: 1.1rem; color: var(--gold);" id="staged-count-label">Staged Photos</h4>
+              <button type="button" class="btn btn-primary btn-sm" id="confirm-upload-photos-btn">Complete Upload</button>
+            </div>
+            <div class="staged-preview-grid" id="staged-photos-grid"></div>
+          </div>
+
+          <!-- Gallery Photos Grid -->
+          <div class="gallery-admin-grid" id="gallery-container">
+            <!-- Dynamically populated -->
+          </div>
+        </section>
+
+        <!-- ====================================================================
+             TAB 5: SHOWS & TOUR MANAGER
+             ==================================================================== -->
+        <section class="tab-pane" id="tab-shows">
+          <div class="tab-header">
+            <div class="tab-header-text">
+              <h2>Upcoming Shows &amp; Event History</h2>
+              <p>Add tour dates, edit venue details, or move concluded concerts to Event History.</p>
+            </div>
+            <button type="button" class="btn btn-primary btn-sm" onclick="openAddShowModal();">
+              <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+              <span>Add Tour Date</span>
+            </button>
+          </div>
+
+          <h3 style="font-family: var(--font-display); font-size: 1.25rem; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem;">
+            Upcoming Tour Dates (<span id="upcoming-shows-count">0</span>)
+          </h3>
+          <div class="shows-list" id="upcoming-shows-container">
+            <!-- Dynamically populated -->
+          </div>
+
+          <div style="margin-top: 3rem; margin-bottom: 1rem; display: flex; align-items: center; justify-content: space-between;">
+            <h3 style="font-family: var(--font-display); font-size: 1.25rem; text-transform: uppercase; color: var(--text-muted);">
+              Past Event History Venues (<span id="event-history-count">0</span>)
+            </h3>
+            <button type="button" class="btn btn-outline btn-sm" onclick="openAddHistoryModal();">
+              <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+              <span>Add Past Venue</span>
+            </button>
+          </div>
+          <div class="shows-list" id="event-history-container">
+            <!-- Dynamically populated -->
+          </div>
+        </section>
+
+        <!-- ====================================================================
+             TAB 6: SETTINGS & BACKUPS
+             ==================================================================== -->
+        <section class="tab-pane" id="tab-settings">
+          <div class="tab-header">
+            <div class="tab-header-text">
+              <h2>Settings &amp; Security</h2>
+              <p>Manage administrative credentials, backups, and site synchronization.</p>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 1.5rem;">
+            
+            <!-- Password Change Form -->
+            <div class="info-box">
+              <h3>
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+                <span>Change Admin Password</span>
+              </h3>
+              <form id="change-password-form">
+                <div class="form-group">
+                  <label class="form-label" for="current-password">Current Password</label>
+                  <input type="password" id="current-password" class="form-input" required autocomplete="current-password">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="new-password">New Password (Min 8 Characters)</label>
+                  <input type="password" id="new-password" class="form-input" required minlength="8" autocomplete="new-password">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="confirm-password">Confirm New Password</label>
+                  <input type="password" id="confirm-password" class="form-input" required minlength="8" autocomplete="new-password">
+                </div>
+                <button type="submit" class="btn btn-primary btn-sm">Update Password</button>
+              </form>
+            </div>
+
+            <!-- Content Backups & Restore -->
+            <div class="info-box">
+              <h3>
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                <span>Data Backups &amp; Sync</span>
+              </h3>
+              <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1.25rem;">
+                Download a clean copy of your site's <code>content.json</code> file anytime for safe keeping or import an existing data file.
+              </p>
+              <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                <button type="button" class="btn btn-outline btn-sm" id="backup-download-btn">
+                  <span>Download Backup (content.json)</span>
+                </button>
+                <button type="button" class="btn btn-outline btn-sm" id="reset-defaults-btn">
+                  <span>Reset to Factory Default Content</span>
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MODALS
+       ========================================================================== -->
+
+  <!-- Add / Edit Video Modal -->
+  <div class="modal-backdrop" id="video-modal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 id="video-modal-title">Add YouTube Video</h3>
+        <button type="button" class="modal-close-btn" onclick="closeModal('video-modal');">✕</button>
+      </div>
+      <form id="video-form">
+        <input type="hidden" id="video-edit-index" value="-1">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label" for="video-url">YouTube Link or Video ID *</label>
+            <input type="text" id="video-url" class="form-input" placeholder="e.g. https://www.youtube.com/watch?v=nSN0ZIoctMo" required>
+            <small style="color: var(--text-dim); font-size: 0.8rem; margin-top: 4px; display: block;">
+              Pasting any YouTube link automatically extracts the 11-character video ID.
+            </small>
+          </div>
+
+          <!-- YouTube Thumbnail Preview -->
+          <div id="video-preview-wrap" style="margin-bottom: 1rem; border-radius: 6px; overflow: hidden; background: #000; aspect-ratio: 16/9; display: flex; align-items: center; justify-content: center;">
+            <img id="video-thumb-preview" src="" alt="Thumbnail preview" style="width: 100%; height: 100%; object-fit: cover; display: none;">
+            <div id="video-thumb-placeholder" style="color: var(--text-dim); font-size: 0.85rem;">Thumbnail preview will appear here</div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="video-title">Video Title *</label>
+            <input type="text" id="video-title" class="form-input" placeholder="e.g. Keep on Smilin’" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="video-subtitle">Subtitle / Performance Details</label>
+            <input type="text" id="video-subtitle" class="form-input" placeholder="e.g. Wet Willie Cover (Live on Stage)">
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div class="form-group">
+              <label class="form-label" for="video-badge">Badge Label</label>
+              <input type="text" id="video-badge" class="form-input" placeholder="e.g. Live Performance">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="video-duration">Duration</label>
+              <input type="text" id="video-duration" class="form-input" placeholder="e.g. 4:12">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="video-desc">Description</label>
+            <textarea id="video-desc" class="form-input" rows="3" placeholder="Brief highlight note about this performance..."></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline btn-sm" onclick="closeModal('video-modal');">Cancel</button>
+          <button type="submit" class="btn btn-primary btn-sm">Save Video</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Add / Edit Show Modal -->
+  <div class="modal-backdrop" id="show-modal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 id="show-modal-title">Add Upcoming Show</h3>
+        <button type="button" class="modal-close-btn" onclick="closeModal('show-modal');">✕</button>
+      </div>
+      <form id="show-form">
+        <input type="hidden" id="show-edit-index" value="-1">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label" for="show-date">Show Date *</label>
+            <input type="date" id="show-date" class="form-input" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="show-venue">Venue Name *</label>
+            <input type="text" id="show-venue" class="form-input" placeholder="e.g. Swabbies on the River" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="show-location">City / Location *</label>
+            <input type="text" id="show-location" class="form-input" placeholder="e.g. Sacramento, CA" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="show-stage">Stage / Time</label>
+            <input type="text" id="show-stage" class="form-input" placeholder="e.g. Riverside Stage · 2:00 PM">
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div class="form-group">
+              <label class="form-label" for="show-badge">Badge</label>
+              <input type="text" id="show-badge" class="form-input" placeholder="e.g. Venue Regular, Festival">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="show-status">Status</label>
+              <select id="show-status" class="form-input">
+                <option value="Confirmed">Confirmed</option>
+                <option value="Tickets On Sale">Tickets On Sale</option>
+                <option value="Free Admission">Free Admission</option>
+                <option value="Special Event">Special Event</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline btn-sm" onclick="closeModal('show-modal');">Cancel</button>
+          <button type="submit" class="btn btn-primary btn-sm">Save Show</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Add Event History Modal -->
+  <div class="modal-backdrop" id="history-modal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3>Add Past Venue / Festival</h3>
+        <button type="button" class="modal-close-btn" onclick="closeModal('history-modal');">✕</button>
+      </div>
+      <form id="history-form">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label" for="history-event">Venue or Festival Name *</label>
+            <input type="text" id="history-event" class="form-input" placeholder="e.g. Swabbies on the River" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="history-location">City / Region *</label>
+            <input type="text" id="history-location" class="form-input" placeholder="e.g. Sacramento, CA" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline btn-sm" onclick="closeModal('history-modal');">Cancel</button>
+          <button type="submit" class="btn btn-primary btn-sm">Add to History</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast">
+    <span id="toast-message">Notification message</span>
+  </div>
+
+  <!-- ==========================================================================
+       3. CLIENT APPLICATION JAVASCRIPT
+       ========================================================================== -->
+  <script>
+    // Southbound CMS State
+    const AppState = {
+      isAuthenticated: false,
+      user: 'admin',
+      token: null,
+      backendMode: 'detecting', // 'php' or 'preview'
+      content: {
+        videos: [],
+        tracks: [],
+        gallery: [],
+        upcomingShows: [],
+        eventHistory: []
+      },
+      hasUnsavedChanges: false,
+      stagedPhotos: []
+    };
+
+    // Default Baseline Content Fallback (loaded if file fetch fails)
+    const DefaultBaselineContent = {
+      videos: [
+        {
+          id: "nSN0ZIoctMo",
+          title: "Southbound Promo Video '25",
+          subtitle: "Official Band Promotional Showcase",
+          badge: "Official Promo Reel",
+          duration: "3:45",
+          thumb: "https://img.youtube.com/vi/nSN0ZIoctMo/hqdefault.jpg",
+          desc: "Official 2025 promotional video reel featuring live concert highlights, twin-guitar solos, and festival energy across Northern California."
+        },
+        {
+          id: "M95QmHVGUWo",
+          title: "Keep on Smilin’",
+          subtitle: "Wet Willie Cover (Live on Stage)",
+          badge: "Live Performance",
+          duration: "4:12",
+          thumb: "https://img.youtube.com/vi/M95QmHVGUWo/hqdefault.jpg",
+          desc: "Soulful three-part vocal harmonies and vintage Hammond B-3 organ groove honoring Jimmy Hall and Wet Willie live."
+        },
+        {
+          id: "OpySJ7OwICg",
+          title: "What If I’d Been The One",
+          subtitle: ".38 Special Cover (Live on Stage)",
+          badge: "Live Performance",
+          duration: "3:58",
+          thumb: "https://img.youtube.com/vi/OpySJ7OwICg/hqdefault.jpg",
+          desc: "Driving arena-rock rhythm section, razor-sharp duel leads, and crowd-rousing rock vocals in a high-octane performance."
+        },
+        {
+          id: "RbEp3GUou94",
+          title: "Marshall Tucker Cover",
+          subtitle: "The Marshall Tucker Band Cover (Live on Stage)",
+          badge: "Marshall Tucker Cover",
+          duration: "6:51",
+          thumb: "https://img.youtube.com/vi/RbEp3GUou94/hqdefault.jpg",
+          desc: "Authentic live performance honoring The Marshall Tucker Band with twin-guitar harmonies, soulful vocals, and Southern Rock energy."
+        }
+      ],
+      tracks: [
+        {
+          id: "cant-you-see",
+          trackNum: "01",
+          title: "Can't You See",
+          artist: "The Marshall Tucker Band Cover",
+          duration: "6:51",
+          file: "./assets/audio/cant-you-see-marshall-tucker-band-cover.mp3",
+          format: "Audio Stream"
+        },
+        {
+          id: "midnight-rider",
+          trackNum: "02",
+          title: "Midnight Rider",
+          artist: "The Allman Brothers Band Cover",
+          duration: "3:05",
+          file: "./assets/audio/midnight-rider-allman-brothers-cover.wav",
+          format: "Audio Stream"
+        },
+        {
+          id: "there-goes-another-love-song",
+          trackNum: "03",
+          title: "There Goes Another Love Song",
+          artist: "The Outlaws Cover",
+          duration: "2:59",
+          file: "./assets/audio/there-goes-another-love-song-outlaws-cover.wav",
+          format: "Audio Stream"
+        }
+      ],
+      gallery: [
+        { id: "fest-1", src: "./assets/gallery/gallery-festival-01.jpg", caption: "Southbound performing at a Northern California festival", wide: true },
+        { id: "fest-2", src: "./assets/gallery/gallery-festival-02.jpg", caption: "Guitar solo at a California summer festival", wide: false },
+        { id: "fest-3", src: "./assets/gallery/gallery-theatre-01.jpg", caption: "Historic Opera House, Roseville", wide: false },
+        { id: "fest-4", src: "./assets/gallery/gallery-festival-03.jpg", caption: "Full stage at a summer festival", wide: true },
+        { id: "fest-5", src: "./assets/gallery/gallery-swabbies-01.jpg", caption: "Swabbies on the River, Sacramento", wide: false }
+      ],
+      upcomingShows: [
+        { id: "show-1", isoDate: "2026-11-14", dateMonth: "NOV", dateDay: "14", venue: "High Hand Brewery & Nursery", location: "Loomis, CA", stage: "Outdoor Patio Stage", badge: "Venue Regular", status: "Confirmed" },
+        { id: "show-2", isoDate: "2026-11-28", dateMonth: "NOV", dateDay: "28", venue: "Powerhouse Pub", location: "Folsom, CA", stage: "Live Music Room", badge: "Venue Regular", status: "Confirmed" },
+        { id: "show-3", isoDate: "2026-12-12", dateMonth: "DEC", dateDay: "12", venue: "Swabbies on the River", location: "Sacramento, CA", stage: "Riverside Stage", badge: "Venue Regular", status: "Confirmed" }
+      ],
+      eventHistory: [
+        { id: "hist-1", event: "Carmichael Music Festival", location: "Carmichael, CA" },
+        { id: "hist-2", event: "Swabbies on the River", location: "Sacramento, CA" },
+        { id: "hist-3", event: "Powerhouse Pub", location: "Folsom, CA" }
+      ]
+    };
+
+    // Helper: Toast Notifications
+    function showToast(message, type = 'info') {
+      const toast = document.getElementById('toast');
+      const msg = document.getElementById('toast-message');
+      msg.textContent = message;
+      toast.className = `toast-${type} show`;
+      setTimeout(() => {
+        toast.className = '';
+      }, 3500);
+    }
+
+    // Helper: Asset Path Resolver (supports GitHub Pages subfolders, localhost Vite, and custom domains)
+    function resolveAdminAssetUrl(path) {
+      if (!path) return '';
+      // If Base64 Data URL, Blob URL, or external HTTP(S) URL, return directly
+      if (path.startsWith('data:') || path.startsWith('blob:') || path.startsWith('http://') || path.startsWith('https://')) {
+        return path;
+      }
+
+      // Normalize clean path without leading ./ or /
+      let cleanPath = path;
+      if (cleanPath.startsWith('./')) {
+        cleanPath = cleanPath.slice(2);
+      } else if (cleanPath.startsWith('/')) {
+        cleanPath = cleanPath.slice(1);
+      }
+
+      // Determine current base folder (e.g., "/southbound-band-website/" or "/")
+      let basePath = window.location.pathname;
+      const lastSlashIdx = basePath.lastIndexOf('/');
+      if (lastSlashIdx >= 0) {
+        basePath = basePath.substring(0, lastSlashIdx + 1);
+      } else {
+        basePath = './';
+      }
+
+      if (!basePath.endsWith('/')) {
+        basePath += '/';
+      }
+
+      return `${basePath}${cleanPath}`;
+    }
+
+    // Helper: Extract YouTube ID
+    function extractYouTubeId(url) {
+      if (!url) return '';
+      const clean = url.trim();
+      const match = clean.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([\w-]{11})/);
+      if (match) return match[1];
+      if (/^[\w-]{11}$/.test(clean)) return clean;
+      return '';
+    }
+
+    // Helper: Auto-Detect Audio Duration from File
+    function detectAudioDuration(file) {
+      return new Promise((resolve) => {
+        const audio = new Audio();
+        const objUrl = URL.createObjectURL(file);
+        audio.src = objUrl;
+        audio.addEventListener('loadedmetadata', () => {
+          const sec = Math.round(audio.duration || 0);
+          const mins = Math.floor(sec / 60);
+          const rem = sec % 60;
+          const formatted = `${mins}:${rem.toString().padStart(2, '0')}`;
+          URL.revokeObjectURL(objUrl);
+          resolve({ seconds: sec, formatted });
+        });
+        audio.addEventListener('error', () => {
+          URL.revokeObjectURL(objUrl);
+          resolve({ seconds: 180, formatted: '3:00' });
+        });
+      });
+    }
+
+    // Tab Switching
+    function switchTab(tabId) {
+      document.querySelectorAll('.sidebar-link').forEach(link => {
+        link.classList.toggle('active', link.getAttribute('data-tab') === tabId);
+      });
+      document.querySelectorAll('.tab-pane').forEach(pane => {
+        pane.classList.toggle('active', pane.id === `tab-${tabId}`);
+      });
+    }
+
+    // Modal helpers
+    function openModal(id) {
+      const modal = document.getElementById(id);
+      if (modal) modal.classList.add('open');
+    }
+    function closeModal(id) {
+      const modal = document.getElementById(id);
+      if (modal) modal.classList.remove('open');
+    }
+
+    // Mark Unsaved Changes
+    function setUnsaved(state) {
+      AppState.hasUnsavedChanges = state;
+      const badge = document.getElementById('unsaved-badge');
+      if (badge) badge.classList.toggle('hidden', !state);
+    }
+
+    // ==============================================================================
+    // API & STORAGE LAYER
+    // ==============================================================================
+
+    // Detect Environment & Backend Capabilities
+    async function detectBackend() {
+      const statusPill = document.getElementById('status-pill');
+      const statusDot = document.getElementById('status-dot');
+      const statusText = document.getElementById('status-text');
+      const diagText = document.getElementById('storage-diag-text');
+
+      try {
+        const res = await fetch('./api/admin-api.php?action=status', { cache: 'no-cache' });
+        if (res.ok) {
+          const data = await res.json();
+          if (data && data.success && data.backend === 'php') {
+            AppState.backendMode = 'php';
+            statusDot.className = 'status-dot';
+            statusText.textContent = 'Live Server API (PHP)';
+            diagText.innerHTML = `Connected to production PHP backend (v${data.version}). Uploads save directly to <code>/assets/audio/</code> and <code>/assets/gallery/</code>, and content changes write live to <code>/data/content.json</code> with automated backups.`;
+            return;
+          }
+        }
+      } catch (err) {
+        // PHP not responding (static preview environment)
+      }
+
+      // Fallback: Preview Mode (Local / GitHub Pages)
+      AppState.backendMode = 'preview';
+      statusDot.className = 'status-dot status-dot-preview';
+      statusText.textContent = 'Preview Mode (Local/Browser)';
+      diagText.innerHTML = `Running in static preview mode (localhost or GitHub Pages). All content and uploaded media persist seamlessly in browser storage (<code>localStorage</code>) and sync directly to the live site preview for client demonstration.`;
+    }
+
+    // Load Website Content
+    async function loadContent() {
+      // 1. Check local preview override first
+      try {
+        const localData = localStorage.getItem('sb_content_override');
+        if (localData) {
+          const parsed = JSON.parse(localData);
+          if (parsed && typeof parsed === 'object') {
+            AppState.content = normalizeContent(parsed);
+            renderAllSections();
+            return;
+          }
+        }
+      } catch (e) {}
+
+      // 2. Fetch from content.json
+      try {
+        const res = await fetch('./data/content.json', { cache: 'no-cache' });
+        if (res.ok) {
+          const data = await res.json();
+          AppState.content = normalizeContent(data);
+          renderAllSections();
+          return;
+        }
+      } catch (e) {}
+
+      // 3. Fallback to Baseline
+      AppState.content = normalizeContent(DefaultBaselineContent);
+      renderAllSections();
+    }
+
+    function normalizeContent(data) {
+      return {
+        videos: Array.isArray(data.videos) ? data.videos : [],
+        tracks: Array.isArray(data.tracks) ? data.tracks : [],
+        gallery: Array.isArray(data.gallery) ? data.gallery : [],
+        upcomingShows: Array.isArray(data.upcomingShows) ? data.upcomingShows : [],
+        eventHistory: Array.isArray(data.eventHistory) ? data.eventHistory : []
+      };
+    }
+
+    // Save Content (PHP API or Local Storage)
+    async function saveContent() {
+      const btn = document.getElementById('save-all-btn');
+      btn.disabled = true;
+      btn.innerHTML = `<span>Saving...</span>`;
+
+      if (AppState.backendMode === 'php') {
+        try {
+          const res = await fetch('./api/admin-api.php?action=save_content', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${AppState.token}`
+            },
+            body: JSON.stringify({ content: AppState.content })
+          });
+          const result = await res.json();
+          if (result.success) {
+            setUnsaved(false);
+            // Also update localStorage so local preview stays synchronized
+            localStorage.setItem('sb_content_override', JSON.stringify(AppState.content));
+            showToast('Changes saved live to server & content.json!', 'success');
+          } else {
+            showToast(result.error || 'Failed to save to server.', 'error');
+          }
+        } catch (err) {
+          showToast('Network error saving to PHP backend. Falling back to local preview storage.', 'error');
+          localStorage.setItem('sb_content_override', JSON.stringify(AppState.content));
+          setUnsaved(false);
+        }
+      } else {
+        // Preview Mode
+        localStorage.setItem('sb_content_override', JSON.stringify(AppState.content));
+        setUnsaved(false);
+        showToast('Saved locally in preview mode! Reflected live on site.', 'success');
+      }
+
+      btn.disabled = false;
+      btn.innerHTML = `<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm2 16H5V5h11.17L19 7.83V19zm-7-7c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3zM6 6h9v4H6z"/></svg><span>Save Changes</span>`;
+    }
+
+    // ==============================================================================
+    // RENDER FUNCTIONS
+    // ==============================================================================
+
+    function renderAllSections() {
+      renderOverviewStats();
+      renderVideos();
+      renderTracks();
+      renderGallery();
+      renderShows();
+      updateBadgeCounts();
+    }
+
+    function updateBadgeCounts() {
+      document.getElementById('badge-count-videos').textContent = AppState.content.videos.length;
+      document.getElementById('badge-count-tracks').textContent = AppState.content.tracks.length;
+      document.getElementById('badge-count-gallery').textContent = AppState.content.gallery.length;
+      document.getElementById('badge-count-shows').textContent = AppState.content.upcomingShows.length;
+    }
+
+    function renderOverviewStats() {
+      document.getElementById('stat-videos').textContent = AppState.content.videos.length;
+      document.getElementById('stat-tracks').textContent = AppState.content.tracks.length;
+      document.getElementById('stat-gallery').textContent = AppState.content.gallery.length;
+      document.getElementById('stat-shows').textContent = AppState.content.upcomingShows.length;
+    }
+
+    // Render Videos
+    function renderVideos() {
+      const container = document.getElementById('videos-container');
+      container.innerHTML = '';
+
+      if (AppState.content.videos.length === 0) {
+        container.innerHTML = `<div style="grid-column: 1/-1; padding: 2rem; text-align: center; color: var(--text-muted); background: var(--bg-surface); border-radius: var(--radius-md);">No videos added yet. Click "Add Video" to add your first YouTube showcase.</div>`;
+        return;
+      }
+
+      AppState.content.videos.forEach((video, index) => {
+        const ytId = video.youtubeId || video.id || extractYouTubeId(video.url || '');
+        const ytOfficialThumb = ytId ? `https://img.youtube.com/vi/${ytId}/hqdefault.jpg` : '';
+        const initialThumb = video.thumb ? resolveAdminAssetUrl(video.thumb) : ytOfficialThumb;
+        const fallbackAttr = ytOfficialThumb ? `onerror="if (this.src !== '${ytOfficialThumb}') { this.src = '${ytOfficialThumb}'; }"` : '';
+
+        const card = document.createElement('div');
+        card.className = 'item-card';
+        card.innerHTML = `
+          <div class="item-card-media">
+            <img src="${initialThumb}" alt="${video.title}" loading="lazy" ${fallbackAttr}>
+            ${video.badge ? `<span class="badge badge-gold item-card-badge">${video.badge}</span>` : ''}
+            ${video.duration ? `<span class="item-card-duration">${video.duration}</span>` : ''}
+          </div>
+          <div class="item-card-body">
+            <div>
+              <h4 class="item-card-title">${video.title}</h4>
+              <p class="item-card-subtitle">${video.subtitle || ''}</p>
+              <p class="item-card-desc">${video.desc || ''}</p>
+            </div>
+            <div class="item-card-actions">
+              <button class="btn btn-outline btn-sm" onclick="editVideo(${index})">Edit</button>
+              <button class="btn btn-outline btn-sm btn-icon" title="Move Up" onclick="moveVideo(${index}, -1)" ${index === 0 ? 'disabled' : ''}>▲</button>
+              <button class="btn btn-outline btn-sm btn-icon" title="Move Down" onclick="moveVideo(${index}, 1)" ${index === AppState.content.videos.length - 1 ? 'disabled' : ''}>▼</button>
+              <a href="${ytId ? `https://youtu.be/${ytId}` : '#'}" target="_blank" class="btn btn-outline btn-sm btn-icon" title="Open on YouTube">↗</a>
+              <button class="btn btn-danger btn-sm" style="margin-left: auto;" onclick="deleteVideo(${index})">Delete</button>
+            </div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    // Render Tracks
+    function renderTracks() {
+      const container = document.getElementById('tracks-container');
+      container.innerHTML = '';
+
+      if (AppState.content.tracks.length === 0) {
+        container.innerHTML = `<div style="padding: 2rem; text-align: center; color: var(--text-muted); background: var(--bg-surface); border-radius: var(--radius-md);">No tracks uploaded yet. Drag and drop MP3 or WAV files into the upload box above.</div>`;
+        return;
+      }
+
+      AppState.content.tracks.forEach((track, index) => {
+        const row = document.createElement('div');
+        row.className = 'track-row';
+        row.innerHTML = `
+          <div class="track-meta">
+            <span class="track-number">${track.trackNum || (index + 1).toString().padStart(2, '0')}</span>
+            <div class="track-info">
+              <h4>${track.title}</h4>
+              <p>${track.artist || 'Southbound'} · ${track.duration || 'Stream'}</p>
+            </div>
+          </div>
+          <div class="track-player-wrap">
+            <audio controls controlsList="nodownload" preload="none" src="${resolveAdminAssetUrl(track.file)}"></audio>
+          </div>
+          <div class="track-actions">
+            <button class="btn btn-danger btn-sm" onclick="deleteTrack(${index})">Delete</button>
+          </div>
+        `;
+        container.appendChild(row);
+      });
+    }
+
+    // Render Gallery Photos
+    function renderGallery() {
+      const container = document.getElementById('gallery-container');
+      container.innerHTML = '';
+
+      if (AppState.content.gallery.length === 0) {
+        container.innerHTML = `<div style="grid-column: 1/-1; padding: 2rem; text-align: center; color: var(--text-muted); background: var(--bg-surface); border-radius: var(--radius-md);">No gallery photos yet. Drag and drop stage photos into the upload box above.</div>`;
+        return;
+      }
+
+      AppState.content.gallery.forEach((photo, index) => {
+        const resolvedSrc = resolveAdminAssetUrl(photo.src);
+        const card = document.createElement('div');
+        card.className = 'gallery-admin-card';
+        card.innerHTML = `
+          <div class="gallery-thumb-wrap">
+            <img src="${resolvedSrc}" alt="${photo.caption || 'Concert photo'}" loading="lazy" onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22400%22%20height%3D%22300%22%20viewBox%3D%220%200%20400%20300%22%3E%3Crect%20fill%3D%22%231c1c24%22%20width%3D%22400%22%20height%3D%22300%22%2F%3E%3Ctext%20fill%3D%22%23e5a947%22%20font-family%3Dsans-serif%20font-size%3D%2216%22%20x%3D%2250%25%22%20y%3D%2250%25%22%20text-anchor%3D%22middle%22%20dominant-baseline%3D%22middle%22%3EImage%20Unavailable%3C%2Ftext%3E%3C%2Fsvg%3E';">
+          </div>
+          <div class="gallery-card-body">
+            <p class="gallery-caption">${photo.caption || 'Live Stage Moment'}</p>
+            <div class="gallery-card-actions">
+              <label style="font-size: 0.75rem; color: var(--text-dim); display: flex; align-items: center; gap: 4px; cursor: pointer;">
+                <input type="checkbox" ${photo.wide ? 'checked' : ''} onchange="toggleGalleryWide(${index}, this.checked)">
+                <span>Wide Grid</span>
+              </label>
+              <button class="btn btn-danger btn-sm" onclick="deleteGalleryPhoto(${index})">Delete</button>
+            </div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    // Render Shows
+    function renderShows() {
+      const upContainer = document.getElementById('upcoming-shows-container');
+      const histContainer = document.getElementById('event-history-container');
+      upContainer.innerHTML = '';
+      histContainer.innerHTML = '';
+
+      document.getElementById('upcoming-shows-count').textContent = AppState.content.upcomingShows.length;
+      document.getElementById('event-history-count').textContent = AppState.content.eventHistory.length;
+
+      // Upcoming Shows
+      if (AppState.content.upcomingShows.length === 0) {
+        upContainer.innerHTML = `<div style="padding: 1.5rem; text-align: center; color: var(--text-muted); background: var(--bg-surface); border-radius: var(--radius-sm);">No upcoming shows listed. Click "Add Tour Date" to post a concert date.</div>`;
+      } else {
+        AppState.content.upcomingShows.forEach((show, index) => {
+          const row = document.createElement('div');
+          row.className = 'show-row';
+          row.innerHTML = `
+            <div style="display: flex; align-items: center; gap: 1rem;">
+              <div class="show-date-badge">
+                <span class="show-month">${show.dateMonth || 'TBD'}</span>
+                <span class="show-day">${show.dateDay || '--'}</span>
+              </div>
+              <div class="show-details">
+                <h4 class="show-venue">${show.venue}</h4>
+                <div class="show-meta-text">
+                  <span>📍 ${show.location}</span>
+                  ${show.stage ? `<span>🎵 ${show.stage}</span>` : ''}
+                  ${show.badge ? `<span class="badge badge-gold">${show.badge}</span>` : ''}
+                </div>
+              </div>
+            </div>
+            <div class="show-actions">
+              <button class="btn btn-outline btn-sm" onclick="moveShowToHistory(${index})" title="Move this venue to past event history">
+                <span>Move to History ➔</span>
+              </button>
+              <button class="btn btn-outline btn-sm" onclick="editShow(${index})">Edit</button>
+              <button class="btn btn-danger btn-sm" onclick="deleteShow(${index})">Delete</button>
+            </div>
+          `;
+          upContainer.appendChild(row);
+        });
+      }
+
+      // Event History
+      if (AppState.content.eventHistory.length === 0) {
+        histContainer.innerHTML = `<div style="padding: 1.5rem; text-align: center; color: var(--text-muted); background: var(--bg-surface); border-radius: var(--radius-sm);">No historical events recorded.</div>`;
+      } else {
+        AppState.content.eventHistory.forEach((hist, index) => {
+          const row = document.createElement('div');
+          row.className = 'show-row';
+          row.style.padding = '0.75rem 1.25rem';
+          row.innerHTML = `
+            <div>
+              <strong style="color: var(--text-main);">${hist.event}</strong>
+              <span style="color: var(--text-muted); margin-left: 0.5rem; font-size: 0.85rem;">📍 ${hist.location}</span>
+            </div>
+            <button class="btn btn-danger btn-sm" onclick="deleteHistoryItem(${index})">Remove</button>
+          `;
+          histContainer.appendChild(row);
+        });
+      }
+    }
+
+    // ==============================================================================
+    // CONTENT MUTATION HANDLERS
+    // ==============================================================================
+
+    // Video Handlers
+    function openAddVideoModal() {
+      document.getElementById('video-edit-index').value = -1;
+      document.getElementById('video-modal-title').textContent = 'Add YouTube Video';
+      document.getElementById('video-form').reset();
+      document.getElementById('video-thumb-preview').style.display = 'none';
+      document.getElementById('video-thumb-placeholder').style.display = 'block';
+      openModal('video-modal');
+    }
+
+    function editVideo(index) {
+      const video = AppState.content.videos[index];
+      if (!video) return;
+      const ytId = video.youtubeId || video.id || extractYouTubeId(video.url || '');
+      const ytOfficialThumb = ytId ? `https://img.youtube.com/vi/${ytId}/hqdefault.jpg` : '';
+      const initialThumb = video.thumb ? resolveAdminAssetUrl(video.thumb) : ytOfficialThumb;
+
+      document.getElementById('video-edit-index').value = index;
+      document.getElementById('video-modal-title').textContent = 'Edit YouTube Video';
+      document.getElementById('video-url').value = ytId ? `https://www.youtube.com/watch?v=${ytId}` : (video.url || '');
+      document.getElementById('video-title').value = video.title || '';
+      document.getElementById('video-subtitle').value = video.subtitle || '';
+      document.getElementById('video-badge').value = video.badge || '';
+      document.getElementById('video-duration').value = video.duration || '';
+      document.getElementById('video-desc').value = video.desc || '';
+
+      const thumbImg = document.getElementById('video-thumb-preview');
+      thumbImg.src = initialThumb;
+      thumbImg.onerror = () => {
+        if (ytOfficialThumb && thumbImg.src !== ytOfficialThumb) {
+          thumbImg.src = ytOfficialThumb;
+        }
+      };
+      thumbImg.style.display = 'block';
+      document.getElementById('video-thumb-placeholder').style.display = 'none';
+      openModal('video-modal');
+    }
+
+    function moveVideo(index, direction) {
+      const target = index + direction;
+      if (target < 0 || target >= AppState.content.videos.length) return;
+      const temp = AppState.content.videos[index];
+      AppState.content.videos[index] = AppState.content.videos[target];
+      AppState.content.videos[target] = temp;
+      setUnsaved(true);
+      renderVideos();
+    }
+
+    function deleteVideo(index) {
+      if (!confirm('Are you sure you want to remove this video?')) return;
+      AppState.content.videos.splice(index, 1);
+      setUnsaved(true);
+      renderVideos();
+      updateBadgeCounts();
+    }
+
+    // Show Handlers
+    function openAddShowModal() {
+      document.getElementById('show-edit-index').value = -1;
+      document.getElementById('show-modal-title').textContent = 'Add Upcoming Show';
+      document.getElementById('show-form').reset();
+      openModal('show-modal');
+    }
+
+    function editShow(index) {
+      const show = AppState.content.upcomingShows[index];
+      if (!show) return;
+      document.getElementById('show-edit-index').value = index;
+      document.getElementById('show-modal-title').textContent = 'Edit Tour Date';
+      document.getElementById('show-date').value = show.isoDate || '';
+      document.getElementById('show-venue').value = show.venue || '';
+      document.getElementById('show-location').value = show.location || '';
+      document.getElementById('show-stage').value = show.stage || '';
+      document.getElementById('show-badge').value = show.badge || '';
+      document.getElementById('show-status').value = show.status || 'Confirmed';
+      openModal('show-modal');
+    }
+
+    function deleteShow(index) {
+      if (!confirm('Remove this upcoming tour date?')) return;
+      AppState.content.upcomingShows.splice(index, 1);
+      setUnsaved(true);
+      renderShows();
+      updateBadgeCounts();
+    }
+
+    function moveShowToHistory(index) {
+      const show = AppState.content.upcomingShows[index];
+      if (!show) return;
+      AppState.content.eventHistory.unshift({
+        id: `hist-${Date.now()}`,
+        event: show.venue,
+        location: show.location
+      });
+      AppState.content.upcomingShows.splice(index, 1);
+      setUnsaved(true);
+      renderShows();
+      updateBadgeCounts();
+      showToast(`Moved "${show.venue}" to Event History!`, 'success');
+    }
+
+    function openAddHistoryModal() {
+      document.getElementById('history-form').reset();
+      openModal('history-modal');
+    }
+
+    function deleteHistoryItem(index) {
+      AppState.content.eventHistory.splice(index, 1);
+      setUnsaved(true);
+      renderShows();
+    }
+
+    // Audio & Gallery deletion
+    function deleteTrack(index) {
+      const track = AppState.content.tracks[index];
+      if (!confirm(`Remove "${track.title}" from audio tracks?`)) return;
+      
+      // If connected to PHP, optionally remove file from server
+      if (AppState.backendMode === 'php' && track.file) {
+        fetch('./api/admin-api.php?action=delete_file', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${AppState.token}` },
+          body: JSON.stringify({ filePath: track.file })
+        }).catch(() => {});
+      }
+
+      AppState.content.tracks.splice(index, 1);
+      setUnsaved(true);
+      renderTracks();
+      updateBadgeCounts();
+    }
+
+    function deleteGalleryPhoto(index) {
+      const photo = AppState.content.gallery[index];
+      if (!confirm('Delete this photo from the gallery?')) return;
+
+      if (AppState.backendMode === 'php' && photo.src) {
+        fetch('./api/admin-api.php?action=delete_file', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${AppState.token}` },
+          body: JSON.stringify({ filePath: photo.src })
+        }).catch(() => {});
+      }
+
+      AppState.content.gallery.splice(index, 1);
+      setUnsaved(true);
+      renderGallery();
+      updateBadgeCounts();
+    }
+
+    function toggleGalleryWide(index, checked) {
+      if (AppState.content.gallery[index]) {
+        AppState.content.gallery[index].wide = checked;
+        setUnsaved(true);
+      }
+    }
+
+    // ==============================================================================
+    // FILE UPLOAD PROCESSORS (AUDIO & PHOTOS)
+    // ==============================================================================
+
+    // Audio File Upload
+    async function handleAudioUpload(file) {
+      showToast(`Processing "${file.name}"...`, 'info');
+      const durationMeta = await detectAudioDuration(file);
+      const cleanTitle = file.name.replace(/\.[^/.]+$/, '').replace(/[-_]+/g, ' ');
+
+      if (AppState.backendMode === 'php') {
+        const formData = new FormData();
+        formData.append('audio', file);
+
+        try {
+          const res = await fetch('./api/admin-api.php?action=upload_audio', {
+            method: 'POST',
+            headers: { 'Authorization': `Bearer ${AppState.token}` },
+            body: formData
+          });
+          const result = await res.json();
+          if (result.success && result.file) {
+            AppState.content.tracks.push({
+              id: `track-${Date.now()}`,
+              trackNum: (AppState.content.tracks.length + 1).toString().padStart(2, '0'),
+              title: cleanTitle,
+              artist: 'Southbound',
+              duration: durationMeta.formatted,
+              file: result.file.url,
+              format: 'Audio Stream'
+            });
+            setUnsaved(true);
+            renderTracks();
+            updateBadgeCounts();
+            showToast(`Track "${cleanTitle}" uploaded and added!`, 'success');
+            return;
+          }
+        } catch (e) {
+          showToast('Server upload failed, converting to local stream preview.', 'warning');
+        }
+      }
+
+      // Preview Mode Fallback (Blob / Object URL or Data URI)
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        AppState.content.tracks.push({
+          id: `track-${Date.now()}`,
+          trackNum: (AppState.content.tracks.length + 1).toString().padStart(2, '0'),
+          title: cleanTitle,
+          artist: 'Southbound',
+          duration: durationMeta.formatted,
+          file: e.target.result,
+          format: 'Audio Stream'
+        });
+        setUnsaved(true);
+        renderTracks();
+        updateBadgeCounts();
+        showToast(`Track "${cleanTitle}" added locally in preview mode!`, 'success');
+      };
+      reader.readAsDataURL(file);
+    }
+
+    // Photo Files Staging & Upload
+    async function handlePhotosStaged(files) {
+      const fileList = Array.from(files);
+      if (fileList.length === 0) return;
+
+      if (AppState.backendMode === 'php') {
+        showToast(`Uploading ${fileList.length} photo(s) to server...`, 'info');
+        const formData = new FormData();
+        fileList.forEach(f => formData.append('photos[]', f));
+
+        try {
+          const res = await fetch('./api/admin-api.php?action=upload_photo', {
+            method: 'POST',
+            headers: { 'Authorization': `Bearer ${AppState.token}` },
+            body: formData
+          });
+          const result = await res.json();
+          if (result.success && result.photos) {
+            result.photos.forEach((uploaded, idx) => {
+              AppState.content.gallery.push({
+                id: `gallery-${Date.now()}-${idx}`,
+                src: uploaded.url,
+                caption: uploaded.name.replace(/\.[^/.]+$/, '').replace(/[-_]+/g, ' '),
+                alt: 'Southbound concert photography',
+                wide: false
+              });
+            });
+            setUnsaved(true);
+            renderGallery();
+            updateBadgeCounts();
+            showToast(`${result.photos.length} photo(s) added to gallery!`, 'success');
+            return;
+          }
+        } catch (e) {
+          showToast('Server photo upload failed, converting to local preview.', 'warning');
+        }
+      }
+
+      // Preview Mode Fallback
+      let processed = 0;
+      fileList.forEach((file, idx) => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          AppState.content.gallery.push({
+            id: `gallery-${Date.now()}-${idx}`,
+            src: e.target.result,
+            caption: file.name.replace(/\.[^/.]+$/, '').replace(/[-_]+/g, ' '),
+            alt: 'Southbound live performance photo',
+            wide: false
+          });
+          processed++;
+          if (processed === fileList.length) {
+            setUnsaved(true);
+            renderGallery();
+            updateBadgeCounts();
+            showToast(`${fileList.length} photo(s) added in preview mode!`, 'success');
+          }
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    // ==============================================================================
+    // INITIALIZATION & EVENT LISTENERS
+    // ==============================================================================
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Check Session Token
+      const storedToken = sessionStorage.getItem('sb_admin_token') || localStorage.getItem('sb_admin_token');
+      const storedUser = sessionStorage.getItem('sb_admin_user') || localStorage.getItem('sb_admin_user');
+
+      if (storedToken && storedUser) {
+        AppState.isAuthenticated = true;
+        AppState.token = storedToken;
+        AppState.user = storedUser;
+        document.getElementById('username-display').textContent = storedUser;
+        document.getElementById('login-view').classList.add('hidden');
+        document.getElementById('dashboard-view').classList.remove('hidden');
+      }
+
+      // 2. Detect Backend & Load Initial Content
+      detectBackend();
+      loadContent();
+
+      // 3. Login Form Submit
+      const loginForm = document.getElementById('login-form');
+      const alertBox = document.getElementById('login-alert-box');
+
+      loginForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        alertBox.classList.add('hidden');
+        const user = document.getElementById('login-username').value.trim();
+        const pass = document.getElementById('login-password').value.trim();
+        const remember = document.getElementById('login-remember').checked;
+        const submitBtn = document.getElementById('login-submit-btn');
+
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = `<span>Verifying...</span>`;
+
+        // Check if PHP backend active
+        if (AppState.backendMode === 'php') {
+          try {
+            const res = await fetch('./api/admin-api.php?action=login', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ username: user, password: pass, remember })
+            });
+            const data = await res.json();
+            if (data.success && data.token) {
+              completeLogin(data.token, user, remember);
+              return;
+            } else {
+              alertBox.textContent = data.error || 'Invalid credentials.';
+              alertBox.classList.remove('hidden');
+              submitBtn.disabled = false;
+              submitBtn.innerHTML = `<span>Sign In to Dashboard</span>`;
+              return;
+            }
+          } catch (err) {}
+        }
+
+        // Preview Mode Credentials Check
+        const savedPass = localStorage.getItem('sb_admin_pass') || 'Southbound2026!';
+        if (user === 'admin' && pass === savedPass) {
+          const fakeToken = `preview-token-${Date.now()}`;
+          completeLogin(fakeToken, user, remember);
+        } else {
+          alertBox.textContent = 'Invalid username or password. Please try again.';
+          alertBox.classList.remove('hidden');
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = `<span>Sign In to Dashboard</span>`;
+        }
+      });
+
+      function completeLogin(token, user, remember) {
+        AppState.isAuthenticated = true;
+        AppState.token = token;
+        AppState.user = user;
+
+        if (remember) {
+          localStorage.setItem('sb_admin_token', token);
+          localStorage.setItem('sb_admin_user', user);
+        } else {
+          sessionStorage.setItem('sb_admin_token', token);
+          sessionStorage.setItem('sb_admin_user', user);
+        }
+
+        document.getElementById('username-display').textContent = user;
+        document.getElementById('login-view').classList.add('hidden');
+        document.getElementById('dashboard-view').classList.remove('hidden');
+        showToast(`Welcome back, ${user}!`, 'success');
+      }
+
+      // 4. Logout Button
+      document.getElementById('logout-btn').addEventListener('click', () => {
+        if (AppState.hasUnsavedChanges) {
+          if (!confirm('You have unsaved changes. Do you want to sign out without saving?')) return;
+        }
+        sessionStorage.removeItem('sb_admin_token');
+        sessionStorage.removeItem('sb_admin_user');
+        localStorage.removeItem('sb_admin_token');
+        localStorage.removeItem('sb_admin_user');
+        window.location.reload();
+      });
+
+      // 5. Password Toggle
+      document.getElementById('toggle-password-btn').addEventListener('click', () => {
+        const inp = document.getElementById('login-password');
+        inp.type = (inp.type === 'password') ? 'text' : 'password';
+      });
+
+      // 6. Sidebar Tab Navigation
+      document.querySelectorAll('.sidebar-link').forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const tab = link.getAttribute('data-tab');
+          if (tab) switchTab(tab);
+        });
+      });
+
+      // 7. Save All Changes Button
+      document.getElementById('save-all-btn').addEventListener('click', () => {
+        saveContent();
+      });
+
+      // 8. YouTube Video URL input listener for live thumbnail preview
+      const videoUrlInp = document.getElementById('video-url');
+      videoUrlInp.addEventListener('input', () => {
+        const id = extractYouTubeId(videoUrlInp.value);
+        const thumbImg = document.getElementById('video-thumb-preview');
+        const thumbPlaceholder = document.getElementById('video-thumb-placeholder');
+        if (id) {
+          thumbImg.src = `https://img.youtube.com/vi/${id}/hqdefault.jpg`;
+          thumbImg.style.display = 'block';
+          thumbPlaceholder.style.display = 'none';
+        } else {
+          thumbImg.style.display = 'none';
+          thumbPlaceholder.style.display = 'block';
+        }
+      });
+
+      // 9. Video Form Submit
+      document.getElementById('video-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const editIdx = parseInt(document.getElementById('video-edit-index').value, 10);
+        const rawUrl = document.getElementById('video-url').value;
+        const videoId = extractYouTubeId(rawUrl);
+
+        if (!videoId) {
+          alert('Please enter a valid YouTube link or 11-character video ID.');
+          return;
+        }
+
+        const videoData = {
+          id: videoId,
+          youtubeId: videoId,
+          title: document.getElementById('video-title').value.trim(),
+          subtitle: document.getElementById('video-subtitle').value.trim(),
+          badge: document.getElementById('video-badge').value.trim() || 'Live Performance',
+          duration: document.getElementById('video-duration').value.trim(),
+          thumb: `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`,
+          desc: document.getElementById('video-desc').value.trim()
+        };
+
+        if (editIdx >= 0) {
+          AppState.content.videos[editIdx] = videoData;
+          showToast('Video details updated!', 'success');
+        } else {
+          AppState.content.videos.unshift(videoData);
+          showToast('New video added to showcase!', 'success');
+        }
+
+        closeModal('video-modal');
+        setUnsaved(true);
+        renderVideos();
+        updateBadgeCounts();
+      });
+
+      // 10. Show Form Submit
+      document.getElementById('show-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const editIdx = parseInt(document.getElementById('show-edit-index').value, 10);
+        const isoDate = document.getElementById('show-date').value;
+        const dateObj = new Date(isoDate + 'T00:00:00');
+        const months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+
+        const showData = {
+          id: editIdx >= 0 ? AppState.content.upcomingShows[editIdx].id : `show-${Date.now()}`,
+          isoDate,
+          dateMonth: months[dateObj.getMonth()] || 'TBD',
+          dateDay: dateObj.getDate().toString(),
+          venue: document.getElementById('show-venue').value.trim(),
+          location: document.getElementById('show-location').value.trim(),
+          stage: document.getElementById('show-stage').value.trim(),
+          badge: document.getElementById('show-badge').value.trim() || 'Venue Regular',
+          status: document.getElementById('show-status').value
+        };
+
+        if (editIdx >= 0) {
+          AppState.content.upcomingShows[editIdx] = showData;
+          showToast('Tour date updated!', 'success');
+        } else {
+          AppState.content.upcomingShows.push(showData);
+          // Sort chronologically
+          AppState.content.upcomingShows.sort((a, b) => new Date(a.isoDate) - new Date(b.isoDate));
+          showToast('New tour date added!', 'success');
+        }
+
+        closeModal('show-modal');
+        setUnsaved(true);
+        renderShows();
+        updateBadgeCounts();
+      });
+
+      // 11. History Form Submit
+      document.getElementById('history-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        AppState.content.eventHistory.unshift({
+          id: `hist-${Date.now()}`,
+          event: document.getElementById('history-event').value.trim(),
+          location: document.getElementById('history-location').value.trim()
+        });
+        closeModal('history-modal');
+        setUnsaved(true);
+        renderShows();
+        showToast('Past venue added to Event History!', 'success');
+      });
+
+      // 12. Audio Drag & Drop & Browse
+      const audioDrop = document.getElementById('audio-drop-zone');
+      const audioInput = document.getElementById('audio-file-input');
+
+      audioDrop.addEventListener('dragover', (e) => { e.preventDefault(); audioDrop.classList.add('dragover'); });
+      audioDrop.addEventListener('dragleave', () => { audioDrop.classList.remove('dragover'); });
+      audioDrop.addEventListener('drop', (e) => {
+        e.preventDefault();
+        audioDrop.classList.remove('dragover');
+        if (e.dataTransfer.files.length > 0) {
+          handleAudioUpload(e.dataTransfer.files[0]);
+        }
+      });
+      audioInput.addEventListener('change', () => {
+        if (audioInput.files.length > 0) {
+          handleAudioUpload(audioInput.files[0]);
+        }
+      });
+
+      // 13. Photo Drag & Drop & Browse
+      const photoDrop = document.getElementById('photo-drop-zone');
+      const photoInput = document.getElementById('photo-file-input');
+
+      photoDrop.addEventListener('dragover', (e) => { e.preventDefault(); photoDrop.classList.add('dragover'); });
+      photoDrop.addEventListener('dragleave', () => { photoDrop.classList.remove('dragover'); });
+      photoDrop.addEventListener('drop', (e) => {
+        e.preventDefault();
+        photoDrop.classList.remove('dragover');
+        if (e.dataTransfer.files.length > 0) {
+          handlePhotosStaged(e.dataTransfer.files);
+        }
+      });
+      photoInput.addEventListener('change', () => {
+        if (photoInput.files.length > 0) {
+          handlePhotosStaged(photoInput.files);
+        }
+      });
+
+      // 14. Change Password Form
+      document.getElementById('change-password-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const currentPass = document.getElementById('current-password').value;
+        const newPass = document.getElementById('new-password').value;
+        const confirmPass = document.getElementById('confirm-password').value;
+
+        if (newPass !== confirmPass) {
+          alert('New password and confirmation do not match.');
+          return;
+        }
+
+        if (AppState.backendMode === 'php') {
+          try {
+            const res = await fetch('./api/admin-api.php?action=change_password', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${AppState.token}`
+              },
+              body: JSON.stringify({ current_password: currentPass, new_password: newPass })
+            });
+            const data = await res.json();
+            if (data.success) {
+              showToast('Password changed successfully on server!', 'success');
+              document.getElementById('change-password-form').reset();
+              return;
+            } else {
+              alert(data.error || 'Failed to change password.');
+              return;
+            }
+          } catch (err) {}
+        }
+
+        // Preview Mode
+        const savedPass = localStorage.getItem('sb_admin_pass') || 'Southbound2026!';
+        if (currentPass !== savedPass) {
+          alert('Current password is incorrect.');
+          return;
+        }
+        localStorage.setItem('sb_admin_pass', newPass);
+        document.getElementById('change-password-form').reset();
+        showToast('Password updated locally in preview mode!', 'success');
+      });
+
+      // 15. Export / Download content.json
+      function downloadContentJson() {
+        const jsonStr = JSON.stringify(AppState.content, null, 2);
+        const blob = new Blob([jsonStr], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'content.json';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        showToast('content.json downloaded!', 'success');
+      }
+      document.getElementById('download-json-btn').addEventListener('click', downloadContentJson);
+      document.getElementById('backup-download-btn').addEventListener('click', downloadContentJson);
+
+      // 16. Reset to Factory Defaults
+      document.getElementById('reset-defaults-btn').addEventListener('click', () => {
+        if (!confirm('Are you sure you want to reset all content back to factory default? Any unsaved edits will be cleared.')) return;
+        AppState.content = JSON.parse(JSON.stringify(DefaultBaselineContent));
+        localStorage.removeItem('sb_content_override');
+        setUnsaved(true);
+        renderAllSections();
+        showToast('Content reset to default values.', 'info');
+      });
+
+      // Window unload protection
+      window.addEventListener('beforeunload', (e) => {
+        if (AppState.hasUnsavedChanges) {
+          e.preventDefault();
+          e.returnValue = '';
+        }
+      });
+    });
+  </script>
+</body>
+</html>

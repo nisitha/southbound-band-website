@@ -1,0 +1,283 @@
+{
+  "videos": [
+    {
+      "id": "nSN0ZIoctMo",
+      "title": "Southbound Promo Video '25",
+      "subtitle": "Official Band Promotional Showcase",
+      "badge": "Official Promo Reel",
+      "duration": "3:45",
+      "thumb": "/assets/video/thumb-promo25.jpg",
+      "desc": "Official 2025 promotional video reel featuring live concert highlights, twin-guitar solos, and festival energy across Northern California."
+    },
+    {
+      "id": "M95QmHVGUWo",
+      "title": "Keep on Smilin’",
+      "subtitle": "Wet Willie Cover (Live on Stage)",
+      "badge": "Live Performance",
+      "duration": "4:12",
+      "thumb": "/assets/video/thumb-keep-on-smilin.jpg",
+      "desc": "Soulful three-part vocal harmonies and vintage Hammond B-3 organ groove honoring Jimmy Hall and Wet Willie live."
+    },
+    {
+      "id": "OpySJ7OwICg",
+      "title": "What If I’d Been The One",
+      "subtitle": ".38 Special Cover (Live on Stage)",
+      "badge": "Live Performance",
+      "duration": "3:58",
+      "thumb": "/assets/video/thumb-what-if-id-been-the-one.jpg",
+      "desc": "Driving arena-rock rhythm section, razor-sharp duel leads, and crowd-rousing rock vocals in a high-octane performance."
+    },
+    {
+      "id": "RbEp3GUou94",
+      "title": "Marshall Tucker Cover",
+      "subtitle": "The Marshall Tucker Band Cover (Live on Stage)",
+      "badge": "Marshall Tucker Cover",
+      "duration": "6:51",
+      "thumb": "/assets/video/thumb-marshall-tucker.jpg",
+      "desc": "Authentic live performance honoring The Marshall Tucker Band with twin-guitar harmonies, soulful vocals, and Southern Rock energy."
+    }
+  ],
+  "tracks": [
+    {
+      "id": "cant-you-see",
+      "trackNum": "01",
+      "title": "Can't You See",
+      "artist": "The Marshall Tucker Band Cover",
+      "duration": "6:51",
+      "durationSec": 411,
+      "file": "/assets/audio/cant-you-see-marshall-tucker-band-cover.mp3",
+      "format": "Audio Stream"
+    },
+    {
+      "id": "midnight-rider",
+      "trackNum": "02",
+      "title": "Midnight Rider",
+      "artist": "The Allman Brothers Band Cover",
+      "duration": "3:05",
+      "durationSec": 185,
+      "file": "/assets/audio/midnight-rider-allman-brothers-cover.wav",
+      "format": "Audio Stream"
+    },
+    {
+      "id": "there-goes-another-love-song",
+      "trackNum": "03",
+      "title": "There Goes Another Love Song",
+      "artist": "The Outlaws Cover",
+      "duration": "2:59",
+      "durationSec": 179,
+      "file": "/assets/audio/there-goes-another-love-song-outlaws-cover.wav",
+      "format": "Audio Stream"
+    }
+  ],
+  "gallery": [
+    {
+      "id": "festival-01",
+      "src": "/assets/gallery/gallery-festival-01.jpg",
+      "caption": "Southbound performing at a Northern California festival",
+      "alt": "Southbound performing live at a Northern California outdoor festival",
+      "category": "festival",
+      "wide": true
+    },
+    {
+      "id": "festival-02",
+      "src": "/assets/gallery/gallery-festival-02.jpg",
+      "caption": "Guitar solo at a California summer festival",
+      "alt": "Guitar solo moment at a California summer festival",
+      "category": "festival",
+      "wide": false
+    },
+    {
+      "id": "theatre-01",
+      "src": "/assets/gallery/gallery-theatre-01.jpg",
+      "caption": "Historic Opera House, Roseville",
+      "alt": "Southbound performing at the Historic Opera House in Roseville",
+      "category": "theatre",
+      "wide": false
+    },
+    {
+      "id": "festival-03",
+      "src": "/assets/gallery/gallery-festival-03.jpg",
+      "caption": "Full stage at a summer festival",
+      "alt": "Southbound full band on stage at an outdoor festival",
+      "category": "festival",
+      "wide": true
+    },
+    {
+      "id": "festival-04",
+      "src": "/assets/gallery/gallery-festival-04.jpg",
+      "caption": "Festival performance — stage panorama",
+      "alt": "Southbound festival performance stage panorama",
+      "category": "festival",
+      "wide": false
+    },
+    {
+      "id": "swabbies-01",
+      "src": "/assets/gallery/gallery-swabbies-01.jpg",
+      "caption": "Swabbies on the River, Sacramento",
+      "alt": "Southbound performing at Swabbies on the River in Sacramento",
+      "category": "swabbies",
+      "wide": false
+    },
+    {
+      "id": "swabbies-02",
+      "src": "/assets/gallery/gallery-swabbies-02.jpg",
+      "caption": "Swabbies on the River — summer 2025",
+      "alt": "Southbound summer performance at Swabbies on the River 2025",
+      "category": "swabbies",
+      "wide": false
+    },
+    {
+      "id": "theatre-02",
+      "src": "/assets/gallery/gallery-theatre-02.jpg",
+      "caption": "Historic Opera House — wide stage view",
+      "alt": "Wide stage view at the Historic Opera House",
+      "category": "theatre",
+      "wide": true
+    },
+    {
+      "id": "theatre-03",
+      "src": "/assets/gallery/gallery-theatre-03.jpg",
+      "caption": "Stage moment at the Opera House",
+      "alt": "Stage moment under spotlights at the Historic Opera House",
+      "category": "theatre",
+      "wide": false
+    },
+    {
+      "id": "resort-01",
+      "src": "/assets/gallery/gallery-resort-01.jpg",
+      "caption": "Robb's Resort — Pollock Pines, Sierra Foothills",
+      "alt": "Southbound performing at Robb's Resort in Pollock Pines",
+      "category": "festival",
+      "wide": false
+    },
+    {
+      "id": "club-01",
+      "src": "/assets/gallery/gallery-club-01.jpg",
+      "caption": "Corner Pocket Sports Bar, Orangevale",
+      "alt": "Southbound at Corner Pocket Sports Bar in Orangevale",
+      "category": "club",
+      "wide": false
+    },
+    {
+      "id": "community-01",
+      "src": "/assets/gallery/gallery-community-01.jpg",
+      "caption": "Community outdoor concert",
+      "alt": "Southbound performing at a community outdoor concert",
+      "category": "festival",
+      "wide": false
+    },
+    {
+      "id": "candid-01",
+      "src": "/assets/gallery/gallery-candid-01.jpg",
+      "caption": "Backstage moment at Swabbies",
+      "alt": "Southbound band members candid backstage moment at Swabbies",
+      "category": "festival",
+      "wide": false
+    }
+  ],
+  "upcomingShows": [
+    {
+      "id": "show-high-hand",
+      "isoDate": "2026-11-14",
+      "dateMonth": "NOV",
+      "dateDay": "14",
+      "venue": "High Hand Brewery & Nursery",
+      "location": "Loomis, CA",
+      "stage": "Outdoor Patio Stage",
+      "badge": "Venue Regular",
+      "status": "Confirmed"
+    },
+    {
+      "id": "show-powerhouse",
+      "isoDate": "2026-11-28",
+      "dateMonth": "NOV",
+      "dateDay": "28",
+      "venue": "Powerhouse Pub",
+      "location": "Folsom, CA",
+      "stage": "Live Music Room",
+      "badge": "Venue Regular",
+      "status": "Confirmed"
+    },
+    {
+      "id": "show-swabbies",
+      "isoDate": "2026-12-12",
+      "dateMonth": "DEC",
+      "dateDay": "12",
+      "venue": "Swabbies on the River",
+      "location": "Sacramento, CA",
+      "stage": "Riverside Stage",
+      "badge": "Venue Regular",
+      "status": "Confirmed"
+    },
+    {
+      "id": "show-roseville-opera",
+      "isoDate": "2027-01-16",
+      "dateMonth": "JAN",
+      "dateDay": "16",
+      "venue": "Historic Roseville Opera House",
+      "location": "Roseville, CA",
+      "stage": "Theatre Stage",
+      "badge": "Theatre",
+      "status": "Confirmed"
+    },
+    {
+      "id": "show-corner-pocket",
+      "isoDate": "2027-02-20",
+      "dateMonth": "FEB",
+      "dateDay": "20",
+      "venue": "Corner Pocket Sports Bar",
+      "location": "Orangevale, CA",
+      "stage": "Indoor Venue",
+      "badge": "Club Night",
+      "status": "Confirmed"
+    },
+    {
+      "id": "show-past-example",
+      "isoDate": "2026-07-15",
+      "dateMonth": "JUL",
+      "dateDay": "15",
+      "venue": "Fair Oaks Music in the Park",
+      "location": "Fair Oaks, CA",
+      "stage": "Main Outdoor Stage",
+      "badge": "Past Concert",
+      "status": "Completed"
+    }
+  ],
+  "eventHistory": [
+    {
+      "id": "hist-carmichael",
+      "event": "Carmichael Music Festival",
+      "location": "Carmichael, CA"
+    },
+    {
+      "id": "hist-roseville",
+      "event": "Roseville Summer Concert Series",
+      "location": "Roseville, CA"
+    },
+    {
+      "id": "hist-vacaville",
+      "event": "Vacaville Community Concert",
+      "location": "Vacaville, CA"
+    },
+    {
+      "id": "hist-robbs",
+      "event": "Robb's Resort Summer Series",
+      "location": "Pollock Pines, CA"
+    },
+    {
+      "id": "hist-swabbies",
+      "event": "Swabbies Summer Bash",
+      "location": "Sacramento, CA"
+    },
+    {
+      "id": "hist-downtown-roseville",
+      "event": "Downtown Roseville Outdoor Festival",
+      "location": "Roseville, CA"
+    },
+    {
+      "id": "hist-rocklin",
+      "event": "Rocklin Outdoor Summer Concert",
+      "location": "Rocklin, CA"
+    }
+  ]
+}

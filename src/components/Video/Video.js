@@ -1,15 +1,11 @@
 /**
  * Video Component Module
  * Section 5: Watch & Listen — Creative Embedded YouTube Gallery
- * 
- * Verified YouTube Videos:
- * 1. nSN0ZIoctMo — Southbound Promo Video '25 (Official EPK Feature)
- * 2. M95QmHVGUWo — Keep on Smilin' (Wet Willie Cover)
- * 3. OpySJ7OwICg — What If I’d Been The One (.38 Special Cover)
- * 4. UlN5942NNu8 — Southbound Live Concert Showcase (Live Reel)
+ * Centralized dynamic content loaded from /data/content.json
  */
 
 import { resolveAssetUrl } from '../../utils/paths.js';
+import { fetchContent } from '../../utils/contentLoader.js';
 
 export const VERIFIED_VIDEOS = [
   {
@@ -53,9 +49,10 @@ export const VERIFIED_VIDEOS = [
 export const VideoComponent = {
   id: 'video',
   name: 'Watch & Listen Video Gallery',
-  activeVideoId: 'nSN0ZIoctMo',
+  activeVideoId: null,
+  videosList: [],
 
-  init() {
+  async init() {
     const theatre = document.getElementById('video-theatre');
     const facade = document.getElementById('video-facade');
     const iframeWrap = document.getElementById('video-iframe-wrap');
@@ -63,25 +60,80 @@ export const VideoComponent = {
     const badgeEl = document.getElementById('video-theatre-badge');
     const descEl = document.getElementById('video-theatre-desc');
     const posterImg = document.getElementById('video-poster');
-    const galleryCards = document.querySelectorAll('.video-card');
+    const gridContainer = document.querySelector('.video-gallery-grid');
+    const countBadge = document.querySelector('.video-grid-header .video-badge');
 
     if (!facade || !iframeWrap) {
       console.debug('[Video] Main elements not found — skipping init');
       return;
     }
 
+    // Load videos from centralized content.json
+    try {
+      const data = await fetchContent();
+      if (data && Array.isArray(data.videos) && data.videos.length > 0) {
+        this.videosList = data.videos;
+      } else {
+        this.videosList = VERIFIED_VIDEOS;
+      }
+    } catch (err) {
+      console.warn('[Video] Error fetching videos, falling back to static list:', err);
+      this.videosList = VERIFIED_VIDEOS;
+    }
+
+    if (countBadge) {
+      countBadge.textContent = `${this.videosList.length} Verified Video${this.videosList.length === 1 ? '' : 's'}`;
+    }
+
+    // Default to first video
+    if (this.videosList.length > 0) {
+      this.activeVideoId = this.videosList[0].id;
+    }
+
+    // Render video cards dynamically
+    if (gridContainer) {
+      gridContainer.innerHTML = this.videosList.map((video, idx) => {
+        const thumbUrl = video.thumb ? resolveAssetUrl(video.thumb) : `https://img.youtube.com/vi/${video.id}/hqdefault.jpg`;
+        const isActive = idx === 0;
+        return `
+          <article class="video-card ${isActive ? 'is-active' : ''}" data-video-id="${video.id}" tabindex="0" role="button" aria-label="Watch ${video.title}" aria-selected="${isActive ? 'true' : 'false'}">
+            <div class="video-card-thumb-wrap">
+              <img src="${thumbUrl}" alt="${video.title}" class="video-card-thumb" width="480" height="360" loading="lazy">
+              <div class="video-card-play-overlay" aria-hidden="true">
+                <div class="video-card-play-icon">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+                </div>
+              </div>
+              ${video.duration ? `<span class="video-card-duration">${video.duration}</span>` : ''}
+            </div>
+            <div class="video-card-body">
+              <span class="video-card-badge">${video.badge || 'Official Video'}</span>
+              <h4 class="video-card-title">${video.title}</h4>
+              <p class="video-card-desc">${video.desc || ''}</p>
+              <span class="video-card-action">Stream Video</span>
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    const galleryCards = document.querySelectorAll('.video-card');
+
     /**
      * Plays the currently active video in the theatre player
      */
     const playActiveVideo = (videoId, autoPlay = true) => {
       this.activeVideoId = videoId;
-      const videoData = VERIFIED_VIDEOS.find(v => v.id === videoId) || VERIFIED_VIDEOS[0];
+      const videoData = this.videosList.find(v => v.id === videoId) || this.videosList[0];
+      if (!videoData) return;
 
       // Update metadata display
       if (titleEl) titleEl.textContent = videoData.title;
-      if (badgeEl) badgeEl.textContent = videoData.badge;
-      if (descEl) descEl.textContent = videoData.desc;
-      if (posterImg) posterImg.src = resolveAssetUrl(videoData.thumb);
+      if (badgeEl) badgeEl.textContent = videoData.badge || 'Official Video';
+      if (descEl) descEl.textContent = videoData.desc || '';
+      if (posterImg) {
+        posterImg.src = videoData.thumb ? resolveAssetUrl(videoData.thumb) : `https://img.youtube.com/vi/${videoData.id}/hqdefault.jpg`;
+      }
 
       // Update gallery cards active state
       galleryCards.forEach(card => {
@@ -120,6 +172,17 @@ export const VideoComponent = {
       iframeWrap.classList.add('is-active');
     };
 
+    // Initialize initial theatre poster and meta
+    if (this.videosList.length > 0) {
+      const initialVideo = this.videosList[0];
+      if (titleEl) titleEl.textContent = initialVideo.title;
+      if (badgeEl) badgeEl.textContent = initialVideo.badge || 'Official Video';
+      if (descEl) descEl.textContent = initialVideo.desc || '';
+      if (posterImg && initialVideo.thumb) {
+        posterImg.src = resolveAssetUrl(initialVideo.thumb);
+      }
+    }
+
     // Facade play click
     facade.addEventListener('click', () => {
       playActiveVideo(this.activeVideoId, true);
@@ -142,7 +205,7 @@ export const VideoComponent = {
         e.preventDefault();
         playActiveVideo(videoId, true);
 
-        // Smooth scroll to theatre if needed
+        // Smooth scroll to theatre if needed on mobile/tablet
         if (theatre && window.innerWidth < 1024) {
           theatre.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }
@@ -156,6 +219,6 @@ export const VideoComponent = {
       });
     });
 
-    console.debug('[Video] Watch & Listen Gallery initialized with 4 verified videos');
+    console.debug(`[Video] Watch & Listen Gallery initialized with ${this.videosList.length} videos`);
   }
 };

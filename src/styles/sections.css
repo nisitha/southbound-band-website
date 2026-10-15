@@ -888,6 +888,15 @@
   border-radius: var(--radius-md);
   cursor: pointer;
   background: var(--color-bg-base);
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+}
+
+.gallery-item.reveal {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
 }
 
 .gallery-item.gallery-wide {
@@ -1107,6 +1116,11 @@
   border: 1px solid var(--color-border-subtle);
   border-radius: var(--radius-lg);
   transition: border-color var(--transition-base), transform var(--transition-base);
+}
+
+.show-card.reveal {
+  opacity: 1 !important;
+  transform: none !important;
 }
 
 .show-card:hover {
