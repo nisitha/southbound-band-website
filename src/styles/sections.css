@@ -1548,6 +1548,11 @@
   overflow: hidden;
 }
 
+.booking-section .section-subtitle {
+  max-width: 850px;
+  white-space: nowrap;
+}
+
 .booking-section::before {
   content: '';
   position: absolute;
@@ -1831,6 +1836,14 @@
   .booking-layout {
     grid-template-columns: 1fr;
     gap: 2.5rem;
+  }
+}
+
+@media (max-width: 680px) {
+  .booking-section .section-subtitle {
+    white-space: normal;
+    font-size: clamp(0.875rem, 3.5vw, 1.05rem);
+    max-width: 100%;
   }
 }
 

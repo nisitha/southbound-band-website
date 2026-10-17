@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-  base: '/southbound-band-website/',
+  base: process.env.VITE_BASE_PATH || './',
   server: {
     port: 3000,
     open: false,

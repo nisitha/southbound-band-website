@@ -95,14 +95,14 @@ export const ShowsComponent = {
       }
 
       if (data && Array.isArray(data.eventHistory)) {
-        this.historyList = data.eventHistory;
+        this.historyList = data.eventHistory.slice(0, 10);
       } else {
-        this.historyList = EVENT_HISTORY;
+        this.historyList = EVENT_HISTORY.slice(0, 10);
       }
     } catch (err) {
       console.warn('[Shows] Error loading shows from content.json:', err);
       this.showsList = UPCOMING_SHOWS;
-      this.historyList = EVENT_HISTORY;
+      this.historyList = EVENT_HISTORY.slice(0, 10);
     }
 
     // Auto-filter: Remove any show whose isoDate is in the past compared to today's date
@@ -177,9 +177,9 @@ export const ShowsComponent = {
       showsListEl.innerHTML = cardsHtml + ctaHtml;
     }
 
-    // Dynamically render Festival & Event History list
+    // Dynamically render Festival & Event History list (strictly limited to maximum of 10 past events)
     if (festivalListEl && this.historyList.length > 0) {
-      festivalListEl.innerHTML = this.historyList.map(item => `
+      festivalListEl.innerHTML = this.historyList.slice(0, 10).map(item => `
         <li>${item.event} — ${item.location}</li>
       `).join('');
     }

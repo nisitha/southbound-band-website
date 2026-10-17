@@ -17,7 +17,7 @@ export const HeaderComponent = {
     { label: 'Music', href: '#music' },
     { label: 'Photos', href: '#photos' },
     { label: 'Shows', href: '#shows' },
-    { label: 'Press', href: '#press' },
+    { label: 'EPK', href: '#press' },
     { label: 'Merch', href: '#merch' },
     { label: 'Booking', href: '#booking' }
   ],
